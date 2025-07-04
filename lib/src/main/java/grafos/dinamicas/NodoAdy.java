@@ -29,4 +29,8 @@ public class NodoAdy {
   public void setSigAdyacente(NodoAdy elSiguiente) {
     this.sigAdyacente = elSiguiente;
   }
+
+  public void setEtiqueta (Object laEtiqueta) {
+    this.etiqueta = laEtiqueta;
+  }
 }
