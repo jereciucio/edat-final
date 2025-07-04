@@ -14,4 +14,8 @@ public class NodoAdy {
   public NodoVert getVertice() {
     return this.vertice;
   }
+
+  public NodoAdy getSigAdy() {
+    return this.sigAdyacente;
+  } 
 }
