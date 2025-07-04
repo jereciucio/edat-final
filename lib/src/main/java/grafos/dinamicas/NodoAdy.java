@@ -21,4 +21,8 @@ public class NodoAdy {
   public Object getEtiqueta() {
     return this.etiqueta;
   }
+
+  public void setVertice(Object elVertice) {
+    this.vertice = elVertice;
+  }
 }
