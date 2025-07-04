@@ -18,4 +18,7 @@ public class NodoAdy {
   public NodoAdy getSigAdy() {
     return this.sigAdyacente;
   } 
+  public Object getEtiqueta() {
+    return this.etiqueta;
+  }
 }
