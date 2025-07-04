@@ -25,4 +25,8 @@ public class NodoAdy {
   public void setVertice(Object elVertice) {
     this.vertice = elVertice;
   }
+
+  public void setSigAdyacente(NodoAdy elSiguiente) {
+    this.sigAdyacente = elSiguiente;
+  }
 }
