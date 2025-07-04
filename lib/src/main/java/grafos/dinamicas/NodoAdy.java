@@ -10,4 +10,8 @@ public class NodoAdy {
     this.sigAdyacente = null;
     this.etiqueta = laEtiqueta;
   }
+
+  public NodoVert getVertice() {
+    return this.vertice;
+  }
 }
