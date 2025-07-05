@@ -14,4 +14,8 @@ public class NodoVert {
   public Object getElem() {
     return this.elem;
   }
+
+  public void setElem(Object unElem) {
+    this.elem = unElem;
+  }
 }
