@@ -18,4 +18,8 @@ public class NodoVert {
   public void setElem(Object unElem) {
     this.elem = unElem;
   }
+
+  public NodoVert getSigVertice() {
+    return this.sigVertice;
+  }
 }
