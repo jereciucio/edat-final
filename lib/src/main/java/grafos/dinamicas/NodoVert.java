@@ -7,8 +7,8 @@ public class NodoVert {
 
   public NodoVert(Object unElemento, NodoVert unSigVertice, NodoAdy unPrimerAdy) {
     this.elem = unElemento;
-    this.sigVertice = unSigVertice;
-    this.primerAdy = unPrimerAdy;
+    this.sigVertice = null;
+    this.primerAdy = null;
   }
 
   public Object getElem() {
