@@ -22,4 +22,8 @@ public class NodoVert {
   public NodoVert getSigVertice() {
     return this.sigVertice;
   }
+
+  public void setSigVertice(NodoVert unSigVertice) {
+    this.sigVertice = unSigVertice;
+  }
 }
