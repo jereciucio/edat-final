@@ -30,4 +30,8 @@ public class NodoVert {
   public NodoAdy getPrimerAdy() {
     return this.primerAdy;
   }
+
+  public void setPrimerAdy(NodoAdy unPrimerAdy) { 
+    this.primerAdy = unPrimerAdy;
+  }
 }
