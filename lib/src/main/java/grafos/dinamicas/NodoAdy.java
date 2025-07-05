@@ -22,7 +22,7 @@ public class NodoAdy {
     return this.etiqueta;
   }
 
-  public void setVertice(Object elVertice) {
+  public void setVertice(NodoVert elVertice) {
     this.vertice = elVertice;
   }
 
