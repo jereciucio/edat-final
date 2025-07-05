@@ -1,4 +1,4 @@
-package grafos.dinamicas
+package grafos.dinamicas;
 public class NodoAdy {
   NodoVert vertice;
   NodoAdy sigAdyacente;
