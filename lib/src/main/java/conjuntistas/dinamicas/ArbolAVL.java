@@ -162,6 +162,66 @@ public class ArbolAVL {
     }
   }
 
+  public Object minimoELem(){
+        Object elem=null;
+        elem=minimoElemAux(this.raiz);
+        return elem;
+    }
+
+    private Object minimoElemAux(NodoAVL n){
+        Object elem=null;
+        if(n!=null){
+            if(n.getIzquierdo()==null){
+                elem=n.getElem();
+            }else{
+                elem=minimoElemAux(n.getIzquierdo());
+            }
+        }
+        return elem;
+    }
+
+    public Object maximoElem(){
+        Object elem=null;
+        elem=maximoElemAux(this.raiz);
+        return elem;
+    }
+
+    private Object maximoElemAux(NodoAVL n){
+        Object elem=null;
+        if(n!=null){
+            if(n.getDerecho()==null){
+                elem=n.getElem();
+            }else{
+                elem=maximoElemAux(n.getDerecho());
+            }
+        }
+        return elem;
+    }
+
+    public boolean esVacio(){
+        return this.raiz==null;
+    }
+
+    public void vaciar(){
+        this.raiz=null;
+    }
+
+    public ArbolAVL clone(){
+        ArbolAVL clon = new ArbolAVL();
+        clon.raiz=cloneAux(this.raiz);
+        return clon;
+    }
+
+    private NodoAVL cloneAux(NodoAVL n){
+        NodoAVL nuevo=null;
+        if(n!=null){
+            nuevo=new NodoAVL(n.getElem(),null,null);
+            nuevo.setIzquierdo(cloneAux(n.getIzquierdo()));
+            nuevo.setDerecho(cloneAux(n.getDerecho()));
+        }
+        return nuevo;
+    }
+
   // TODO: Agregar altura al toString()
   public String toString() {
     return toStringRecursivo(raiz);
