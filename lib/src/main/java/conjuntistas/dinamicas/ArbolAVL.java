@@ -100,6 +100,65 @@ public class ArbolAVL {
     return nodoActual;
   }
 
+  public boolean eliminar(Comparable elemento) {
+        boolean[] exito = {false};
+        this.raiz = eliminarAux(this.raiz, elemento, exito);
+        return exito[0];
+    }
+
+    private NodoAVL eliminarAux(NodoAVL nodo, Comparable elem, boolean[] exito) {
+    NodoAVL resultado = nodo;
+
+    if (nodo != null) {
+        int cmp = elem.compareTo(nodo.getElem());
+
+        if (cmp < 0) {
+            nodo.setIzquierdo(eliminarAux(nodo.getIzquierdo(), elem, exito));
+        } else if (cmp > 0) {
+            nodo.setDerecho(eliminarAux(nodo.getDerecho(), elem, exito));
+        } else {
+            // Nodo encontrado
+            exito[0] = true;
+
+            // Caso 1: sin hijos
+            if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                resultado = null;
+            }
+            // Caso 2: un hijo (solo derecho)
+            else if (nodo.getIzquierdo() == null) {
+                resultado = nodo.getDerecho();
+            }
+            // Caso 2: un hijo (solo izquierdo)
+            else if (nodo.getDerecho() == null) {
+                resultado = nodo.getIzquierdo();
+            }
+            // Caso 3: dos hijos
+            else {
+                NodoAVL sucesor = encontrarMinimo(nodo.getDerecho());
+                nodo.setElem(sucesor.getElem());
+                nodo.setDerecho(eliminarAux(nodo.getDerecho(), (Comparable)sucesor.getElem(), exito));
+                resultado = nodo;
+            }
+        }
+    }
+
+    if (resultado != null) {
+      resultado.recalcularAltura();
+      resultado = rebalancear(resultado);
+    }
+    return resultado;
+}
+
+   private NodoAVL encontrarMinimo(NodoAVL nodo) {
+        NodoAVL res=null;
+        if (nodo.getIzquierdo() == null) {
+            res=nodo; // caso base: ya es el menor
+        } else {
+            res= encontrarMinimo(nodo.getIzquierdo()); // seguir buscando por la izquierda
+        }
+        return res;
+    }
+
   private NodoAVL rebalancear(NodoAVL nodo) {
     int balance = balance(nodo);
     int balanceHijo = 0;
