@@ -6,6 +6,7 @@ public class Grafo {
   public Grafo(){
     this.inicio = null;
   }
+
   public boolean insertarVertice(Object vertice){
     boolean exito=true;
     if(this.inicio==null){
@@ -26,18 +27,21 @@ public class Grafo {
   }
 
   public boolean existeVertice(Object vertice){
-    boolean encontrado = buscarVertice(vertice);
+    boolean encontrado=false;
+    if(this.inicio!=null){
+      encontrado=buscarVertice(vertice)!=null;
+    }
     return encontrado;
   }
 
-  private boolean buscarVertice(Object vertice){
-    boolean existe=false;
+  private NodoVert buscarVertice(Object vertice){
+    NodoVert existe=null;
     NodoVert aux=this.inicio;
-    while(aux!=null && !existe){
+    while(aux!=null && existe==null ){
         if(!aux.getElem().equals(vertice)){
             aux=aux.getSigVertice();
         }else{
-            existe=true;
+            existe=aux;
         }
     }
     return existe;
@@ -45,27 +49,50 @@ public class Grafo {
 
   public boolean insertarArco(Object verSalida, Object verEntrada, Object etiqueta){
     boolean exito=false;
-    NodoVert aux=this.inicio;
-    NodoVert aux0=null;
-    NodoVert aux1=null;
-    while(aux!=null && (aux0==null || aux1==null)){
-      if(aux.getElem().equals(verSalida)) aux0=aux;
-      if(aux.getElem().equals(verEntrada)) aux1=aux;
-      aux=aux.getSigVertice();
-    }
-    if(aux0!=null && aux1!=null){
-        exito=true;
-        NodoAdy nuevo=aux0.getPrimerAdy();
-        if(nuevo!=null){
-          while(nuevo.getSigAdy()!=null){
-            nuevo=nuevo.getSigAdy();
-          }
-          nuevo.setSigAdyacente(new NodoAdy(aux1, etiqueta));
-        }else{
-          aux0.setPrimerAdy(new NodoAdy(aux1, etiqueta));
-        } 
+    NodoVert nodoSalida=buscarVertice(verSalida);
+    NodoVert nodoEntrada=buscarVertice(verEntrada);
+    if(nodoSalida!=null && nodoEntrada!=null){
+      NodoAdy ady=nodoSalida.getPrimerAdy();
+      boolean existe =false;
+      while(ady!=null && !existe){
+        if(ady.getVertice().equals(nodoEntrada)){
+          existe=true;
+        }
+        ady=ady.getSigAdy();
       }
+      if(!existe){
+        NodoAdy nuevo=new NodoAdy(nodoEntrada, etiqueta);
+        nuevo.setSigAdyacente(nodoSalida.getPrimerAdy());
+        nodoSalida.setPrimerAdy(nuevo);
+        exito=true;
+      }
+    }
     return exito;
+  }
+
+  public boolean existeArco(Object verSalida, Object verEntrada){
+    boolean existe=false;
+    NodoVert nodoSalida=buscarVertice(verSalida);
+    NodoVert nodoEntrada=buscarVertice(verEntrada);
+    if(nodoSalida!=null && nodoEntrada!=null){
+      NodoAdy ady=nodoSalida.getPrimerAdy();
+      while(ady!=null && !existe){
+        if(ady.getVertice().equals(nodoEntrada)){
+          existe=true;
+        }
+        ady=ady.getSigAdy();
+      }
+    }
+    return existe;
+  }
+
+  public boolean vacio(){
+    boolean esVacio=this.inicio==null;
+    return esVacio;
+  }
+
+  public void vaciar(){
+    this.inicio=null;
   }
 
   public String toString(){
