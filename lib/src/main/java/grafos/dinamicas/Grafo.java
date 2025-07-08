@@ -26,6 +26,51 @@ public class Grafo {
     return exito;
   }
 
+  public boolean eliminarVertice(Object vertice){
+    boolean exito=false;
+    if(this.inicio!=null && this.inicio.getElem().equals(vertice)){
+      this.inicio=this.inicio.getSigVertice();
+      exito=true;
+    }else{
+      NodoVert actual=this.inicio;
+      NodoVert anterior=null;
+      while(actual!=null && !exito){
+        if(actual.getElem().equals(vertice)){
+          if(anterior!=null){
+            anterior.setSigVertice(actual.getSigVertice());
+          }
+          exito=true;
+        }else{
+          anterior=actual;
+          actual=actual.getSigVertice();
+        }
+      }
+    }
+    if(exito){
+      NodoVert aux=this.inicio;
+      while (aux!=null) {
+        NodoAdy actualAdy=aux.getPrimerAdy();
+        NodoAdy anteriorAdy=null;
+        while(actualAdy!=null){
+          if(actualAdy.getVertice().getElem().equals(vertice)){
+            if(anteriorAdy==null){
+              aux.setPrimerAdy(actualAdy.getSigAdy());
+              actualAdy=aux.getPrimerAdy();
+            }else{
+              anteriorAdy.setSigAdyacente(actualAdy.getSigAdy());
+              actualAdy=anteriorAdy.getSigAdy();
+            }
+          }else{
+            anteriorAdy=actualAdy;
+            actualAdy=actualAdy.getSigAdy();
+          }
+        }
+        aux=aux.getSigVertice();
+      }
+    }
+    return exito;
+  }
+
   public boolean existeVertice(Object vertice){
     boolean encontrado=false;
     if(this.inicio!=null){
@@ -65,6 +110,29 @@ public class Grafo {
         nuevo.setSigAdyacente(nodoSalida.getPrimerAdy());
         nodoSalida.setPrimerAdy(nuevo);
         exito=true;
+      }
+    }
+    return exito;
+  }
+
+  public boolean eliminarArco(Object verSalida, Object verEntrada){
+    boolean exito=false;
+    NodoVert nodoSalida=buscarVertice(verSalida);
+    if(nodoSalida!=null){
+      NodoAdy actualAdy=nodoSalida.getPrimerAdy();
+      NodoAdy anteriorAdy=null;
+      while(actualAdy!=null && !exito){
+        if(actualAdy.getVertice().getElem().equals(verEntrada)){
+          exito=true;
+          if(anteriorAdy==null){
+            nodoSalida.setPrimerAdy(actualAdy.getSigAdy());
+          }else{
+            anteriorAdy.setSigAdyacente(actualAdy.getSigAdy());
+          }
+        }else{
+          anteriorAdy=actualAdy;
+          actualAdy=actualAdy.getSigAdy();
+        }
       }
     }
     return exito;
