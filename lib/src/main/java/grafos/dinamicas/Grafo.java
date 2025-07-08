@@ -163,6 +163,43 @@ public class Grafo {
     this.inicio=null;
   }
 
+  public Grafo clone(){
+    Grafo copia=new Grafo();
+    if(this.inicio!=null){
+      NodoVert aux=this.inicio;
+      NodoVert nodAnterior=null;
+      NodoVert actual;
+      actual=new NodoVert(aux.getElem(), null, null);
+      copia.inicio=actual;
+      while(aux.getSigVertice()!=null){
+        aux=aux.getSigVertice();
+        nodAnterior=actual;
+        actual=new NodoVert(aux.getElem(), null, null);
+        nodAnterior.setSigVertice(actual);
+      }
+      aux=copia.inicio;
+      NodoVert aux2=this.inicio;
+      while(aux!=null && aux2!=null){
+        NodoAdy adyOriginal=aux2.getPrimerAdy();
+        NodoAdy ultimo=null;
+        while(adyOriginal!=null){
+          NodoVert destino=copia.buscarVertice(adyOriginal.getVertice().getElem());
+          NodoAdy nuevo=new NodoAdy(destino,adyOriginal.getEtiqueta());
+          if(ultimo==null){
+            aux.setPrimerAdy(nuevo);
+          }else{
+            ultimo.setSigAdyacente(nuevo);
+          }
+          ultimo=nuevo;
+          adyOriginal=adyOriginal.getSigAdy();
+        }
+        aux=aux.getSigVertice();
+        aux2=aux2.getSigVertice();
+      }
+    }
+    return copia;
+  }
+  
   public String toString(){
     String cad="";
     if(this.inicio==null){
