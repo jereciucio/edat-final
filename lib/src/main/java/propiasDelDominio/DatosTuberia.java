@@ -54,4 +54,10 @@ public class DatosTuberia {
   public String getEstado() {
     return this.estado;
   }
+
+  public void setEstado(String elEstado) {
+    // No verifica si el estado es válido. Debería hacerse en cualquier utilizacion desde
+    // TransporteDeAgua
+    this.estado = elEstado;
+  }
 }
