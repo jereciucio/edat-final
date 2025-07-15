@@ -38,4 +38,8 @@ public class DatosTuberia {
   public double getCaudalMaximo() {
     return this.caudalMaximoM3;
   }
+
+  public void setCaudalMaximo(double elCaudalMaximo) {
+    this.caudalMaximoM3 = elCaudalMaximo;
+  }
 }
