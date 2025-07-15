@@ -26,4 +26,8 @@ public class DatosTuberia {
   public String getNomenclatura() {
     return this.nomenclatura;
   }
+
+  public double getCaudalMinimo() {
+    return this.caudalMinimoM3;
+  }
 }
