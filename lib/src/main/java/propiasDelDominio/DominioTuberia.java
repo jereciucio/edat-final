@@ -16,6 +16,6 @@ public class DominioTuberia {
 
   public int hashCode() {
     int valorHash = this.ciudadOrigen.hashCode() * this.ciudadDestino.hashCode();
-    return valorHast
+    return valorHash;
   }
 }
