@@ -200,23 +200,28 @@ public class Grafo {
     return copia;
   }
   
-  public String toString(){
-    String cad="";
-    if(this.inicio==null){
-        cad="Grafo vacio";
-    }else{
+  public String toString() {
+    String cad = "";
+    if (this.inicio == null) {
+        cad = "Grafo vacío";
+    } else {
         NodoVert actual = this.inicio;
         while (actual != null) {
-            cad+="\n"+"Vértice Salida: " + actual.getElem().toString() + " -> ";
+            cad += "Vértice salida: " + actual.getElem() + " ->";
             NodoAdy ady = actual.getPrimerAdy();
-            while (ady != null) {
-                cad+="\n" +"Arco: "+ady.getEtiqueta().toString() + " -> ";
-                cad+="Vertice entrada: " + ady.getVertice().getElem().toString()+" ";
-                ady = ady.getSigAdy();
+            if (ady == null) {
+                cad += " [sin adyacencias]";
+            } else {
+                while (ady != null) {
+                    cad += "\n  Arco: " + ady.getEtiqueta() + " -> ";
+                    cad += "Vértice entrada: " + ady.getVertice().getElem();
+                    ady = ady.getSigAdy();
+                }
             }
+            cad += "\n"; // Salto de línea entre vértices
             actual = actual.getSigVertice();
         }
-    }    
+    }
     return cad;
   }
 }
