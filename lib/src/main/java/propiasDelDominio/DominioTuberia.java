@@ -13,4 +13,9 @@ public class DominioTuberia {
     valorIgualdad = this.ciudadOrigen == otroPar.ciudadOrigen && this.ciudadDestino == otroPar.ciudadDestino;
     return valorIgualdad;
   }
+
+  public int hashCode() {
+    int valorHash = this.ciudadOrigen.hashCode() * this.ciudadDestino.hashCode();
+    return valorHast
+  }
 }
