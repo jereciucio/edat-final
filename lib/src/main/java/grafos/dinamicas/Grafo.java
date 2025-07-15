@@ -7,24 +7,23 @@ public class Grafo {
     this.inicio = null;
   }
 
-  public boolean insertarVertice(Object vertice){
-    boolean exito=true;
-    if(this.inicio==null){
-        this.inicio=new NodoVert(vertice, null, null);
-        exito=true;
-    }else{
-      NodoVert aux=this.inicio;
-      while(aux.getSigVertice()!=null && exito){
-        if(aux.getElem().equals(vertice)){
-          exito=false;
-        }else{
-          aux=aux.getSigVertice();
+  public boolean insertarVertice(Object vertice) {
+    boolean exito = true;
+    if (this.inicio == null) {
+        this.inicio = new NodoVert(vertice, null, null);
+    } else {
+        NodoVert aux = this.inicio;
+        while (aux.getSigVertice() != null && !aux.getElem().equals(vertice)) {
+            aux = aux.getSigVertice();
         }
-      }
-      aux.setSigVertice(new NodoVert(vertice, null, null));
+        if (aux.getElem().equals(vertice)) {
+            exito = false;
+        } else {
+            aux.setSigVertice(new NodoVert(vertice, null, null));
+        }
     }
     return exito;
-  }
+}
 
   public boolean eliminarVertice(Object vertice){
     boolean exito=false;
