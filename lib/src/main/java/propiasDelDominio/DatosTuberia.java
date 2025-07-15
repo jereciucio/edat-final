@@ -5,4 +5,21 @@ public class DatosTuberia {
   private double diametroMM;
   private String nomenclatura;
   private String estado;
+
+  public DatosTuberia(String nomCiudadOrigen, String nomCiudadDestino) {
+    this.nomenclatura = "(" + nomCiudadOrigen + ", " + nomCiudadDestino + ")";
+    this.caudalMinimoM3 = 0.0;
+    this.caudalMaximoM3 = 0.0;
+    this.diametroMM = 0.0;
+    this.estado = "EN DISEÑO";
+  }
+
+  public DatosTuberia(String nomCiudadOrigen, String nomCiudadDestino,
+                      double elCaudalMinimo, double elCaudalMaximo, double elDiametro, String elEstado) {
+    this.nomenclatura = "(" + nomCiudadOrigen + ", " + nomCiudadDestino + ")";
+    this.caudalMinimoM3 = elCaudalMinimo;
+    this.caudalMaximoM3 = elCaudalMaximo;
+    this.diametroMM = elDiametro;
+    this.estado = elEstado;
+  }
 }
