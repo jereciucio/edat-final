@@ -79,18 +79,13 @@ public class Grafo {
     return encontrado;
   }
 
-  private NodoVert buscarVertice(Object vertice){
-    NodoVert existe=null;
-    NodoVert aux=this.inicio;
-    while(aux!=null && existe==null ){
-        if(!aux.getElem().equals(vertice)){
-            aux=aux.getSigVertice();
-        }else{
-            existe=aux;
-        }
+  private NodoVert buscarVertice(Object vertice) {
+    NodoVert aux = this.inicio;
+    while (aux != null && !aux.getElem().equals(vertice)) {
+        aux = aux.getSigVertice();
     }
-    return existe;
-  }
+    return aux;
+}
 
   public boolean insertarArco(Object verSalida, Object verEntrada, Object etiqueta){
     boolean exito=false;
