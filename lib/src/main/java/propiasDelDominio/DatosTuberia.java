@@ -1,4 +1,5 @@
 package propiasDelDominio;
+
 public class DatosTuberia {
   private double caudalMinimoM3;
   private double caudalMaximoM3;
@@ -14,8 +15,13 @@ public class DatosTuberia {
     this.estado = "EN DISEÑO";
   }
 
-  public DatosTuberia(String nomCiudadOrigen, String nomCiudadDestino,
-                      double elCaudalMinimo, double elCaudalMaximo, double elDiametro, String elEstado) {
+  public DatosTuberia(
+      String nomCiudadOrigen,
+      String nomCiudadDestino,
+      double elCaudalMinimo,
+      double elCaudalMaximo,
+      double elDiametro,
+      String elEstado) {
     this.nomenclatura = "(" + nomCiudadOrigen + ", " + nomCiudadDestino + ")";
     this.caudalMinimoM3 = elCaudalMinimo;
     this.caudalMaximoM3 = elCaudalMaximo;
@@ -30,7 +36,7 @@ public class DatosTuberia {
   public double getCaudalMinimo() {
     return this.caudalMinimoM3;
   }
-  
+
   public void setCaudalMinimo(double elCaudalMinimo) {
     this.caudalMinimoM3 = elCaudalMinimo;
   }
