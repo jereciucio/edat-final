@@ -22,4 +22,8 @@ public class DatosTuberia {
     this.diametroMM = elDiametro;
     this.estado = elEstado;
   }
+
+  public String getNomenclatura() {
+    return this.nomenclatura;
+  }
 }
