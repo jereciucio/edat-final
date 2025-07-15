@@ -30,4 +30,8 @@ public class DatosTuberia {
   public double getCaudalMinimo() {
     return this.caudalMinimoM3;
   }
+  
+  public void setCaudalMinimo(double elCaudalMinimo) {
+    this.caudalMinimoM3 = elCaudalMinimo;
+  }
 }
