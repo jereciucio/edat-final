@@ -46,4 +46,8 @@ public class DatosTuberia {
   public double getDiametro() {
     return this.diametroMM;
   }
+
+  public void setDiametro(double elDiametro) {
+    this.diametroMM = elDiametro;
+  }
 }
