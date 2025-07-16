@@ -96,8 +96,9 @@ public class Grafo {
       while(ady!=null && !existe){
         if(ady.getVertice().equals(nodoEntrada)){
           existe=true;
+        }else{
+        ady = ady.getSigAdy();
         }
-        ady=ady.getSigAdy();
       }
       if(!existe){
         NodoAdy nuevo=new NodoAdy(nodoEntrada, etiqueta);
