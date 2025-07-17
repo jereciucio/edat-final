@@ -22,4 +22,13 @@ public class Anio {
       this.meses[unMes - 1] = unValor;
     }
   }
+  public int compareTo(Anio unAnio){
+    int retorno = 0;
+    if(this.numeroAnio > unAnio.numeroAnio){
+      retorno = 1;
+    }else if(this.numeroAnio < unAnio.numeroAnio){
+      retorno = -1;
+    }
+    return retorno;
+  }
 }
