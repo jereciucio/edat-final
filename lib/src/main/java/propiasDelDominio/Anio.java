@@ -17,4 +17,9 @@ public class Anio {
     }
     return valor;
   }
+  public void setValor(int unMes, int unValor) {
+    if(unMes >= 1 && unMes <= 12){
+      this.meses[unMes - 1] = unValor;
+    }
+  }
 }
