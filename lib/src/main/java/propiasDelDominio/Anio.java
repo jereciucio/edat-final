@@ -1,6 +1,6 @@
 package propiasDelDominio;
 
-public class Anio {
+public class Anio implements Comparable <Anio> {
   private int numeroAnio;
   private int[] meses;
 
