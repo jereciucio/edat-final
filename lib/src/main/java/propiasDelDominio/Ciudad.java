@@ -50,5 +50,17 @@ public class Ciudad {
     }
     return consumo;
   }
+
+  public boolean setHabitantes(int cantidad, int mes, int anio){
+    boolean exito=false;
+    if(cantidad>0 && mes>0 && mes<13 && anio>1900){
+      Anio unAnio=this.calendarioHabitantes.buscar(anio);
+      if(unAnio != null){
+        unAnio.setValor(mes, cantidad);
+        exito = true;
+      }
+    }
+    return exito;
+  }
   
 }
