@@ -20,5 +20,9 @@ public class Ciudad {
   public String getNombre(){
     return this.nombre;
   }
+
+  public String getNomenclatura(){
+    return this.nomenclatura;
+  }
   
 }
