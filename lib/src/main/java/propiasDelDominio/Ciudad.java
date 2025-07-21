@@ -66,5 +66,15 @@ public class Ciudad {
   public void setConsumo(double consumoPromedio){
     this.consumoPerCapita=consumoPromedio;
   }
+
+  public String toString(){
+    String cad="";
+    cad+="nombre: "+this.nombre;
+    cad+="\n"+"nomenclatura: "+this.nomenclatura;
+    cad+="\n"+"superficie: "+this.superficie;
+    cad+="\n"+"consumo perCapita: "+this.consumoPerCapita;
+    cad+="\n"+"Calendario de habitantes: "+this.calendarioHabitantes.toString();
+    return cad;
+  }
   
 }
