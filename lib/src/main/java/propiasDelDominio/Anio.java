@@ -8,12 +8,12 @@ public class Anio implements Comparable <Anio> {
     this.numeroAnio = unNumeroAnio;
     this.meses = new int[12];
   }
-  public Object getValor(int unMes) {
-    Object valor;
+  public int getValor(int unMes) {
+    int valor;
     if (unMes >= 1 && unMes <= 12) {
       valor = this.meses[unMes - 1];
     } else {
-      valor = null;
+      valor = 0;
     }
     return valor;
   }
