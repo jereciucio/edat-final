@@ -28,5 +28,16 @@ public class Ciudad {
   public double getSuperficie(){
     return this.superficie;
   }
+
+  public int getHabitantes(int mes, int anio){
+    int cantidad=0;
+    if(mes>0 && mes<13 && anio>1900){
+      Anio unAnio=this.calendarioHabitantes.buscar(anio);
+      if(unAnio!=null){
+        cantidad=(int)unAnio.getValor(mes);
+      }
+    }
+    return cantidad;
+  }
   
 }
