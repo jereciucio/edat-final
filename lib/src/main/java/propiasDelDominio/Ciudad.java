@@ -24,5 +24,4 @@ public class Ciudad {
   public String getNomenclatura(){
     return this.nomenclatura;
   }
-  
 }
