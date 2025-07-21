@@ -34,7 +34,7 @@ public class Ciudad {
     if(mes>0 && mes<13 && anio>1900){
       Anio unAnio=this.calendarioHabitantes.buscar(anio);
       if(unAnio!=null){
-        cantidad=(int)unAnio.getValor(mes);
+        cantidad=unAnio.getValor(mes);
       }
     }
     return cantidad;
@@ -45,7 +45,7 @@ public class Ciudad {
     if(mes>0 && mes<13 && anio>1900){
       Anio unAnio=this.calendarioHabitantes.buscar(anio);
       if(unAnio!=null){
-        consumo=this.consumoPerCapita*(int)unAnio.getValor(mes);
+        consumo=this.consumoPerCapita*unAnio.getValor(mes);
       }   
     }
     return consumo;
