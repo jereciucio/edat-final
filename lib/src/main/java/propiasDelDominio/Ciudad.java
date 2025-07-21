@@ -62,5 +62,9 @@ public class Ciudad {
     }
     return exito;
   }
+
+  public void setConsumo(double consumoPromedio){
+    this.consumoPerCapita=consumoPromedio;
+  }
   
 }
