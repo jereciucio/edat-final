@@ -26,5 +26,9 @@ public class TransporteDeAgua {
   public void setArbolCiudades(ArbolAVL otro){
     this.arbolCiudades=otro;
   }
+
+  public void setGrafoTuberias(Grafo otro){
+    this.grafoTuberias=otro;
+  }
   
 }
