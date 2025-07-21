@@ -14,5 +14,9 @@ public class TransporteDeAgua {
     this.grafoTuberias=null;
     this.mapeoTuberias=null;
   }
+
+  public ArbolAVL getArbolCiudades(){
+    return this.arbolCiudades;
+  }
   
 }
