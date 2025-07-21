@@ -39,5 +39,16 @@ public class Ciudad {
     }
     return cantidad;
   }
+
+  public double getConsumo(int mes, int anio){
+    double consumo=0;
+    if(mes>0 && mes<13 && anio>1900){
+      Anio unAnio=this.calendarioHabitantes.buscar(anio);
+      if(unAnio!=null){
+        consumo=this.consumoPerCapita*(int)unAnio.getValor(mes);
+      }   
+    }
+    return consumo;
+  }
   
 }
