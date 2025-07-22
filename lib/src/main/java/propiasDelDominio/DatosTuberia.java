@@ -46,7 +46,9 @@ public class DatosTuberia {
   }
 
   public void setCaudalMaximo(double elCaudalMaximo) {
+    if(elCaudalMaximo >= 0){
     this.caudalMaximoM3 = elCaudalMaximo;
+    }
   }
 
   public double getDiametro() {
