@@ -38,6 +38,7 @@ public class DatosTuberia {
   }
 
   public void setCaudalMinimo(double elCaudalMinimo) {
+    //El caudalMinimo no puede ser negativo, se asume que se ingresan valores positivos
     this.caudalMinimoM3 = elCaudalMinimo;
   }
 
@@ -56,6 +57,7 @@ public class DatosTuberia {
   }
 
   public void setDiametro(double elDiametro) {
+    //El diametro no puede ser negativo, se asume que se ingresan valores positivos
     this.diametroMM = elDiametro;
   }
 
