@@ -64,7 +64,9 @@ public class Ciudad {
   }
 
   public void setConsumo(double consumoPromedio){
+    if(consumoPromedio >= 0){
     this.consumoPerCapita=consumoPromedio;
+    }
   }
 
   public String toString(){
