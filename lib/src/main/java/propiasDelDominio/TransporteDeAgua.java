@@ -1,8 +1,8 @@
 package propiasDelDominio;
 
 import java.util.HashMap;
-import conjuntistas.ArbolAVL;
-import grafos.Grafo;
+import conjuntistas.dinamicas.ArbolAVL;
+import grafos.dinamicas.Grafo;
 
 public class TransporteDeAgua {
   private ArbolAVL arbolCiudades;
