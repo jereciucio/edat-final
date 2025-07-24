@@ -1,6 +1,6 @@
 package propiasDelDominio;
 
-import conjuntistas.ArbolAVL;
+import conjuntistas.dinamicas.ArbolAVL;
 
 public class Ciudad {
   private String nombre;
