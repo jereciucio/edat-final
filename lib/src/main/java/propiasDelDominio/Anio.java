@@ -31,4 +31,11 @@ public class Anio implements Comparable <Anio> {
     }
     return retorno;
   }
+  public String toString(){
+    String cad = "Año: " + this.numeroAnio;
+    for(int i = 0; i < this.meses.length; i++){
+      cad += "\nMes " + (i + 1) + ": " + this.meses[i] + " habitantes";
+    }
+    return cad;
+  }
 }
