@@ -30,37 +30,43 @@ public class Ciudad {
   }
 
   public int getHabitantes(int mes, int anio){
-    int cantidad=0;
-    if(mes>0 && mes<13 && anio>1900){
-      Anio unAnio=this.calendarioHabitantes.buscar(anio);
-      if(unAnio!=null){
-        cantidad=unAnio.getValor(mes);
-      }
-    }
-    return cantidad;
+    // int cantidad=0;
+    // if(mes>0 && mes<13 && anio>1900){
+    //   Anio unAnio = this.calendarioHabitantes.buscar(anio);
+    //   if(unAnio!=null){
+    //     cantidad=unAnio.getValor(mes);
+    //   }
+    // }
+    // return cantidad;
+    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
+    return 0;
   }
 
   public double getConsumo(int mes, int anio){
-    double consumo=0;
-    if(mes>0 && mes<13 && anio>1900){
-      Anio unAnio=this.calendarioHabitantes.buscar(anio);
-      if(unAnio!=null){
-        consumo=this.consumoPerCapita*unAnio.getValor(mes);
-      }   
-    }
-    return consumo;
+    // double consumo=0;
+    // if(mes>0 && mes<13 && anio>1900){
+    //   Anio unAnio=this.calendarioHabitantes.buscar(anio);
+    //   if(unAnio!=null){
+    //     consumo=this.consumoPerCapita*unAnio.getValor(mes);
+    //   }   
+    // }
+    // return consumo;
+    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
+    return 0;
   }
 
   public boolean setHabitantes(int cantidad, int mes, int anio){
-    boolean exito=false;
-    if(cantidad>0 && mes>0 && mes<13 && anio>1900){
-      Anio unAnio=this.calendarioHabitantes.buscar(anio);
-      if(unAnio != null){
-        unAnio.setValor(mes, cantidad);
-        exito = true;
-      }
-    }
-    return exito;
+    // boolean exito=false;
+    // if(cantidad>0 && mes>0 && mes<13 && anio>1900){
+    //   Anio unAnio=this.calendarioHabitantes.buscar(anio);
+    //   if(unAnio != null){
+    //     unAnio.setValor(mes, cantidad);
+    //     exito = true;
+    //   }
+    // }
+    // return exito;
+    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
+    return false;
   }
 
   public void setConsumo(double consumoPromedio){
