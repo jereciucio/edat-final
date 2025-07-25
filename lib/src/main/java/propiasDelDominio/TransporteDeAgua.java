@@ -10,9 +10,9 @@ public class TransporteDeAgua {
   private HashMap mapeoTuberias;
 
   public TransporteDeAgua(){
-    this.arbolCiudades=null;
-    this.grafoTuberias=null;
-    this.mapeoTuberias=null;
+    this.arbolCiudades=new ArbolAVL();
+    this.grafoTuberias=new Grafo();
+    this.mapeoTuberias=new HashMap();
   }
 
   public ArbolAVL getArbolCiudades(){
