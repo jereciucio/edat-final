@@ -1,5 +1,6 @@
 package propiasDelDominio;
 
+import java.util.Scanner;
 import java.util.HashMap;
 import conjuntistas.dinamicas.ArbolAVL;
 import grafos.dinamicas.Grafo;
