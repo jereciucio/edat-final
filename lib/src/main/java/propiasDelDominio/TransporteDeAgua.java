@@ -6,6 +6,7 @@ import propositoEspecifico.ArbolAVLDicc;
 import grafos.dinamicas.Grafo;
 import propiasDelDominio.Ciudad;
 import java.util.Iterator;
+import lineales.dinamicas.Pila;
 
 public class TransporteDeAgua {
   private ArbolAVLDicc arbolCiudades;
@@ -65,6 +66,7 @@ public class TransporteDeAgua {
     Ciudad laCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
     String nomenclatura = laCiudad.getNomenclatura();
     Iterator<DominioTuberia> iteradorClaves;
+    Pila clavesAEliminar = new Pila();
     DominioTuberia claveActual;
     // Primero eliminamos la ciudad del AVL
     arbolCiudades.eliminar(nombreCiudad);
@@ -80,8 +82,13 @@ public class TransporteDeAgua {
     while (iteradorClaves.hasNext()) {
       claveActual = iteradorClaves.next();
       if (claveActual.tieneCiudad(nomenclatura)) {
-        this.mapeoTuberias.remove(claveActual);
+        clavesAEliminar.apilar(claveActual);
       }
+    }
+    while (!clavesAEliminar.esVacia()) {
+      claveActual = (DominioTuberia) clavesAEliminar.obtenerTope();
+      clavesAEliminar.desapilar();
+      this.mapeoTuberias.remove(claveActual);
     }
   }
 }
