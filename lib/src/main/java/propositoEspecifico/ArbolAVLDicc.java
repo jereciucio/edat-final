@@ -1,5 +1,7 @@
 package propositoEspecifico;
 
+import lineales.dinamicas.Lista;
+
 public class ArbolAVLDicc {
   private NodoAVLDicc raiz;
 
@@ -214,5 +216,25 @@ public class ArbolAVLDicc {
       }
     }
     return resultado;
+  }
+
+  public Lista listarClaves() {
+    Lista listaClaves = new Lista();
+    int[] pos = {1};
+    listarClavesAux(this.raiz, listaClaves, pos);
+    return listaClaves;
+  }
+
+  private void listarClavesAux(NodoAVLDicc nodoActual, Lista listaClaves, int[] pos) {
+    // Recorrido in-orden
+    if (nodoActual != null) {
+      // Visitar sub-árbol izquierdo
+      listarClavesAux(nodoActual.getIzquierdo(), listaClaves, pos);
+      // Añadir el elemento actual
+      listaClaves.insertar(nodoActual.getClave(), pos[0]);
+      pos[0]++;
+      // Visitar el sub-árbol derecho
+      listarClavesAux(nodoActual.getDerecho(), listaClaves, pos);
+    }
   }
 }
