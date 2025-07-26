@@ -42,4 +42,19 @@ public class NodoAVLMapeo {
     return this.altura;
   }
 
+  public void setClave(Comparable laClave) {
+    this.clave = laClave;
+  }
+
+  public void setDato(Object elDato) {
+    this.dato = elDato;
+  }
+
+  public void setDerecho(NodoAVLMapeo elDerecho) {
+    this.derecho = elDerecho;
+  }
+
+  public void setIzquierdo(NodoAVLMapeo elIzquierdo) {
+    this.izquierdo = elIzquierdo;
+  }
 }
