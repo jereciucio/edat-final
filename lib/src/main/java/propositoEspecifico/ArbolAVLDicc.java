@@ -27,4 +27,38 @@ public class ArbolAVLDicc {
     }
     return exito;
   }
+
+  private NodoAVLDicc rotacionSimpleIzquierda(NodoAVLDicc raiz) {
+    NodoAVLDicc hijo = raiz.getDerecho();
+    NodoAVLDicc temp = hijo.getIzquierdo();
+    hijo.setIzquierdo(raiz);
+    raiz.setDerecho(temp);
+
+    raiz.recalcularAltura();
+    hijo.recalcularAltura();
+
+    return hijo;
+  }
+
+  private NodoAVLDicc rotacionSimpleDerecha(NodoAVLDicc raiz) {
+    NodoAVLDicc hijo = raiz.getIzquierdo();
+    NodoAVLDicc temp = hijo.getDerecho();
+    hijo.setDerecho(raiz);
+    raiz.setIzquierdo(temp);
+
+    raiz.recalcularAltura();
+    hijo.recalcularAltura();
+
+    return hijo;
+  }
+
+  private NodoAVLDicc rotacionDobleIzquierdaDerecha(NodoAVLDicc raiz) {
+    raiz.setIzquierdo(rotacionSimpleIzquierda(raiz.getIzquierdo()));
+    return rotacionSimpleDerecha(raiz);
+  }
+
+  private NodoAVLDicc rotacionDobleDerechaIzquierda(NodoAVLDicc raiz) {
+    raiz.setDerecho(rotacionSimpleDerecha(raiz.getDerecho()));
+    return rotacionSimpleIzquierda(raiz);
+  }
 }
