@@ -2,21 +2,21 @@ package propiasDelDominio;
 
 import java.util.Scanner;
 import java.util.HashMap;
-import conjuntistas.dinamicas.ArbolAVL;
+import propositoEspecifico.ArbolAVLDicc;
 import grafos.dinamicas.Grafo;
 
 public class TransporteDeAgua {
-  private ArbolAVL arbolCiudades;
+  private ArbolAVLDicc arbolCiudades;
   private Grafo grafoTuberias;
   private HashMap mapeoTuberias;
 
   public TransporteDeAgua(){
-    this.arbolCiudades=new ArbolAVL();
+    this.arbolCiudades=new ArbolAVLDicc();
     this.grafoTuberias=new Grafo();
     this.mapeoTuberias=new HashMap();
   }
 
-  public ArbolAVL getArbolCiudades(){
+  public ArbolAVLDicc getArbolCiudades(){
     return this.arbolCiudades;
   }
 
@@ -24,7 +24,7 @@ public class TransporteDeAgua {
     return this.grafoTuberias;
   }
 
-  public void setArbolCiudades(ArbolAVL otro){
+  public void setArbolCiudades(ArbolAVLDicc otro){
     this.arbolCiudades=otro;
   }
 

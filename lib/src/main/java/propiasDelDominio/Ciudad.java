@@ -1,15 +1,15 @@
 package propiasDelDominio;
 
-import conjuntistas.dinamicas.ArbolAVL;
+import propositoEspecifico.ArbolAVLDicc;
 
 public class Ciudad {
   private String nombre;
   private String nomenclatura;
-  private ArbolAVL calendarioHabitantes;
+  private ArbolAVLDicc calendarioHabitantes;
   private double superficie;
   private double consumoPerCapita;
 
-  public Ciudad(String nombre, String nomenclatura, ArbolAVL calendario, double superficie, double consumo){
+  public Ciudad(String nombre, String nomenclatura, ArbolAVLDicc calendario, double superficie, double consumo){
     this.nombre=nombre;
     this.nomenclatura=nomenclatura;
     this.calendarioHabitantes=calendario;
