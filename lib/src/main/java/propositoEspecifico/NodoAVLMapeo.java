@@ -57,4 +57,17 @@ public class NodoAVLMapeo {
   public void setIzquierdo(NodoAVLMapeo elIzquierdo) {
     this.izquierdo = elIzquierdo;
   }
+
+  public void recalcularAltura() {
+    int alturaMax = -1;
+    if (this.izquierdo != null) {
+      alturaMax = this.izquierdo.altura;
+    }
+    if (this.derecho != null) {
+      int alturaDerecho = this.derecho.altura;
+      // Si el derecho es mayor, lo pone como altura maxima
+      alturaMax = ( alturaDerecho > alturaMax ) ? alturaDerecho : alturaMax;
+    }
+    this.altura = alturaMax + 1;
+  }
 }
