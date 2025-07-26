@@ -60,5 +60,37 @@ public class ArbolAVLDicc {
   private NodoAVLDicc rotacionDobleDerechaIzquierda(NodoAVLDicc raiz) {
     raiz.setDerecho(rotacionSimpleDerecha(raiz.getDerecho()));
     return rotacionSimpleIzquierda(raiz);
+  } 
+
+  public boolean insertar(Comparable laClave, Object elDato) {
+    boolean[] exito = new boolean[1];
+    exito[0] = false;
+    this.raiz = insertarAux(this.raiz, laClave, elDato, exito);
+    return exito[0];
+  }
+
+  private NodoAVLDicc insertarAux(
+      NodoAVLDicc nodoActual, Comparable laClave, Object elDato, boolean[] exito) {
+    int comparacion = 0;
+
+    // Buscar el lugar donde insertar el elemento hasta llegar a un nulo o encontrar el elemento.
+    if (nodoActual != null) {
+      comparacion = laClave.compareTo(nodoActual.getClave());
+      if (comparacion < 0) {
+        nodoActual.setIzquierdo(insertarAux(nodoActual.getIzquierdo(), laClave, elDato, exito));
+      } else if (comparacion > 0) {
+        nodoActual.setDerecho(insertarAux(nodoActual.getDerecho(), laClave, elDato, exito));
+      }
+    } else {
+      nodoActual = new NodoAVLDicc(laClave, elDato, null, null);
+      exito[0] = true;
+    }
+
+    // Recalcular altura y rebalancear.
+    if (nodoActual != null) {
+      nodoActual.recalcularAltura();
+      nodoActual = rebalancear(nodoActual);
+    }
+    return nodoActual;
   }
 }
