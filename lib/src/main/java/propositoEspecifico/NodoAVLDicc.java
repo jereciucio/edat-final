@@ -1,12 +1,12 @@
 package propositoEspecifico;
-public class NodoAVLMapeo {
+public class NodoAVLDicc {
   private Comparable clave;
   private Object dato;
   private int altura;
-  private NodoAVLMapeo izquierdo;
-  private NodoAVLMapeo derecho;
+  private NodoAVLDicc izquierdo;
+  private NodoAVLDicc derecho;
 
-  public NodoAVLMapeo(Comparable laClave, Object elDato, NodoAVLMapeo elIzquierdo, NodoAVLMapeo elDerecho) {
+  public NodoAVLDicc(Comparable laClave, Object elDato, NodoAVLDicc elIzquierdo, NodoAVLDicc elDerecho) {
     this.clave = laClave;
     this.dato = elDato;
     this.izquierdo = elIzquierdo;
@@ -14,7 +14,7 @@ public class NodoAVLMapeo {
     this.altura = 0;
   }
 
-  public NodoAVLMapeo(Comparable laClave, Object elDato) {
+  public NodoAVLDicc(Comparable laClave, Object elDato) {
     this.clave = laClave;
     this.dato = elDato;
     this.izquierdo = null;
@@ -30,11 +30,11 @@ public class NodoAVLMapeo {
     return this.dato;
   }
 
-  public NodoAVLMapeo getDerecho() {
+  public NodoAVLDicc getDerecho() {
     return this.derecho;
   }
 
-  public NodoAVLMapeo getIzquierdo() {
+  public NodoAVLDicc getIzquierdo() {
     return this.izquierdo;
   }
 
@@ -50,11 +50,11 @@ public class NodoAVLMapeo {
     this.dato = elDato;
   }
 
-  public void setDerecho(NodoAVLMapeo elDerecho) {
+  public void setDerecho(NodoAVLDicc elDerecho) {
     this.derecho = elDerecho;
   }
 
-  public void setIzquierdo(NodoAVLMapeo elIzquierdo) {
+  public void setIzquierdo(NodoAVLDicc elIzquierdo) {
     this.izquierdo = elIzquierdo;
   }
 

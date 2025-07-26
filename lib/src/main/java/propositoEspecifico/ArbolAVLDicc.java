@@ -1,9 +1,9 @@
 package propositoEspecifico;
 
-public class ArbolAVLMapeo {
-  private NodoAVLMapeo raiz;
+public class ArbolAVLDicc {
+  private NodoAVLDicc raiz;
 
-  public ArbolAVLMapeo() {
+  public ArbolAVLDicc() {
     this.raiz = null;
   }
 
@@ -11,7 +11,7 @@ public class ArbolAVLMapeo {
     return existeClaveAux(this.raiz, laClave);
   }
 
-  private boolean existeClaveAux(NodoAVLMapeo nodoActual, Comparable laClave) {
+  private boolean existeClaveAux(NodoAVLDicc nodoActual, Comparable laClave) {
     int comparacion = 0;
     boolean exito = false;
     if (nodoActual != null) {
