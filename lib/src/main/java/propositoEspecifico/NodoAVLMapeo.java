@@ -22,4 +22,24 @@ public class NodoAVLMapeo {
     this.altura = 0;
   }
 
+  public Comparable getClave() {
+    return this.clave;
+  }
+
+  public Object getDato() {
+    return this.dato;
+  }
+
+  public NodoAVLMapeo getDerecho() {
+    return this.derecho;
+  }
+
+  public NodoAVLMapeo getIzquierdo() {
+    return this.izquierdo;
+  }
+
+  public int getAltura() {
+    return this.altura;
+  }
+
 }
