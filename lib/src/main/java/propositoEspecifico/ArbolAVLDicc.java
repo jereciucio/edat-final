@@ -237,4 +237,24 @@ public class ArbolAVLDicc {
       listarClavesAux(nodoActual.getDerecho(), listaClaves, pos);
     }
   }
+
+  public Lista listarDatos() {
+    Lista listaDatos = new Lista();
+    int[] pos = {1};
+    listarDatosAux(this.raiz, listaDatos, pos);
+    return listaDatos;
+  }
+
+  private void listarDatosAux(NodoAVLDicc nodoActual, Lista listaDatos, int[] pos) {
+    // Recorrido in-orden
+    if (nodoActual != null) {
+      // Visitar sub-árbol izquierdo
+      listarDatosAux(nodoActual.getIzquierdo(), listaDatos, pos);
+      // Añadir el elemento actual
+      listaDatos.insertar(nodoActual.getDato(), pos[0]);
+      pos[0]++;
+      // Visitar el sub-árbol derecho
+      listarDatosAux(nodoActual.getDerecho(), listaDatos, pos);
+    }
+  }
 }
