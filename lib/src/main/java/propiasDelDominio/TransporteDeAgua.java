@@ -13,27 +13,28 @@ public class TransporteDeAgua {
   private Grafo grafoTuberias;
   private HashMap mapeoTuberias;
 
-  public TransporteDeAgua(){
-    this.arbolCiudades=new ArbolAVLDicc();
-    this.grafoTuberias=new Grafo();
-    this.mapeoTuberias=new HashMap();
+  public TransporteDeAgua() {
+    this.arbolCiudades = new ArbolAVLDicc();
+    this.grafoTuberias = new Grafo();
+    this.mapeoTuberias = new HashMap();
   }
 
-  public ArbolAVLDicc getArbolCiudades(){
+  public ArbolAVLDicc getArbolCiudades() {
     return this.arbolCiudades;
   }
 
-  public Grafo getGrafoTuberias(){
+  public Grafo getGrafoTuberias() {
     return this.grafoTuberias;
   }
 
-  public void setArbolCiudades(ArbolAVLDicc otro){
-    this.arbolCiudades=otro;
+  public void setArbolCiudades(ArbolAVLDicc otro) {
+    this.arbolCiudades = otro;
   }
 
-  public void setGrafoTuberias(Grafo otro){
-    this.grafoTuberias=otro;
+  public void setGrafoTuberias(Grafo otro) {
+    this.grafoTuberias = otro;
   }
+
   public boolean altaCiudad() {
     Scanner sc = new Scanner(System.in);
     boolean continuar = true;
@@ -88,7 +89,9 @@ public class TransporteDeAgua {
     } while (continuar);
     return exito;
   }
-  private boolean registrarCiudad(String nombre, String nomenclatura, double superficie, double consumo, ArbolAVLDicc calendario) {
+
+  private boolean registrarCiudad(String nombre, String nomenclatura, double superficie, double consumo,
+      ArbolAVLDicc calendario) {
     boolean registrado = true;
     Ciudad nuevaCiudad = new Ciudad(nombre, nomenclatura, calendario, superficie, consumo);
     if (arbolCiudades.existeClave(nombre)) {
@@ -104,6 +107,7 @@ public class TransporteDeAgua {
     }
     return registrado;
   }
+
   public void bajaCiudad() {
     Scanner sc = new Scanner(System.in);
     String nombreIngresado;
@@ -117,8 +121,9 @@ public class TransporteDeAgua {
       existe = this.arbolCiudades.existeClave(nombreIngresado);
       if (!existe) {
         System.out.print("La Ciudad ingresada no existe. ¿Desea volver a intentar? (S/n): ");
-        switch(sc.nextLine().toUpperCase()) {
-          case "": case "S":
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
             continuar = true;
             break;
           default:
@@ -131,6 +136,7 @@ public class TransporteDeAgua {
       }
     } while (continuar);
   }
+
   private void bajaCiudadAux(String nombreCiudad) {
     Ciudad laCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
     String nomenclatura = laCiudad.getNomenclatura();
@@ -140,12 +146,14 @@ public class TransporteDeAgua {
     // Primero eliminamos la ciudad del AVL
     arbolCiudades.eliminar(nombreCiudad);
 
-    // Luego debemos eliminar todas las tuberias que tengan a esa ciudad como origen o destino
+    // Luego debemos eliminar todas las tuberias que tengan a esa ciudad como origen
+    // o destino
     // Primero nos encargamos de eliminarlas en el Grafo
     grafoTuberias.eliminarVertice(nomenclatura);
 
     // Despues, eliminamos todos los mapeos en el HashMap que tengan a esa Ciudad
-    // Para eso, iteramos todos los DominioTuberia, verificamos si la ciudad está presente
+    // Para eso, iteramos todos los DominioTuberia, verificamos si la ciudad está
+    // presente
     // Y de ahi, eliminamos todos los en los que esto sea cierto
     iteradorClaves = this.mapeoTuberias.keySet().iterator();
     while (iteradorClaves.hasNext()) {
