@@ -62,7 +62,7 @@ public class ArbolAVLDicc {
   private NodoAVLDicc rotacionDobleDerechaIzquierda(NodoAVLDicc raiz) {
     raiz.setDerecho(rotacionSimpleDerecha(raiz.getDerecho()));
     return rotacionSimpleIzquierda(raiz);
-  } 
+  }
 
   public boolean insertar(Comparable laClave, Object elDato) {
     boolean[] exito = new boolean[1];
@@ -99,7 +99,7 @@ public class ArbolAVLDicc {
   private NodoAVLDicc rebalancear(NodoAVLDicc nodo) {
     int balance = balance(nodo);
     int balanceHijo = 0;
-    
+
     if (balance >= 2) { // Desbalance hacia la izquierda
       balanceHijo = balance(nodo.getIzquierdo());
 
@@ -139,11 +139,12 @@ public class ArbolAVLDicc {
     return alturaIzquierdo - alturaDerecho;
   }
 
-  public boolean eliminar (Comparable laClave) {
+  public boolean eliminar(Comparable laClave) {
     boolean[] exito = {false};
     this.raiz = eliminarAux(this.raiz, laClave, exito);
     return exito[0];
   }
+
   private NodoAVLDicc eliminarAux(NodoAVLDicc nodo, Comparable laClave, boolean[] exito) {
     NodoAVLDicc resultado = nodo;
     if (nodo != null) {
