@@ -75,10 +75,6 @@ public class Ciudad {
     }
   }
 
-  public int compareTo(Ciudad otra){
-    return this.nombre.compareTo(otra.getNombre());
-  }
-
   public String toString(){
     String cad="";
     cad+="nombre: "+this.nombre;
