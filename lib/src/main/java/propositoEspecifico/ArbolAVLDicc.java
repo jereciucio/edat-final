@@ -257,4 +257,8 @@ public class ArbolAVLDicc {
       listarDatosAux(nodoActual.getDerecho(), listaDatos, pos);
     }
   }
+
+  public boolean esVacio() {
+    return this.raiz == null;
+  }
 }
