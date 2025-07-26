@@ -136,4 +136,51 @@ public class ArbolAVLDicc {
     }
     return alturaIzquierdo - alturaDerecho;
   }
+
+  public boolean eliminar (Comparable laClave) {
+    boolean[] exito = {false};
+    this.raiz = eliminarAux(this.raiz, laClave, exito);
+    return exito[0];
+  }
+  private NodoAVLDicc eliminarAux(NodoAVLDicc nodo, Comparable laClave, boolean[] exito) {
+    NodoAVLDicc resultado = nodo;
+    if (nodo != null) {
+      int comparacion = laClave.compareTo(nodo.getClave());
+
+      if (comparacion < 0) {
+        nodo.setIzquierdo(eliminarAux(nodo.getIzquierdo(), laClave, exito));
+      } else if (comparacion > 0) {
+        nodo.setDerecho(eliminarAux(nodo.getDerecho(), laClave, exito));
+      } else {
+        // Nodo encontrado
+        exito[0] = true;
+
+        // Caso 1: sin hijos
+        if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+          resultado = null;
+        }
+        // Caso 2.1: Un solo hijo (Solo izquierdo)
+        else if (nodo.getDerecho() == null) {
+          resultado = nodo.getIzquierdo();
+        }
+        // Caso 2.2: Un solo hijo (Solo derecho)
+        else if (nodo.getIzquierdo() == null) {
+          resultado = nodo.getDerecho();
+        }
+        // Caso 3: Dos hijos
+        else {
+          NodoAVLDicc sucesor = encontrarMinimo(nodo.getDerecho());
+          nodo.setClave(sucesor.getClave());
+          nodo.setDato(sucesor.getDato());
+          nodo.setDerecho(eliminarAux(nodo.getDerecho(), sucesor.getClave(), exito));
+          resultado = nodo;
+        }
+      }
+    }
+    if (resultado != null) {
+      resultado.recalcularAltura();
+      resultado = rebalancear(resultado);
+    }
+    return resultado;
+  }
 }
