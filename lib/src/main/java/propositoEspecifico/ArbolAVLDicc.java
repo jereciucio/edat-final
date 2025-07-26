@@ -193,4 +193,26 @@ public class ArbolAVLDicc {
     }
     return resultado;
   }
+
+  public Object obtenerInformacion(Comparable laClave) {
+    return obtenerInformacionAux(this.raiz, laClave);
+  }
+
+  private Object obtenerInformacionAux(NodoAVLDicc nodoActual, Comparable laClave) {
+    Object resultado = null;
+    int comparacion;
+    // Caso base, si no se encuentra el nodo de la clave buscada (es decir, que el nodoActual sería
+    // nulo), se devolverá como resultado un `null`.
+    if (nodoActual != null) {
+      comparacion = laClave.compareTo(nodoActual.getClave());
+      if (comparacion < 0) {
+        resultado = obtenerInformacionAux(nodoActual.getIzquierdo(), laClave);
+      } else if (comparacion > 0) {
+        resultado = obtenerInformacionAux(nodoActual.getDerecho(), laClave);
+      } else {
+        resultado = nodoActual.getDato();
+      }
+    }
+    return resultado;
+  }
 }
