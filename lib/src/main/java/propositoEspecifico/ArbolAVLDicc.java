@@ -183,4 +183,14 @@ public class ArbolAVLDicc {
     }
     return resultado;
   }
+
+  private NodoAVLDicc encontrarMinimo(NodoAVLDicc nodo) {
+    NodoAVLDicc resultado = null;
+    if (nodo.getIzquierdo() == null) {
+      resultado = nodo; // Caso base: Ya es el menor de su subarbol
+    } else {
+      resultado = encontrarMinimo(nodo.getIzquierdo()); // Seguir buscando por la izquierda
+    }
+    return resultado;
+  }
 }
