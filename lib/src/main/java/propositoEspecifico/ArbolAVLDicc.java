@@ -122,4 +122,18 @@ public class ArbolAVLDicc {
 
     return nodo;
   }
+
+  private int balance(NodoAVLDicc nodo) {
+    NodoAVLDicc izquierdo = nodo.getIzquierdo();
+    NodoAVLDicc derecho = nodo.getDerecho();
+    int alturaIzquierdo = -1;
+    int alturaDerecho = -1;
+    if (izquierdo != null) {
+      alturaIzquierdo = izquierdo.getAltura();
+    }
+    if (derecho != null) {
+      alturaDerecho = derecho.getAltura();
+    }
+    return alturaIzquierdo - alturaDerecho;
+  }
 }
