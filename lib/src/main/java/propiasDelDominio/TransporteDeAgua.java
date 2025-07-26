@@ -34,7 +34,60 @@ public class TransporteDeAgua {
   public void setGrafoTuberias(Grafo otro){
     this.grafoTuberias=otro;
   }
-  
+  public boolean altaCiudad() {
+    Scanner sc = new Scanner(System.in);
+    boolean continuar = true;
+    boolean exito = false;
+    do {
+      System.out.print("Ingrese el nombre de la ciudad: ");
+      String nombreCiudad = sc.nextLine().trim();
+      if (nombreCiudad.length() < 2) {
+        System.out.println("El nombre debe tener al menos 2 caracteres.");
+      } else {
+        System.out.print("Ingrese la nomenclatura: ");
+        String nomenclaturaCiudad = sc.nextLine().trim().toUpperCase();
+        if (!Ciudad.nomenclaturaValida(nombreCiudad, nomenclaturaCiudad)) {
+          System.out.println(
+              "Nomenclatura inválida. Debe comenzar con las dos primeras letras del nombre y un número entre 3000 y 4000.");
+        } else {
+          System.out.print("Ingrese la superficie: ");
+          double superficieCiudad = sc.nextDouble();
+          if (superficieCiudad < 0) {
+            System.out.println("Valor no válido. Debe ser un número positivo.");
+          } else {
+            System.out.print("Ingrese el consumo per cápita: ");
+            double consumoCiudad = sc.nextDouble();
+            if (consumoCiudad < 0) {
+              System.out.println("Valor no válido. Debe ser un número positivo.");
+            } else {
+              double consumo = sc.nextDouble();
+              sc.nextLine();
+              ArbolAVLDicc calendario = new ArbolAVLDicc();
+              exito = registrarCiudad(nombreCiudad, nomenclaturaCiudad, superficieCiudad, consumo, calendario);
+              if (exito) {
+                System.out.println("Ciudad cargada correctamente.");
+              } else {
+                System.out.println("La ciudad no se ha cargado (puede que ya exista el nombre o la nomenclatura).");
+              }
+              continuar = false;
+              break;
+            }
+          }
+        }
+      }
+      System.out.print("¿Desea volver a intentar? (S/n): ");
+      String opcion = sc.nextLine().toUpperCase();
+      switch (opcion) {
+        case "S":
+          continuar = true;
+          break;
+        default:
+          continuar = false;
+          break;
+      }
+    } while (continuar);
+    return exito;
+  }
   public void bajaCiudad() {
     Scanner sc = new Scanner(System.in);
     String nombreIngresado;
