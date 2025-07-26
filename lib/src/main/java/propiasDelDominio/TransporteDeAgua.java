@@ -88,6 +88,22 @@ public class TransporteDeAgua {
     } while (continuar);
     return exito;
   }
+  private boolean registrarCiudad(String nombre, String nomenclatura, double superficie, double consumo, ArbolAVLDicc calendario) {
+    boolean registrado = true;
+    Ciudad nuevaCiudad = new Ciudad(nombre, nomenclatura, calendario, superficie, consumo);
+    if (arbolCiudades.existeClave(nombre)) {
+      System.out.println("Ya existe una ciudad con ese nombre.");
+      registrado = false;
+    } else if (grafoTuberias.existeVertice(nomenclatura)) {
+      System.out.println("Ya existe una ciudad con esa nomenclatura.");
+      registrado = false;
+    } else {
+      arbolCiudades.insertar(nombre, nuevaCiudad);
+      grafoTuberias.insertarVertice(nomenclatura);
+      mapeoTuberias.put(nomenclatura, nuevaCiudad);
+    }
+    return registrado;
+  }
   public void bajaCiudad() {
     Scanner sc = new Scanner(System.in);
     String nombreIngresado;
