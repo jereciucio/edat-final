@@ -74,7 +74,20 @@ public class Ciudad {
     this.consumoPerCapita=consumoPromedio;
     }
   }
-
+  public static boolean nomenclaturaValida(String unNombre, String unaNomenclatura) {
+    boolean esValido = false;
+    if (unaNomenclatura != null && unaNomenclatura.length() == 6) {
+        String letrasEsperadas = unNombre.substring(0, 2).toUpperCase();
+        String letrasNomenclatura = unaNomenclatura.substring(0, 2);
+      if (letrasEsperadas.equals(letrasNomenclatura)) {
+        int numeroNomenclatura = Integer.parseInt(unaNomenclatura.substring(2));
+        if(numeroNomenclatura >= 3000 && numeroNomenclatura <= 4000){
+          esValido = true;
+        }
+      }
+    }
+    return esValido;
+  }
   public String toString(){
     String cad="";
     cad+="nombre: "+this.nombre;
