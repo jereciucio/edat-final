@@ -93,4 +93,33 @@ public class ArbolAVLDicc {
     }
     return nodoActual;
   }
+
+  private NodoAVLDicc rebalancear(NodoAVLDicc nodo) {
+    int balance = balance(nodo);
+    int balanceHijo = 0;
+    
+    if (balance >= 2) { // Desbalance hacia la izquierda
+      balanceHijo = balance(nodo.getIzquierdo());
+
+      if (balanceHijo >= 0) {
+        // El hijo tiene el mismo o nulo desbalance
+        nodo = rotacionSimpleDerecha(nodo);
+      } else {
+        // El hijo tiene el desbalance contrario
+        nodo = rotacionDobleIzquierdaDerecha(nodo);
+      }
+    } else { // Desbalance hacia la derecha
+      balanceHijo = balance(nodo.getDerecho());
+
+      if (balanceHijo <= 0) {
+        // El hijo tiene el mismo o nulo desbalance
+        nodo = rotacionSimpleDerecha(nodo);
+      } else {
+        // El hijo tiene el desbalance contrario
+        nodo = rotacionDobleIzquierdaDerecha(nodo);
+      }
+    }
+
+    return nodo;
+  }
 }
