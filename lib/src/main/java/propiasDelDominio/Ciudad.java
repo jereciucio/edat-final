@@ -25,6 +25,10 @@ public class Ciudad {
     return this.nomenclatura;
   }
 
+  public ArbolAVLDicc getCalendarioHabitantes(){
+    return this.calendarioHabitantes;
+  }
+
   public double getSuperficie(){
     return this.superficie;
   }
@@ -66,7 +70,7 @@ public class Ciudad {
     }
     return exito;
   }
-  
+
   public void setConsumo(double consumoPromedio){
     if(consumoPromedio >= 0){
     this.consumoPerCapita=consumoPromedio;
