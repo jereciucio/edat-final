@@ -56,19 +56,17 @@ public class Ciudad {
   }
 
   public boolean setHabitantes(int cantidad, int mes, int anio){
-    // boolean exito=false;
-    // if(cantidad>0 && mes>0 && mes<13 && anio>1900){
-    //   Anio unAnio=this.calendarioHabitantes.buscar(anio);
-    //   if(unAnio != null){
-    //     unAnio.setValor(mes, cantidad);
-    //     exito = true;
-    //   }
-    // }
-    // return exito;
-    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
-    return false;
+    boolean exito=false;
+    if(cantidad>0 && mes>0 && mes<13){
+      Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
+      if(unAnio != null){
+        unAnio.setValor(mes, cantidad);
+        exito = true;
+      }
+    }
+    return exito;
   }
-
+  
   public void setConsumo(double consumoPromedio){
     if(consumoPromedio >= 0){
     this.consumoPerCapita=consumoPromedio;
