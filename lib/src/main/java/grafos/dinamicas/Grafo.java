@@ -149,6 +149,24 @@ public class Grafo {
     return existe;
   }
 
+  public NodoAdy obtenerArco(Object verSalida, Object verEntrada){
+    NodoAdy resultado = null;
+    boolean existe = false;
+    NodoVert nodoSalida=buscarVertice(verSalida);
+    NodoVert nodoEntrada=buscarVertice(verEntrada);
+    if(nodoSalida!=null && nodoEntrada!=null){
+      NodoAdy ady=nodoSalida.getPrimerAdy();
+      while(ady!=null && !existe){
+        if(ady.getVertice().equals(nodoEntrada)){
+          existe=true;
+          resultado = ady;
+        }
+        ady=ady.getSigAdy();
+      }
+    }
+    return resultado;
+  }
+
   public boolean vacio(){
     boolean esVacio=this.inicio==null;
     return esVacio;
