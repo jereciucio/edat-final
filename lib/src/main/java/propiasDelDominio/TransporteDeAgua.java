@@ -168,7 +168,34 @@ public class TransporteDeAgua {
       this.mapeoTuberias.remove(claveActual);
     }
   }
-
+   public void bajaTuberia() {
+  Scanner sc = new Scanner(System.in);
+  String ciudadOrigen, ciudadDestino;
+  boolean existe, continuar;
+  do {
+    System.out.print("Ingrese la nomenclatura de la ciudad origen: ");
+    ciudadOrigen = sc.nextLine().trim().toUpperCase();
+    System.out.print("Ingrese la nomenclatura de la ciudad destino: ");
+    ciudadDestino = sc.nextLine().trim().toUpperCase();
+    existe = grafoTuberias.existeVertice(ciudadOrigen) && grafoTuberias.existeVertice(ciudadDestino)&& grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
+    if (!existe) {
+      System.out.print("La tubería especificada no existe. ¿Desea volver a intentar? (S/n): ");
+      switch (sc.nextLine().trim().toUpperCase()) {
+        case "":
+        case "S":
+          continuar = true;
+          break;
+        default:
+          continuar = false;
+          break;
+      }
+    } else {
+      continuar = false;
+      bajaTuberiaAux(ciudadOrigen, ciudadDestino);
+      System.out.println("Tubería eliminada exitosamente.");
+    }
+  } while (continuar);
+}
   public void modificarTuberia(){
     Scanner sc = new Scanner(System.in);
     String nombreCiudadOrigen, nombreCiudadDestino; 
@@ -197,7 +224,6 @@ public class TransporteDeAgua {
       }
     } while(continuar);
   }
-
   private void cambiarTuberia(String nombreCiudadOrigen, String nombreCiudadDestino){
     double caudalMax, caudalMin, diametro;
     String estado;
