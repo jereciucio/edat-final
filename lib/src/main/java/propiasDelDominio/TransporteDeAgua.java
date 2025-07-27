@@ -196,6 +196,13 @@ public class TransporteDeAgua {
     }
   } while (continuar);
 }
+private void bajaTuberiaAux(String ciudadOrigen, String ciudadDestino) {
+  //Primeramente eliminamos el arco pasanado las ciudades
+    grafoTuberias.eliminarArco(ciudadOrigen, ciudadDestino);
+    //Removemos la tuberia del hashMap
+    DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
+    mapeoTuberias.remove(clave);
+  }
   public void modificarTuberia(){
     Scanner sc = new Scanner(System.in);
     String nombreCiudadOrigen, nombreCiudadDestino; 
