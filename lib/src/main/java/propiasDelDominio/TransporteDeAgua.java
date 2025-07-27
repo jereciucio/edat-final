@@ -168,70 +168,77 @@ public class TransporteDeAgua {
       this.mapeoTuberias.remove(claveActual);
     }
   }
-   public void bajaTuberia() {
-  Scanner sc = new Scanner(System.in);
-  String ciudadOrigen, ciudadDestino;
-  boolean existe, continuar;
-  do {
-    System.out.print("Ingrese la nomenclatura de la ciudad origen: ");
-    ciudadOrigen = sc.nextLine().trim().toUpperCase();
-    System.out.print("Ingrese la nomenclatura de la ciudad destino: ");
-    ciudadDestino = sc.nextLine().trim().toUpperCase();
-    existe = grafoTuberias.existeVertice(ciudadOrigen) && grafoTuberias.existeVertice(ciudadDestino)&& grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
-    if (!existe) {
-      System.out.print("La tubería especificada no existe. ¿Desea volver a intentar? (S/n): ");
-      switch (sc.nextLine().trim().toUpperCase()) {
-        case "":
-        case "S":
-          continuar = true;
-          break;
-        default:
-          continuar = false;
-          break;
-      }
-    } else {
-      continuar = false;
-      bajaTuberiaAux(ciudadOrigen, ciudadDestino);
-      System.out.println("Tubería eliminada exitosamente.");
-    }
-  } while (continuar);
-}
-private void bajaTuberiaAux(String ciudadOrigen, String ciudadDestino) {
-  //Primeramente eliminamos el arco pasanado las ciudades
-    grafoTuberias.eliminarArco(ciudadOrigen, ciudadDestino);
-    //Removemos la tuberia del hashMap
-    DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
-    mapeoTuberias.remove(clave);
-  }
-  public void modificarTuberia(){
+
+  public void bajaTuberia() {
     Scanner sc = new Scanner(System.in);
-    String nombreCiudadOrigen, nombreCiudadDestino; 
+    String ciudadOrigen, ciudadDestino;
     boolean existe, continuar;
-    do{
-      System.out.println("Ingrese el nombre de la ciudad de origen:");
-      nombreCiudadOrigen = sc.nextLine();
-      System.out.println("Ingrese el nombre de la ciudad de destino:");
-      nombreCiudadDestino = sc.nextLine();
-      existe = this.arbolCiudades.existeClave(nombreCiudadOrigen) && 
-               this.arbolCiudades.existeClave(nombreCiudadDestino);
-      if(!existe){
-        System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
-        switch (sc.nextLine().toUpperCase()) {
-          case "": case "S":
+    do {
+      System.out.print("Ingrese la nomenclatura de la ciudad origen: ");
+      ciudadOrigen = sc.nextLine().trim().toUpperCase();
+      System.out.print("Ingrese la nomenclatura de la ciudad destino: ");
+      ciudadDestino = sc.nextLine().trim().toUpperCase();
+      existe = grafoTuberias.existeVertice(ciudadOrigen) && grafoTuberias.existeVertice(ciudadDestino)
+          && grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
+      if (!existe) {
+        System.out.print("La tubería especificada no existe. ¿Desea volver a intentar? (S/n): ");
+        switch (sc.nextLine().trim().toUpperCase()) {
+          case "":
+          case "S":
             continuar = true;
             break;
           default:
             continuar = false;
             break;
         }
-      } else{
+      } else {
+        continuar = false;
+        bajaTuberiaAux(ciudadOrigen, ciudadDestino);
+        System.out.println("Tubería eliminada exitosamente.");
+      }
+    } while (continuar);
+  }
+
+  private void bajaTuberiaAux(String ciudadOrigen, String ciudadDestino) {
+    // Primeramente eliminamos el arco pasanado las ciudades
+    grafoTuberias.eliminarArco(ciudadOrigen, ciudadDestino);
+    // Removemos la tuberia del hashMap
+    DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
+    mapeoTuberias.remove(clave);
+  }
+
+  public void modificarTuberia() {
+    Scanner sc = new Scanner(System.in);
+    String nombreCiudadOrigen, nombreCiudadDestino;
+    boolean existe, continuar;
+    do {
+      System.out.println("Ingrese el nombre de la ciudad de origen:");
+      nombreCiudadOrigen = sc.nextLine();
+      System.out.println("Ingrese el nombre de la ciudad de destino:");
+      nombreCiudadDestino = sc.nextLine();
+      existe = this.arbolCiudades.existeClave(nombreCiudadOrigen) &&
+          this.arbolCiudades.existeClave(nombreCiudadDestino);
+      if (!existe) {
+        System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
         continuar = false;
         cambiarTuberia(nombreCiudadOrigen, nombreCiudadDestino);
-        System.out.println("Tubería actualizada correctamente con ciudad de origen: " + nombreCiudadOrigen + " y ciudad de destino: " + nombreCiudadDestino);
+        System.out.println("Tubería actualizada correctamente con ciudad de origen: " + nombreCiudadOrigen
+            + " y ciudad de destino: " + nombreCiudadDestino);
       }
-    } while(continuar);
+    } while (continuar);
   }
-  private void cambiarTuberia(String nombreCiudadOrigen, String nombreCiudadDestino){
+
+  private void cambiarTuberia(String nombreCiudadOrigen, String nombreCiudadDestino) {
     double caudalMax, caudalMin, diametro;
     String estado;
     Scanner sc = new Scanner(System.in);
@@ -244,17 +251,20 @@ private void bajaTuberiaAux(String ciudadOrigen, String ciudadDestino) {
     System.out.println("Ingrese el caudal máximo de la tubería:");
     caudalMax = sc.nextDouble();
     sc.close();
-    DatosTuberia datosTuberia = new DatosTuberia(nombreCiudadOrigen, nombreCiudadDestino, caudalMin, caudalMax, diametro, estado);
+    DatosTuberia datosTuberia = new DatosTuberia(nombreCiudadOrigen, nombreCiudadDestino, caudalMin, caudalMax,
+        diametro, estado);
     Ciudad ciudadOrigen = (Ciudad) this.arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
     Ciudad ciudadDestino = (Ciudad) this.arbolCiudades.obtenerInformacion(nombreCiudadDestino);
     String claveTuberia = ciudadOrigen.getNomenclatura() + "-" + ciudadDestino.getNomenclatura();
     this.mapeoTuberias.put(claveTuberia, datosTuberia);
-    boolean existeTuberia = this.grafoTuberias.existeArco(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura());
-    if(!existeTuberia){
+    boolean existeTuberia = this.grafoTuberias.existeArco(ciudadOrigen.getNomenclatura(),
+        ciudadDestino.getNomenclatura());
+    if (!existeTuberia) {
       this.grafoTuberias.insertarArco(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura(), caudalMax);
-    }else{
-      this.grafoTuberias.obtenerArco(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura()).setEtiqueta(caudalMax);
+    } else {
+      this.grafoTuberias.obtenerArco(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura())
+          .setEtiqueta(caudalMax);
     }
   }
-  
+
 }
