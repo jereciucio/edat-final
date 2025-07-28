@@ -264,4 +264,44 @@ public class TransporteDeAgua {
           .setEtiqueta(caudalMax);
     }
   }
+  public void cantHabitantesYVolAgua(int mes, int anio){
+    Scanner sc = new Scanner(System.in);
+    boolean continuar = true;
+    do {
+      boolean exito = true;
+      System.out.println("Ingrese el nombre de la ciudad");
+      String nombreCiudad = sc.nextLine();
+      if(!this.arbolCiudades.existeClave(nombreCiudad)){
+        System.out.println("La ciudad ingresada no existe");
+        exito = false;
+      }else{
+        if(mes < 1 || mes > 12 && anio >= 1900 && anio < 2025){
+        System.out.println("Mes invalido");
+        exito = false;
+      }
+    }
+    if(!exito){
+    switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      }else{
+        continuar = false;
+        Ciudad ciudadBuscada = (Ciudad)arbolCiudades.obtenerInformacion(nombreCiudad);
+        int habitantes = ciudadBuscada.getHabitantes(mes, anio);
+        double consumoDiario = ciudadBuscada.getConsumo(mes, anio);
+        int diasMes = obtenerDiasMes(mes, anio);
+        double volumenAgua = calcularVolumen(habitantes, consumoDiario, diasMes);
+        System.out.println("Ciudad: "+nombreCiudad);
+        System.out.println("Año: "+anio+"y Mes: "+mes);
+        System.out.println("Cantidad Habitantes: "+habitantes);
+        System.out.println("Volumen de agua: "+volumenAgua);
+      }      
+    } while (continuar);
+  }
 }
