@@ -264,6 +264,55 @@ public class TransporteDeAgua {
           .setEtiqueta(caudalMax);
     }
   }
+
+  public void altaHabitantes(){
+    Scanner sc = new Scanner(System.in);
+    String nombreCiudad;
+    boolean existe, continuar;
+    do{
+      System.out.println("Ingrese el nombre de la ciudad:");
+      nombreCiudad=sc.nextLine();
+      existe = this.arbolCiudades.existeClave(nombreCiudad);
+      if(!existe){
+        System.out.println("La ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "": case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else{
+        sc.close();
+        continuar = false;
+        modificarHabitantes(nombreCiudad);
+        System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);}
+    } while(continuar);
+  }
+
+  private void modificarHabitantes(String nombreCiudad){
+    Scanner sc = new Scanner(System.in);
+    int habitantes, anio, mes;
+    System.out.println("Ingrese la cantidad de habitantes:");
+    habitantes=sc.nextInt();
+    System.out.println("Ingrese el numero del anio:");
+    anio=sc.nextInt();
+    sc.nextLine(); // Consumir el salto de línea pendiente
+    System.out.println("Ingrese el numero del mes:");
+    mes=sc.nextInt();
+    sc.close();
+    Ciudad unaCiudad = (Ciudad) this.arbolCiudades.obtenerInformacion(nombreCiudad);
+    Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
+    if(unAnio == null){
+      unAnio = new Anio(anio);
+      unAnio.setValor(mes, habitantes);
+      unaCiudad.getCalendarioHabitantes().insertar(anio, unAnio); 
+    }else{
+      unaCiudad.setHabitantes(habitantes, mes, anio);
+    }
+  }
+
   public void cantHabitantesYVolAgua(int mes, int anio){
     Scanner sc = new Scanner(System.in);
     boolean continuar = true;
