@@ -169,6 +169,77 @@ public class TransporteDeAgua {
     }
   }
 
+  private void modificarCiudad() {
+    Scanner sc = new Scanner(System.in);
+    String nombreIngresado;
+    boolean existe;
+    boolean continuar;
+    int datoAModificar;
+    double superficieNueva;
+    double consumoNuevo;
+
+    // Primero solicitamos un nombre de ciudad válido. 
+    do {
+      System.out.print("Ingrese el nombre de la ciudad a modificar: ");
+      nombreIngresado = sc.nextLine();
+      existe = this.arbolCiudades.existeClave(nombreIngresado);
+      if (!existe) {
+        System.out.print("La Ciudad ingresada no existe. ¿Desea volver a intentar? (s/N): ");
+        switch(sc.nextLine().toUpperCase()) {
+          case "": case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
+        continuar = false;
+      }
+    } while (continuar);
+    
+    // Solicitar el dato a modificar.
+    if (existe) {
+      System.out.println("Seleccione el dato a modificar:");
+      System.out.println("(1) Superficie");
+      System.out.println("(2) Consumo de agua promedio en m³ por habitante");
+      System.out.print("Su respuesta: ");
+      datoAModificar = sc.nextInt();
+      sc.nextLine(); // Consumir el \n
+      switch (datoAModificar) {
+        case 1:
+          System.out.print("Ingrese la nueva superficie: ");
+          superficieNueva = sc.nextDouble();
+          if (superficieNueva < 0) {
+            System.out.println("La superficie ingresada es inválida, inténtelo nuevamente.");
+          } else {
+            modificarSuperficieCiudad(superficieNueva, nombreIngresado);
+          }
+          break;
+        case 2:
+          System.out.print("Ingrese el nuevo consumo de agua promedio por habitante: ");
+          consumoNuevo = sc.nextDouble();
+          if (consumoNuevo < 0) {
+            System.out.println("El consumo ingresado es inválido, inténtelo nuevamente.");
+          } else {
+            modificarConsumoCiudad(consumoNuevo, nombreIngresado);
+          }
+          break;
+      }
+    }
+    sc.close();
+  }
+
+  private void modificarSuperficieCiudad(double superficie, String nombreCiudad) {
+    Ciudad laCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
+    laCiudad.setSuperficie(superficie);
+  }
+
+  private void modificarConsumoCiudad(double consumo, String nombreCiudad) {
+    Ciudad laCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
+    laCiudad.setConsumo(consumo);
+  }
+
   public void bajaTuberia() {
     Scanner sc = new Scanner(System.in);
     String ciudadOrigen, ciudadDestino;
