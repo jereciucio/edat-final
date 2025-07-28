@@ -304,4 +304,15 @@ public class TransporteDeAgua {
       }      
     } while (continuar);
   }
+   private int obtenerDiasMes(int mes, int anio){
+    int dias;
+    if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
+      dias = 30;
+    }else if(mes == 2){
+      dias = 28;
+    }else{
+        dias = 31;
+      } 
+    return dias;
+  }
 }
