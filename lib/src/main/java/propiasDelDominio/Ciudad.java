@@ -76,6 +76,13 @@ public class Ciudad {
     this.consumoPerCapita=consumoPromedio;
     }
   }
+
+  public void setSuperficie(double laSuperficie) {
+    if (laSuperficie >= 0) {
+      this.superficie = laSuperficie;
+    }
+  }
+
   public static boolean nomenclaturaValida(String unNombre, String unaNomenclatura) {
     boolean esValido = false;
     if (unaNomenclatura != null && unaNomenclatura.length() == 6) {
