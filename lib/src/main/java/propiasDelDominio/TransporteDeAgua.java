@@ -61,21 +61,15 @@ public class TransporteDeAgua {
             if (consumoCiudad < 0) {
               System.out.println("Valor no válido. Debe ser un número positivo.");
             } else {
-              double consumo = sc.nextDouble();
               sc.nextLine();
               ArbolAVLDicc calendario = new ArbolAVLDicc();
-              exito = registrarCiudad(nombreCiudad, nomenclaturaCiudad, superficieCiudad, consumo, calendario);
-              if (exito) {
-                System.out.println("Ciudad cargada correctamente.");
-              } else {
-                System.out.println("La ciudad no se ha cargado (puede que ya exista el nombre o la nomenclatura).");
-              }
-              continuar = false;
-              break;
+              exito = registrarCiudad(nombreCiudad, nomenclaturaCiudad, superficieCiudad, consumoCiudad, calendario);
             }
           }
         }
       }
+      if(!exito){
+        System.out.println("La ciudad no se ha cargado (puede que ya exista el nombre o la nomenclatura).");
       System.out.print("¿Desea volver a intentar? (S/n): ");
       String opcion = sc.nextLine().toUpperCase();
       switch (opcion) {
@@ -86,6 +80,10 @@ public class TransporteDeAgua {
           continuar = false;
           break;
       }
+    }else{
+      System.out.println("Ciudad cargada correctamente.");
+      continuar = false;
+    }
     } while (continuar);
     return exito;
   }
@@ -266,5 +264,4 @@ public class TransporteDeAgua {
           .setEtiqueta(caudalMax);
     }
   }
-
 }
