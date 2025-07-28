@@ -315,4 +315,8 @@ public class TransporteDeAgua {
       } 
     return dias;
   }
+  private double calcularVolumen(int habitantes, double consumoDiario, int diasMes){
+    double volumenAgua = habitantes * consumoDiario * diasMes;
+    return volumenAgua;
+  }
 }
