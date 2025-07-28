@@ -111,7 +111,6 @@ public class TransporteDeAgua {
   public void bajaCiudad() {
     Scanner sc = new Scanner(System.in);
     String nombreIngresado;
-    Ciudad ciudadADarDeBaja;
     boolean existe;
     boolean continuar;
 
