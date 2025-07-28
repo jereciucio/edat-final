@@ -6,6 +6,8 @@ import propositoEspecifico.ArbolAVLDicc;
 import grafos.dinamicas.Grafo;
 import propiasDelDominio.Ciudad;
 import java.util.Iterator;
+
+import lineales.dinamicas.Lista;
 import lineales.dinamicas.Pila;
 
 public class TransporteDeAgua {
@@ -368,4 +370,65 @@ public class TransporteDeAgua {
     double volumenAgua = habitantes * consumoDiario * diasMes;
     return volumenAgua;
   }
+
+  public void obtenerCiudadRango(){
+    Scanner sc = new Scanner(System.in);
+    String minNombre, maxNombre;
+    boolean existe, continuar;
+    do {
+      System.out.println("Ingrese el nombre de la ciudad minima:");
+      minNombre = sc.nextLine();
+      System.out.println("Ingrese el nombre de la ciudad maxima:");
+      maxNombre = sc.nextLine();
+      existe = this.arbolCiudades.existeClave(minNombre) &&
+          this.arbolCiudades.existeClave(maxNombre);
+      if (!existe) {
+        System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
+        sc.close();
+        continuar = false;
+        listarCiudadesRango(minNombre, maxNombre);
+      }
+    } while (continuar);
+  }
+
+  private void listarCiudadesRango(String minNombre, String maxNombre){
+    Scanner sc = new Scanner(System.in);
+    double minVolumen, maxVolumen;
+    int anio, mes;
+    Lista ciudadesRango = new Lista();
+    System.out.println("Ingrese el volumen de agua minimo:");
+    minVolumen = sc.nextDouble();
+    System.out.println("Ingrese el volumen de agua maximo:");
+    maxVolumen = sc.nextDouble();
+    sc.nextLine(); // Consumir el salto de línea pendiente
+    System.out.println("Ingrese el numero del anio:");
+    anio = sc.nextInt();
+    System.out.println("Ingrese el numero del mes:");
+    mes = sc.nextInt();
+    sc.close();
+    ciudadesRango = this.arbolCiudades.listarPorRango(minNombre, maxNombre);
+    if(ciudadesRango.esVacia()){
+      System.out.println("No hay ciudades en el rango especificado.");
+    }else{
+      while(!ciudadesRango.esVacia()){
+        Ciudad unaCiudad = (Ciudad) ciudadesRango.recuperar(1);
+        double volumenCiudad = unaCiudad.getHabitantes(mes, anio) * unaCiudad.getConsumo(mes, anio);
+        if(volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen){
+          System.out.println("\n"+unaCiudad.toString());
+        }
+        ciudadesRango.eliminar(1);  
+      }          
+    }  
+  }
+
 }
