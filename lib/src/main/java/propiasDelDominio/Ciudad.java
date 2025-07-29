@@ -49,9 +49,10 @@ public class Ciudad {
   public double getConsumo(int mes, int anio){
     // double consumo=0;
     // if(mes>0 && mes<13 && anio>1900){
-    //   Anio unAnio=this.calendarioHabitantes.buscar(anio);
+    //   Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
     //   if(unAnio!=null){
-    //     consumo=this.consumoPerCapita*unAnio.getValor(mes);
+    //   int diasMes = obtenerDiasMes(mes;)
+    //     consumo=this.consumoPerCapita*unAnio.getValor(mes)*diasMes;
     //   }   
     // }
     // return consumo;
@@ -59,6 +60,17 @@ public class Ciudad {
     return 0;
   }
 
+  private int obtenerDiasMes(int mes){
+    int dias; 
+    if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
+      dias = 30;
+    }else if(mes == 2){
+      dias = 28;
+    }else{
+        dias = 31;
+      } 
+    return dias;
+  }
   public boolean setHabitantes(int cantidad, int mes, int anio){
     boolean exito=false;
     if(cantidad>0 && mes>0 && mes<13){
