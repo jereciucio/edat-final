@@ -43,7 +43,7 @@ public class TransporteDeAgua {
     boolean exito = false;
     do {
       System.out.print("Ingrese el nombre de la ciudad: ");
-      String nombreCiudad = sc.nextLine().trim();
+      String nombreCiudad = sc.nextLine().trim().toUpperCase();
       if (nombreCiudad.length() < 2) {
         System.out.println("El nombre debe tener al menos 2 caracteres.");
       } else {
@@ -116,7 +116,7 @@ public class TransporteDeAgua {
 
     do {
       System.out.print("Ingrese el nombre de la ciudad a dar de baja: ");
-      nombreIngresado = sc.nextLine();
+      nombreIngresado = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreIngresado);
       if (!existe) {
         System.out.print("La Ciudad ingresada no existe. ¿Desea volver a intentar? (S/n): ");
@@ -180,7 +180,7 @@ public class TransporteDeAgua {
     // Primero solicitamos un nombre de ciudad válido. 
     do {
       System.out.print("Ingrese el nombre de la ciudad a modificar: ");
-      nombreIngresado = sc.nextLine();
+      nombreIngresado = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreIngresado);
       if (!existe) {
         System.out.print("La Ciudad ingresada no existe. ¿Desea volver a intentar? (s/N): ");
@@ -283,9 +283,9 @@ public class TransporteDeAgua {
     boolean existe, continuar;
     do {
       System.out.println("Ingrese el nombre de la ciudad de origen:");
-      nombreCiudadOrigen = sc.nextLine();
+      nombreCiudadOrigen = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese el nombre de la ciudad de destino:");
-      nombreCiudadDestino = sc.nextLine();
+      nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreCiudadOrigen) &&
           this.arbolCiudades.existeClave(nombreCiudadDestino);
       if (!existe) {
@@ -315,7 +315,7 @@ public class TransporteDeAgua {
     System.out.println("Ingrese el diametro de la tubería:");
     diametro = sc.nextInt();
     System.out.println("Ingrese el estado de la tubería (ACTIVO, EN REPARACIÓN, EN DISEÑO, INACTIVO):");
-    estado = sc.nextLine();
+    estado = sc.nextLine().trim().toUpperCase();
     System.out.println("Ingrese el caudal minimo de la tubería:");
     caudalMin = sc.nextDouble();
     System.out.println("Ingrese el caudal máximo de la tubería:");
@@ -343,7 +343,7 @@ public class TransporteDeAgua {
     boolean existe, continuar;
     do{
       System.out.println("Ingrese el nombre de la ciudad:");
-      nombreCiudad=sc.nextLine();
+      nombreCiudad=sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreCiudad);
       if(!existe){
         System.out.println("La ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
@@ -391,7 +391,7 @@ public class TransporteDeAgua {
     do {
       boolean exito = true;
       System.out.println("Ingrese el nombre de la ciudad");
-      String nombreCiudad = sc.nextLine();
+      String nombreCiudad = sc.nextLine().trim().toUpperCase();
       if(!this.arbolCiudades.existeClave(nombreCiudad)){
         System.out.println("La ciudad ingresada no existe");
         exito = false;
@@ -447,9 +447,9 @@ public class TransporteDeAgua {
     boolean existe, continuar;
     do {
       System.out.println("Ingrese el nombre de la ciudad minima:");
-      minNombre = sc.nextLine();
+      minNombre = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese el nombre de la ciudad maxima:");
-      maxNombre = sc.nextLine();
+      maxNombre = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(minNombre) &&
           this.arbolCiudades.existeClave(maxNombre);
       if (!existe) {
