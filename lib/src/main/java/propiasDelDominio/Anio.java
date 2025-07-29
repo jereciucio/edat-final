@@ -22,17 +22,6 @@ public class Anio {
       this.meses[unMes - 1] = unValor;
     }
   }
-  public int compareTo(Anio otroAnio) {
-    int numero;
-  if (this.numeroAnio > otroAnio.numeroAnio) {
-    numero = 1;
-  } else if (this.numeroAnio < otroAnio.numeroAnio) {
-    numero = -1;
-  } else {
-    numero = 0;
-  }
-  return numero;
-}
   public String toString(){
     int i;
     String cad = "(" + this.numeroAnio + " " + this.meses.toString() + ")";
