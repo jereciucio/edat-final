@@ -47,17 +47,15 @@ public class Ciudad {
   }
 
   public double getConsumo(int mes, int anio){
-    // double consumo=0;
-    // if(mes>0 && mes<13 && anio>1900){
-    //   Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
-    //   if(unAnio!=null){
-    //   int diasMes = obtenerDiasMes(mes;)
-    //     consumo=this.consumoPerCapita*unAnio.getValor(mes)*diasMes;
-    //   }   
-    // }
-    // return consumo;
-    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
-    return 0;
+     double consumo=0;
+     if(mes>0 && mes<13 && anio>1900){
+       Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
+       if(unAnio!=null){
+       int diasMes = obtenerDiasMes(mes);
+         consumo=this.consumoPerCapita*unAnio.getValor(mes)*diasMes;
+       }   
+     }
+     return consumo;
   }
 
   private int obtenerDiasMes(int mes){
