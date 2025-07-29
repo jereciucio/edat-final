@@ -9,31 +9,36 @@ public class Ciudad {
   private double superficie;
   private double consumoPerCapita;
 
-  public Ciudad(String nombre, String nomenclatura, ArbolAVLDicc calendario, double superficie, double consumo){
-    this.nombre=nombre;
-    this.nomenclatura=nomenclatura;
-    this.calendarioHabitantes=calendario;
-    this.superficie=superficie;
-    this.consumoPerCapita=consumo;
+  public Ciudad(
+      String nombre,
+      String nomenclatura,
+      ArbolAVLDicc calendario,
+      double superficie,
+      double consumo) {
+    this.nombre = nombre;
+    this.nomenclatura = nomenclatura;
+    this.calendarioHabitantes = calendario;
+    this.superficie = superficie;
+    this.consumoPerCapita = consumo;
   }
 
-  public String getNombre(){
+  public String getNombre() {
     return this.nombre;
   }
 
-  public String getNomenclatura(){
+  public String getNomenclatura() {
     return this.nomenclatura;
   }
 
-  public ArbolAVLDicc getCalendarioHabitantes(){
+  public ArbolAVLDicc getCalendarioHabitantes() {
     return this.calendarioHabitantes;
   }
 
-  public double getSuperficie(){
+  public double getSuperficie() {
     return this.superficie;
   }
 
-  public int getHabitantes(int mes, int anio){
+  public int getHabitantes(int mes, int anio) {
     // int cantidad=0;
     // if(mes>0 && mes<13 && anio>1900){
     //   Anio unAnio = this.calendarioHabitantes.buscar(anio);
@@ -46,34 +51,35 @@ public class Ciudad {
     return 0;
   }
 
-  public double getConsumo(int mes, int anio){
-     double consumo=0;
-     if(mes>0 && mes<13 && anio>1900){
-       Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
-       if(unAnio!=null){
-       int diasMes = obtenerDiasMes(mes);
-         consumo=this.consumoPerCapita*unAnio.getValor(mes)*diasMes;
-       }   
-     }
-     return consumo;
+  public double getConsumo(int mes, int anio) {
+    double consumo = 0;
+    if (mes > 0 && mes < 13 && anio > 1900) {
+      Anio unAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);
+      if (unAnio != null) {
+        int diasMes = obtenerDiasMes(mes);
+        consumo = this.consumoPerCapita * unAnio.getValor(mes) * diasMes;
+      }
+    }
+    return consumo;
   }
 
-  private int obtenerDiasMes(int mes){
-    int dias; 
-    if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
+  private int obtenerDiasMes(int mes) {
+    int dias;
+    if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
       dias = 30;
-    }else if(mes == 2){
+    } else if (mes == 2) {
       dias = 28;
-    }else{
-        dias = 31;
-      } 
+    } else {
+      dias = 31;
+    }
     return dias;
   }
-  public boolean setHabitantes(int cantidad, int mes, int anio){
-    boolean exito=false;
-    if(cantidad>0 && mes>0 && mes<13){
-      Anio unAnio=(Anio)this.calendarioHabitantes.obtenerInformacion(anio);
-      if(unAnio != null){
+
+  public boolean setHabitantes(int cantidad, int mes, int anio) {
+    boolean exito = false;
+    if (cantidad > 0 && mes > 0 && mes < 13) {
+      Anio unAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);
+      if (unAnio != null) {
         unAnio.setValor(mes, cantidad);
         exito = true;
       }
@@ -81,9 +87,9 @@ public class Ciudad {
     return exito;
   }
 
-  public void setConsumo(double consumoPromedio){
-    if(consumoPromedio >= 0){
-    this.consumoPerCapita=consumoPromedio;
+  public void setConsumo(double consumoPromedio) {
+    if (consumoPromedio >= 0) {
+      this.consumoPerCapita = consumoPromedio;
     }
   }
 
@@ -96,25 +102,25 @@ public class Ciudad {
   public static boolean nomenclaturaValida(String unNombre, String unaNomenclatura) {
     boolean esValido = false;
     if (unaNomenclatura != null && unaNomenclatura.length() == 6) {
-        String letrasEsperadas = unNombre.substring(0, 2).toUpperCase();
-        String letrasNomenclatura = unaNomenclatura.substring(0, 2);
+      String letrasEsperadas = unNombre.substring(0, 2).toUpperCase();
+      String letrasNomenclatura = unaNomenclatura.substring(0, 2);
       if (letrasEsperadas.equals(letrasNomenclatura)) {
         int numeroNomenclatura = Integer.parseInt(unaNomenclatura.substring(2));
-        if(numeroNomenclatura >= 3000 && numeroNomenclatura <= 4000){
+        if (numeroNomenclatura >= 3000 && numeroNomenclatura <= 4000) {
           esValido = true;
         }
       }
     }
     return esValido;
   }
-  public String toString(){
-    String cad="";
-    cad+="nombre: "+this.nombre;
-    cad+="\n"+"nomenclatura: "+this.nomenclatura;
-    cad+="\n"+"superficie: "+this.superficie;
-    cad+="\n"+"consumo perCapita: "+this.consumoPerCapita;
-    cad+="\n"+"Calendario de habitantes: "+this.calendarioHabitantes.toString();
+
+  public String toString() {
+    String cad = "";
+    cad += "nombre: " + this.nombre;
+    cad += "\n" + "nomenclatura: " + this.nomenclatura;
+    cad += "\n" + "superficie: " + this.superficie;
+    cad += "\n" + "consumo perCapita: " + this.consumoPerCapita;
+    cad += "\n" + "Calendario de habitantes: " + this.calendarioHabitantes.toString();
     return cad;
   }
-  
 }
