@@ -65,12 +65,15 @@ public class Ciudad {
 
   private int obtenerDiasMes(int mes) {
     int dias;
-    if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
-      dias = 30;
-    } else if (mes == 2) {
-      dias = 28;
-    } else {
-      dias = 31;
+    switch (mes) {
+      case 4: case 6: case 9: case 11:
+        dias = 30;
+        break;
+      case 2:
+        dias = 28;
+        break;
+      default:
+        dias = 31;
     }
     return dias;
   }
