@@ -63,6 +63,20 @@ public class Ciudad {
     return consumo;
   }
 
+  public double getConsumoTotal(int anio) {
+    double consumo = -1;
+    Anio elAnio;
+    int mes, diasMes;
+    elAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);
+    if (elAnio != null) {
+      for (mes = 1; mes <= 12; mes++) {
+        diasMes = obtenerDiasMes(mes);
+        consumo += this.consumoPerCapita * elAnio.getValor(mes) * diasMes;
+      }
+    }
+    return consumo;
+  }
+
   private int obtenerDiasMes(int mes) {
     int dias;
     switch (mes) {
