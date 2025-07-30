@@ -391,16 +391,28 @@ public class TransporteDeAgua {
     do {
       boolean exito = true;
       System.out.println("Ingrese el nombre de la ciudad");
-      String nombreCiudad = sc.nextLine().trim().toUpperCase();
+      String nombreCiudad = sc.nextLine().toUpperCase();
       if(!this.arbolCiudades.existeClave(nombreCiudad)){
         System.out.println("La ciudad ingresada no existe");
         exito = false;
-      }else{
-        if(mes < 1 || mes > 12 && anio >= 1900 && anio < 2025){
+      }else if(mes < 1 || mes > 12){
         System.out.println("Mes invalido");
         exito = false;
+      }else{
+        Ciudad ciudadBuscada = (Ciudad)arbolCiudades.obtenerInformacion(nombreCiudad);
+        double volumenAgua = ciudadBuscada.getConsumo(mes,anio);
+        if(volumenAgua == -1){
+          exito = false;
+          System.out.println("El año no esta registrado");
+        }else{
+          int habitantes = ciudadBuscada.getHabitantes(mes, anio);
+                System.out.println("Ciudad: " + nombreCiudad);
+                System.out.println("Año: " + anio + " y Mes: " + mes);
+                System.out.println("Cantidad de Habitantes: " + habitantes);
+                System.out.println("Volumen de agua: " + volumenAgua);
+                continuar = false;
+        }
       }
-    }
     if(!exito){
     switch (sc.nextLine().toUpperCase()) {
           case "":
@@ -411,34 +423,8 @@ public class TransporteDeAgua {
             continuar = false;
             break;
         }
-      }else{
-        continuar = false;
-        Ciudad ciudadBuscada = (Ciudad)arbolCiudades.obtenerInformacion(nombreCiudad);
-        int habitantes = ciudadBuscada.getHabitantes(mes, anio);
-        double consumoDiario = ciudadBuscada.getConsumo(mes, anio);
-        int diasMes = obtenerDiasMes(mes, anio);
-        double volumenAgua = calcularVolumen(habitantes, consumoDiario, diasMes);
-        System.out.println("Ciudad: "+nombreCiudad);
-        System.out.println("Año: "+anio+"y Mes: "+mes);
-        System.out.println("Cantidad Habitantes: "+habitantes);
-        System.out.println("Volumen de agua: "+volumenAgua);
       }      
     } while (continuar);
-  }
-   private int obtenerDiasMes(int mes, int anio){
-    int dias;
-    if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
-      dias = 30;
-    }else if(mes == 2){
-      dias = 28;
-    }else{
-        dias = 31;
-      } 
-    return dias;
-  }
-  private double calcularVolumen(int habitantes, double consumoDiario, int diasMes){
-    double volumenAgua = habitantes * consumoDiario * diasMes;
-    return volumenAgua;
   }
 
   public void obtenerCiudadRango(){
