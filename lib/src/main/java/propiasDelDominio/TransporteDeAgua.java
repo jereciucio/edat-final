@@ -242,6 +242,89 @@ public class TransporteDeAgua {
     laCiudad.setConsumo(consumo);
   }
 
+  public void altaTuberia() {
+    Scanner sc = new Scanner(System.in);
+    String nombreCiudadOrigen;
+    String nombreCiudadDestino;
+    Ciudad ciudadOrigen;
+    Ciudad ciudadDestino;
+    double caudalMinimo;
+    double caudalMaximo;
+    double diametro;
+    int estado;
+
+    System.out.print("Ingrese el nombre de la ciudad de origen de la nueva tubería: ");
+    nombreCiudadOrigen = sc.nextLine().trim().toUpperCase();
+    ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
+    if (ciudadOrigen != null) {
+      System.out.print("Ingrese el nombre de la ciudad de destino: ");
+      nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
+      ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
+      if (ciudadDestino != null) {
+        if (!grafoTuberias.existeArco(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura())) {
+          System.out.print("Ingrese el caudal mínimo en m² por hora: ");
+          caudalMinimo = sc.nextDouble(); 
+          sc.nextLine(); // Consumir \n
+          if (caudalMinimo >= 0) {
+            System.out.print("Ingrese el caudal máximo en m² por hora: ");
+            caudalMaximo = sc.nextDouble(); 
+            sc.nextLine(); // Consumir \n
+            if (caudalMaximo >= 0) {
+              System.out.print("Ingrese el diámetro en milímetros: ");
+              diametro = sc.nextDouble();
+              if (diametro >= 0) {
+                System.out.println("[1] Activo [2] En reparacion [3] En diseño [4] Inactivo");
+                System.out.print("Seleccione de la lista anterior el estado actual de la tubería: ");
+                estado = sc.nextInt();
+                sc.nextLine(); // Consumir \n
+                if (estado >= 1 && estado <= 4) {
+                  altaTuberiaAux(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura(), caudalMinimo, caudalMaximo, diametro, estado);
+                } else {
+                  System.out.println("El estado seleccionado es inválido. Inténtelo nuevamente.");
+                }
+              } else {
+                System.out.println("El diámetro no puede ser negativo. Inténtelo nuevamente.");
+              }
+            } else {
+              System.out.println("El caudal no puede ser negativo. Inténtelo nuevamente.");
+            }
+          } else {
+            System.out.println("El caudal no puede ser negativo. Inténtelo nuevamente.");
+          }
+        } else {
+          System.out.println("Ya existe una tubería entre las dos ciudades ingresadas. Inténtelo nuevamente.");
+        }
+      } else {
+        System.out.println("La ciudad ingresada no existe. Inténtelo nuevamente.");
+      }
+    } else {
+      System.out.println("La ciudad ingresada no existe. Inténtelo nuevamente.");
+    }
+  }
+
+  public void altaTuberiaAux(String nomenclaturaCiudadOrigen, String nomenclaturaCiudadDestino, double caudalMin, double caudalMax, double diametro, int estado) {
+    String textoEstado = "";
+    switch (estado) {
+      case 1:
+        textoEstado = "ACTIVO";
+        break;
+      case 2:
+        textoEstado = "EN REPARACION";
+        break;
+      case 3:
+        textoEstado = "EN DISEÑO";
+        break;
+      case 4:
+        textoEstado = "INACTIVO";
+        break;
+    }
+    DominioTuberia dominio = new DominioTuberia(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino);
+    DatosTuberia datos = new DatosTuberia(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino, caudalMin, caudalMax, diametro, textoEstado);
+    
+    mapeoTuberias.put(dominio, datos);
+    grafoTuberias.insertarArco(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino, caudalMax);
+  }
+
   public void bajaTuberia() {
     Scanner sc = new Scanner(System.in);
     String ciudadOrigen, ciudadDestino;
