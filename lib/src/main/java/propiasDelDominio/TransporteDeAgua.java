@@ -488,5 +488,34 @@ public class TransporteDeAgua {
       }          
     }  
   }
-
+public void listarCiudadesPorConsumoAnual() {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Ingrese el año: ");
+    int anio = sc.nextInt();
+      Lista listaCiudades = arbolCiudades.listarDatos();
+      ArbolHeap heap = new ArbolHeap();
+      boolean incompleto = false;
+      int i = 1;
+      while(i <= listaCiudades.longitud() && !incompleto){
+        Ciudad ciudad = (Ciudad) listaCiudades.recuperar(i);
+        double consumoAnual = ciudad.getConsumoTotal(anio);
+        if(consumoAnual == -1){
+          incompleto = true;
+        }else{
+        NodoConsumo nodo = new NodoConsumo(ciudad, consumoAnual);
+        heap.insertar(nodo);
+        i++;
+        }
+      }
+      if (incompleto) {
+        System.out.println("No todas las ciudades tienen datos cargados para el año ingresado.");
+    } else {
+        System.out.println("Listado de ciudades por consumo anual:");
+        while (!heap.esVacio()) {
+            NodoConsumo nodo = (NodoConsumo) heap.recuperarCima();
+            System.out.println(nodo.toString());
+            heap.eliminarCima();
+        }
+  }
+}
 }
