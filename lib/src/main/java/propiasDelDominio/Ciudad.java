@@ -51,7 +51,7 @@ public class Ciudad {
     return 0;
   }
 
-  public double getConsumo(int mes, int anio) {
+  public double getConsumoMensual(int mes, int anio) {
     double consumo = -1;
     if (mes > 0 && mes < 13 && anio > 1900) {
       Anio unAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);

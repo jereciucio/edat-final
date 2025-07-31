@@ -531,7 +531,7 @@ public class TransporteDeAgua {
         exito = false;
       } else {
         Ciudad ciudadBuscada = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
-        double volumenAgua = ciudadBuscada.getConsumo(mes, anio);
+        double volumenAgua = ciudadBuscada.getConsumoMensual(mes, anio);
         if (volumenAgua == -1) {
           exito = false;
           System.out.println("El año no esta registrado");
@@ -609,7 +609,7 @@ public class TransporteDeAgua {
     } else {
       while (!ciudadesRango.esVacia()) {
         Ciudad unaCiudad = (Ciudad) ciudadesRango.recuperar(1);
-        double volumenCiudad = unaCiudad.getHabitantes(mes, anio) * unaCiudad.getConsumo(mes, anio);
+        double volumenCiudad = unaCiudad.getConsumoMensual(mes, anio);
         if (volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen) {
           System.out.println("\n" + unaCiudad.toString());
         }
