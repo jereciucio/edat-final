@@ -625,16 +625,15 @@ public class TransporteDeAgua {
     Lista listaCiudades = arbolCiudades.listarDatos();
     ArbolHeap heap = new ArbolHeap();
     boolean incompleto = false;
-    int i = 1;
-    while (i <= listaCiudades.longitud() && !incompleto) {
-      Ciudad ciudad = (Ciudad) listaCiudades.recuperar(i);
+    while (!listaCiudades.esVacia() && !incompleto) {
+      Ciudad ciudad = (Ciudad) listaCiudades.recuperar(1);
       double consumoAnual = ciudad.getConsumoTotal(anio);
       if (consumoAnual == -1) {
         incompleto = true;
       } else {
         NodoConsumo nodo = new NodoConsumo(ciudad, consumoAnual);
         heap.insertar(nodo);
-        i++;
+        listaCiudades.eliminar(1);
       }
     }
     if (incompleto) {
