@@ -267,11 +267,15 @@ public class ArbolAVLDicc {
 
   private void listarPorRangoAux(NodoAVLDicc n, Comparable claveInferior, Comparable claveSuperior, Lista rango){
     if(n!=null){
-      listarPorRangoAux(n.getIzquierdo(), claveInferior, claveSuperior, rango);
+      if(n.getClave().compareTo(claveInferior)>0){
+        listarPorRangoAux(n.getIzquierdo(), claveInferior, claveSuperior, rango);
+      }
       if(n.getClave().compareTo(claveInferior) >= 0 && n.getClave().compareTo(claveSuperior) <= 0){
         rango.insertar(n.getDato(), rango.longitud() + 1);
       }
-      listarPorRangoAux(n.getDerecho(), claveInferior, claveSuperior, rango);
+      if(n.getClave().compareTo(claveSuperior)<0){
+        listarPorRangoAux(n.getDerecho(), claveInferior, claveSuperior, rango);
+      }
     }
   }
 
