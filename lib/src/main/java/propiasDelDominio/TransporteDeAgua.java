@@ -72,22 +72,22 @@ public class TransporteDeAgua {
           }
         }
       }
-      if(!exito){
+      if (!exito) {
         System.out.println("La ciudad no se ha cargado (puede que ya exista el nombre o la nomenclatura).");
-      System.out.print("¿Desea volver a intentar? (S/n): ");
-      String opcion = sc.nextLine().toUpperCase();
-      switch (opcion) {
-        case "S":
-          continuar = true;
-          break;
-        default:
-          continuar = false;
-          break;
+        System.out.print("¿Desea volver a intentar? (S/n): ");
+        String opcion = sc.nextLine().toUpperCase();
+        switch (opcion) {
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
+        System.out.println("Ciudad cargada correctamente.");
+        continuar = false;
       }
-    }else{
-      System.out.println("Ciudad cargada correctamente.");
-      continuar = false;
-    }
     } while (continuar);
     return exito;
   }
@@ -179,15 +179,16 @@ public class TransporteDeAgua {
     double superficieNueva;
     double consumoNuevo;
 
-    // Primero solicitamos un nombre de ciudad válido. 
+    // Primero solicitamos un nombre de ciudad válido.
     do {
       System.out.print("Ingrese el nombre de la ciudad a modificar: ");
       nombreIngresado = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreIngresado);
       if (!existe) {
         System.out.print("La Ciudad ingresada no existe. ¿Desea volver a intentar? (s/N): ");
-        switch(sc.nextLine().toUpperCase()) {
-          case "": case "S":
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
             continuar = true;
             break;
           default:
@@ -198,7 +199,7 @@ public class TransporteDeAgua {
         continuar = false;
       }
     } while (continuar);
-    
+
     // Solicitar el dato a modificar.
     if (existe) {
       System.out.println("Seleccione el dato a modificar:");
@@ -339,84 +340,17 @@ public class TransporteDeAgua {
     }
   }
 
-  public void altaHabitantes(){
+  public void altaHabitantes() {
     Scanner sc = new Scanner(System.in);
     String nombreCiudad;
     boolean existe, continuar;
-    do{
+    do {
       System.out.println("Ingrese el nombre de la ciudad:");
-      nombreCiudad=sc.nextLine().trim().toUpperCase();
+      nombreCiudad = sc.nextLine().trim().toUpperCase();
       existe = this.arbolCiudades.existeClave(nombreCiudad);
-      if(!existe){
+      if (!existe) {
         System.out.println("La ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
-          case "": case "S":
-            continuar = true;
-            break;
-          default:
-            continuar = false;
-            break;
-        }
-      } else{
-        sc.close();
-        continuar = false;
-        modificarHabitantes(nombreCiudad);
-        System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);}
-    } while(continuar);
-  }
-
-  private void modificarHabitantes(String nombreCiudad){
-    Scanner sc = new Scanner(System.in);
-    int habitantes, anio, mes;
-    System.out.println("Ingrese la cantidad de habitantes:");
-    habitantes=sc.nextInt();
-    System.out.println("Ingrese el numero del anio:");
-    anio=sc.nextInt();
-    sc.nextLine(); // Consumir el salto de línea pendiente
-    System.out.println("Ingrese el numero del mes:");
-    mes=sc.nextInt();
-    sc.close();
-    Ciudad unaCiudad = (Ciudad) this.arbolCiudades.obtenerInformacion(nombreCiudad);
-    Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
-    if(unAnio == null){
-      unAnio = new Anio(anio);
-      unAnio.setValor(mes, habitantes);
-      unaCiudad.getCalendarioHabitantes().insertar(anio, unAnio); 
-    }else{
-      unaCiudad.setHabitantes(habitantes, mes, anio);
-    }
-  }
-
-  public void cantHabitantesYVolAgua(int mes, int anio){
-    Scanner sc = new Scanner(System.in);
-    boolean continuar = true;
-    do {
-      boolean exito = true;
-      System.out.println("Ingrese el nombre de la ciudad");
-      String nombreCiudad = sc.nextLine().toUpperCase();
-      if(!this.arbolCiudades.existeClave(nombreCiudad)){
-        System.out.println("La ciudad ingresada no existe");
-        exito = false;
-      }else if(mes < 1 || mes > 12){
-        System.out.println("Mes invalido");
-        exito = false;
-      }else{
-        Ciudad ciudadBuscada = (Ciudad)arbolCiudades.obtenerInformacion(nombreCiudad);
-        double volumenAgua = ciudadBuscada.getConsumo(mes,anio);
-        if(volumenAgua == -1){
-          exito = false;
-          System.out.println("El año no esta registrado");
-        }else{
-          int habitantes = ciudadBuscada.getHabitantes(mes, anio);
-                System.out.println("Ciudad: " + nombreCiudad);
-                System.out.println("Año: " + anio + " y Mes: " + mes);
-                System.out.println("Cantidad de Habitantes: " + habitantes);
-                System.out.println("Volumen de agua: " + volumenAgua);
-                continuar = false;
-        }
-      }
-    if(!exito){
-    switch (sc.nextLine().toUpperCase()) {
           case "":
           case "S":
             continuar = true;
@@ -425,11 +359,80 @@ public class TransporteDeAgua {
             continuar = false;
             break;
         }
-      }      
+      } else {
+        sc.close();
+        continuar = false;
+        modificarHabitantes(nombreCiudad);
+        System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);
+      }
     } while (continuar);
   }
 
-  public void obtenerCiudadRango(){
+  private void modificarHabitantes(String nombreCiudad) {
+    Scanner sc = new Scanner(System.in);
+    int habitantes, anio, mes;
+    System.out.println("Ingrese la cantidad de habitantes:");
+    habitantes = sc.nextInt();
+    System.out.println("Ingrese el numero del anio:");
+    anio = sc.nextInt();
+    sc.nextLine(); // Consumir el salto de línea pendiente
+    System.out.println("Ingrese el numero del mes:");
+    mes = sc.nextInt();
+    sc.close();
+    Ciudad unaCiudad = (Ciudad) this.arbolCiudades.obtenerInformacion(nombreCiudad);
+    Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
+    if (unAnio == null) {
+      unAnio = new Anio(anio);
+      unAnio.setValor(mes, habitantes);
+      unaCiudad.getCalendarioHabitantes().insertar(anio, unAnio);
+    } else {
+      unaCiudad.setHabitantes(habitantes, mes, anio);
+    }
+  }
+
+  public void cantHabitantesYVolAgua(int mes, int anio) {
+    Scanner sc = new Scanner(System.in);
+    boolean continuar = true;
+    do {
+      boolean exito = true;
+      System.out.println("Ingrese el nombre de la ciudad");
+      String nombreCiudad = sc.nextLine().toUpperCase();
+      if (!this.arbolCiudades.existeClave(nombreCiudad)) {
+        System.out.println("La ciudad ingresada no existe");
+        exito = false;
+      } else if (mes < 1 || mes > 12) {
+        System.out.println("Mes invalido");
+        exito = false;
+      } else {
+        Ciudad ciudadBuscada = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
+        double volumenAgua = ciudadBuscada.getConsumo(mes, anio);
+        if (volumenAgua == -1) {
+          exito = false;
+          System.out.println("El año no esta registrado");
+        } else {
+          int habitantes = ciudadBuscada.getHabitantes(mes, anio);
+          System.out.println("Ciudad: " + nombreCiudad);
+          System.out.println("Año: " + anio + " y Mes: " + mes);
+          System.out.println("Cantidad de Habitantes: " + habitantes);
+          System.out.println("Volumen de agua: " + volumenAgua);
+          continuar = false;
+        }
+      }
+      if (!exito) {
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      }
+    } while (continuar);
+  }
+
+  public void obtenerCiudadRango() {
     Scanner sc = new Scanner(System.in);
     String minNombre, maxNombre;
     boolean existe, continuar;
@@ -459,7 +462,7 @@ public class TransporteDeAgua {
     } while (continuar);
   }
 
-  private void listarCiudadesRango(String minNombre, String maxNombre){
+  private void listarCiudadesRango(String minNombre, String maxNombre) {
     Scanner sc = new Scanner(System.in);
     double minVolumen, maxVolumen;
     int anio, mes;
@@ -475,47 +478,48 @@ public class TransporteDeAgua {
     mes = sc.nextInt();
     sc.close();
     ciudadesRango = this.arbolCiudades.listarPorRango(minNombre, maxNombre);
-    if(ciudadesRango.esVacia()){
+    if (ciudadesRango.esVacia()) {
       System.out.println("No hay ciudades en el rango especificado.");
-    }else{
-      while(!ciudadesRango.esVacia()){
+    } else {
+      while (!ciudadesRango.esVacia()) {
         Ciudad unaCiudad = (Ciudad) ciudadesRango.recuperar(1);
         double volumenCiudad = unaCiudad.getHabitantes(mes, anio) * unaCiudad.getConsumo(mes, anio);
-        if(volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen){
-          System.out.println("\n"+unaCiudad.toString());
+        if (volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen) {
+          System.out.println("\n" + unaCiudad.toString());
         }
-        ciudadesRango.eliminar(1);  
-      }          
-    }  
+        ciudadesRango.eliminar(1);
+      }
+    }
   }
-public void listarCiudadesPorConsumoAnual() {
+
+  public void listarCiudadesPorConsumoAnual() {
     Scanner sc = new Scanner(System.in);
     System.out.println("Ingrese el año: ");
     int anio = sc.nextInt();
-      Lista listaCiudades = arbolCiudades.listarDatos();
-      ArbolHeap heap = new ArbolHeap();
-      boolean incompleto = false;
-      int i = 1;
-      while(i <= listaCiudades.longitud() && !incompleto){
-        Ciudad ciudad = (Ciudad) listaCiudades.recuperar(i);
-        double consumoAnual = ciudad.getConsumoTotal(anio);
-        if(consumoAnual == -1){
-          incompleto = true;
-        }else{
+    Lista listaCiudades = arbolCiudades.listarDatos();
+    ArbolHeap heap = new ArbolHeap();
+    boolean incompleto = false;
+    int i = 1;
+    while (i <= listaCiudades.longitud() && !incompleto) {
+      Ciudad ciudad = (Ciudad) listaCiudades.recuperar(i);
+      double consumoAnual = ciudad.getConsumoTotal(anio);
+      if (consumoAnual == -1) {
+        incompleto = true;
+      } else {
         NodoConsumo nodo = new NodoConsumo(ciudad, consumoAnual);
         heap.insertar(nodo);
         i++;
-        }
       }
-      if (incompleto) {
-        System.out.println("No todas las ciudades tienen datos cargados para el año ingresado.");
+    }
+    if (incompleto) {
+      System.out.println("No todas las ciudades tienen datos cargados para el año ingresado.");
     } else {
-        System.out.println("Listado de ciudades por consumo anual:");
-        while (!heap.esVacio()) {
-            NodoConsumo nodo = (NodoConsumo) heap.recuperarCima();
-            System.out.println(nodo.toString());
-            heap.eliminarCima();
-        }
+      System.out.println("Listado de ciudades por consumo anual:");
+      while (!heap.esVacio()) {
+        NodoConsumo nodo = (NodoConsumo) heap.recuperarCima();
+        System.out.println(nodo.toString());
+        heap.eliminarCima();
+      }
+    }
   }
-}
 }
