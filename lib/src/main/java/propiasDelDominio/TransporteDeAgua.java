@@ -38,6 +38,79 @@ public class TransporteDeAgua {
     this.grafoTuberias = otro;
   }
 
+  public void menuTransporteDeAgua(){
+    Scanner sc = new Scanner(System.in);
+    boolean continuar = true;
+    while (continuar) {
+      System.out.println("Seleccione una opción:");
+      System.out.println("(1) Alta de ciudad");
+      System.out.println("(2) Baja de ciudad");
+      System.out.println("(3) Modificar ciudad");
+      System.out.println("(4) Alta de tubería");
+      System.out.println("(5) Baja de tubería");
+      System.out.println("(6) Modificar tubería");
+      System.out.println("(7) Alta de habitantes");
+      System.out.println("(8) Cantidad de habitantes y volumen de agua consumido");
+      System.out.println("(9) Listar ciudades por rango de nombre de ciudades y volumen de agua consumido");
+      System.out.println("(10) Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles");
+      System.out.println("(11) Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades");
+      System.out.println("(12) Listar ciudades por consumo anual");
+      System.out.println("(13) Mostrar sistema de Transporte de agua");
+      System.out.println("(0) Salir del menu");
+
+      int opcion = sc.nextInt();
+      sc.nextLine(); // Consumir el salto de línea pendiente
+
+      switch (opcion) {
+        case 1:
+          altaCiudad();
+          break;
+        case 2:
+          bajaCiudad();
+          break;
+        case 3:
+          modificarCiudad();
+          break;
+        case 4:
+          altaTuberia();
+          break;
+        case 5:
+          bajaTuberia();
+          break;
+        case 6:
+          modificarTuberias();
+          break;
+        case 7:
+          altaHabitantes();
+          break;
+        case 8:
+          cantHabitantesYVolAgua(0, 0);
+          break;
+        case 9:
+          listarCiudadesPorConsumoAnual();
+          break;
+        case 10:
+          /// Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles
+          break;
+        case 11:
+          /// Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades
+          break;
+        case 12:
+          listarCiudadesPorConsumoAnual();
+          break;
+        case 13:
+          /// Mostrar sistema de Transporte de agua
+          break;
+        case 0:
+          continuar = false;
+          break;
+        default:
+          System.out.println("Opción no válida. Inténtelo nuevamente.");
+      }
+    }
+    sc.close();
+  }
+
   public boolean altaCiudad() {
     Scanner sc = new Scanner(System.in);
     boolean continuar = true;
@@ -181,7 +254,7 @@ public class TransporteDeAgua {
     }
   }
 
-  private void modificarCiudad() {
+  public void modificarCiudad() {
     Scanner sc = new Scanner(System.in);
     String nombreIngresado;
     boolean existe;
