@@ -7,6 +7,10 @@ import grafos.dinamicas.NodoAdy;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import lineales.dinamicas.Lista;
 import lineales.dinamicas.Pila;
 import propositoEspecifico.ArbolAVLDicc;
@@ -919,5 +923,4 @@ public class TransporteDeAgua {
     }
     System.out.println("===============================================");
   }
-
 }
