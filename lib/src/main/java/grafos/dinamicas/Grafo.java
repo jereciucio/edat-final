@@ -220,14 +220,18 @@ public class Grafo {
     } else {
         NodoVert actual = this.inicio;
         while (actual != null) {
-            cad += "Vértice salida: " + actual.getElem() + " ->";
+            cad += actual.getElem() + " ->";
             NodoAdy ady = actual.getPrimerAdy();
             if (ady == null) {
                 cad += " [sin adyacencias]";
             } else {
                 while (ady != null) {
-                    cad += "\n  Arco: " + ady.getEtiqueta() + " -> ";
-                    cad += "Vértice entrada: " + ady.getVertice().getElem();
+                    cad += " " + ady.getVertice().getElem();
+                    if(ady.getSigAdy() != null) {
+                      cad += " (" + ady.getEtiqueta() + "),";
+                    }else{
+                      cad += " (" + ady.getEtiqueta() + ")";
+                    }
                     ady = ady.getSigAdy();
                 }
             }
@@ -237,4 +241,5 @@ public class Grafo {
     }
     return cad;
   }
+  
 }
