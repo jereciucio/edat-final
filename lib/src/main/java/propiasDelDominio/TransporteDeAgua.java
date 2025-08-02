@@ -923,4 +923,26 @@ public class TransporteDeAgua {
     }
     System.out.println("===============================================");
   }
+  public void precargarCiudades(String pathArchivo) {
+    try (BufferedReader br = new BufferedReader(new FileReader(pathArchivo))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            linea = linea.trim();
+            if (!linea.isEmpty()) {
+                StringTokenizer separadorTokens = new StringTokenizer(linea, ";");
+                if (separadorTokens.countTokens() >= 4) {
+                    String nombre = separadorTokens.nextToken().trim().toUpperCase();
+                    String nomenclatura = separadorTokens.nextToken().trim().toUpperCase();
+                    double superficie = Double.parseDouble(separadorTokens.nextToken().trim());
+                    double consumo = Double.parseDouble(separadorTokens.nextToken().trim());
+                    ArbolAVLDicc calendario = new ArbolAVLDicc(); // Árbol vacío
+                    registrarCiudad(nombre, nomenclatura, superficie, consumo, calendario);
+                }
+            }
+        }
+        System.out.println("Ciudades precargadas correctamente.");
+    } catch (IOException e) {
+        System.out.println("Error al leer el archivo de ciudades: " + e.getMessage());
+    }
+}
 }
