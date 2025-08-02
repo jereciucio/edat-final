@@ -279,6 +279,38 @@ public class ArbolAVLDicc {
     }
   }
 
+  public String toString() {
+    String representación = "";
+    if (!this.esVacio()) {
+      representación = toStringAux(this.raiz);
+    }
+    return representación;
+  }
+
+  private String toStringAux(NodoAVLDicc nodo) {
+    String representacion = "";
+    final String VACIO = "-";
+    representacion += nodo.getDato() +" (alt: " + nodo.getAltura() + ") ";
+    if (nodo.getIzquierdo() != null) {
+      representacion += "HI: " + nodo.getIzquierdo().getDato().toString() + " ";
+    } else {
+      representacion += "HI " + VACIO + " ";
+    }
+    if (nodo.getDerecho() != null) {
+      representacion += "HD: " + nodo.getDerecho().getDato().toString();
+    } else {
+      representacion += "HD " + VACIO;
+    }
+    // Recorrido en preorden
+    if (nodo.getIzquierdo() != null) {
+      representacion += "\n" + toStringAux(nodo.getIzquierdo());
+    }
+    if (nodo.getDerecho() != null) {
+      representacion += "\n" + toStringAux(nodo.getDerecho());
+    }
+    return representacion;
+  }
+
   public boolean esVacio() {
     return this.raiz == null;
   }
