@@ -282,7 +282,7 @@ public class ArbolAVLDicc {
   public String toString() {
     String representación = "";
     if (!this.esVacio()) {
-      representación = toStringAux(this.raiz);
+      representación = "Raiz: " + this.raiz.getDato()+ "\n" + toStringAux(this.raiz);
     }
     return representación;
   }
