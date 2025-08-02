@@ -100,7 +100,7 @@ public class TransporteDeAgua {
           listarCiudadesPorConsumoAnual();
           break;
         case 13:
-          /// Mostrar sistema de Transporte de agua
+          mostrarSistema();
           break;
         case 0:
           continuar = false;
@@ -897,4 +897,27 @@ public class TransporteDeAgua {
       }
     }
   }
+
+  public void mostrarSistema() {
+    System.out.println("=== Estado del Sistema de Transporte de Agua ===\n");
+    System.out.println("Árbol AVL de Ciudades:");
+    System.out.println(arbolCiudades.toString());
+    System.out.println();
+    System.out.println("Grafo de Tuberías:");
+    System.out.println(grafoTuberias.toString());
+    System.out.println();
+
+    System.out.println("Mapeo de Tuberías (HashMap):");
+    if (mapeoTuberias.isEmpty()) {
+        System.out.println("El mapeo está vacío.");
+    } else {
+        for (Object clave : mapeoTuberias.keySet()) {
+            System.out.println("Clave: " + clave.toString());
+            System.out.println("Valor: " + mapeoTuberias.get(clave).toString());
+            System.out.println("---");
+        }
+    }
+    System.out.println("===============================================");
+  }
+
 }
