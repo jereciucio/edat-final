@@ -945,4 +945,35 @@ public class TransporteDeAgua {
         System.out.println("Error al leer el archivo de ciudades: " + e.getMessage());
     }
 }
+public void precargarTuberias(String pathArchivo) {
+    try (BufferedReader lector = new BufferedReader(new FileReader(pathArchivo))) {
+        String linea;
+        while ((linea = lector.readLine()) != null) {
+            linea = linea.trim();
+            if (!linea.isEmpty()) {
+                StringTokenizer separador = new StringTokenizer(linea, ";");
+                if (separador.countTokens() >= 5) {
+                    String campoCiudades = separador.nextToken().trim().toUpperCase();
+                    StringTokenizer separadorCiudades = new StringTokenizer(campoCiudades, "-");
+                    if (separadorCiudades.countTokens() == 2) {
+                        String origen = separadorCiudades.nextToken();
+                        String destino = separadorCiudades.nextToken();
+                        double caudalMin = Double.parseDouble(separador.nextToken().trim());
+                        double caudalMax = Double.parseDouble(separador.nextToken().trim());
+                        double diametro = Double.parseDouble(separador.nextToken().trim());
+                        String estado = separador.nextToken().trim().toUpperCase();
+
+                        DominioTuberia dominio = new DominioTuberia(origen, destino);
+                        DatosTuberia datos = new DatosTuberia(origen, destino, caudalMin, caudalMax, diametro, estado);
+                        this.mapeoTuberias.put(dominio, datos);
+                        this.grafoTuberias.insertarArco(origen, destino, caudalMax);
+                    }
+                }
+            }
+        }
+        System.out.println("Tuberías precargadas correctamente.");
+    } catch (IOException e) {
+        System.out.println("Error al leer el archivo de tuberías: " + e.getMessage());
+    }
+}
 }
