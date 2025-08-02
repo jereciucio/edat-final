@@ -86,7 +86,7 @@ public class Grafo {
     return aux;
 }
 
-  public boolean insertarArco(Object verSalida, Object verEntrada, Object etiqueta){
+  public boolean insertarArco(Object verSalida, Object verEntrada, Comparable etiqueta){
     boolean exito=false;
     NodoVert nodoSalida=buscarVertice(verSalida);
     NodoVert nodoEntrada=buscarVertice(verEntrada);
