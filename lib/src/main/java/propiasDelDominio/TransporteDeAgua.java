@@ -42,6 +42,7 @@ public class TransporteDeAgua {
     Scanner sc = new Scanner(System.in);
     boolean continuar = true;
     while (continuar) {
+      System.out.println("=== Menú de Transporte de Agua ===");
       System.out.println("Seleccione una opción:");
       System.out.println("(1) Alta de ciudad");
       System.out.println("(2) Baja de ciudad");
@@ -808,30 +809,64 @@ public class TransporteDeAgua {
     double minVolumen, maxVolumen;
     int anio, mes;
     Lista ciudadesRango = new Lista();
-    System.out.println("Ingrese el volumen de agua minimo:");
-    minVolumen = sc.nextDouble();
-    System.out.println("Ingrese el volumen de agua maximo:");
-    maxVolumen = sc.nextDouble();
-    sc.nextLine(); // Consumir el salto de línea pendiente
-    System.out.println("Ingrese el numero del anio:");
-    anio = sc.nextInt();
-    System.out.println("Ingrese el numero del mes:");
-    mes = sc.nextInt();
-    sc.close();
-    ciudadesRango = this.arbolCiudades.listarPorRango(minNombre, maxNombre);
-    if (ciudadesRango.esVacia()) {
-      System.out.println("No hay ciudades en el rango especificado.");
-    } else {
-      while (!ciudadesRango.esVacia()) {
-        Ciudad unaCiudad = (Ciudad) ciudadesRango.recuperar(1);
-        double volumenCiudad = unaCiudad.getConsumoMensual(mes, anio);
-        if (volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen) {
-          System.out.println("\n" + unaCiudad.toString());
+    boolean valido, continuar;
+    do {
+      System.out.println("Ingrese el volumen de agua minimo:");
+      minVolumen = sc.nextDouble();
+      System.out.println("Ingrese el volumen de agua maximo:");
+      maxVolumen = sc.nextDouble();
+      sc.nextLine();
+      valido = minVolumen >= 0 && maxVolumen >= minVolumen;
+      if (!valido) {
+        System.out.println("Algún volumen ingresado no es valido. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
         }
-        ciudadesRango.eliminar(1);
+      } else {
+        do {
+          System.out.println("Ingrese el número del año:");
+          anio = sc.nextInt();
+          System.out.println("Ingrese el número del mes:");
+          mes = sc.nextInt();
+          valido = mes >= 1 && mes <= 12 && anio > 0;
+          if (!valido) {
+            System.out.println("Algún valor ingresado en año o mes no es valido. ¿Desea volver a intentar? (S/n)");
+            switch (sc.nextLine().toUpperCase()) {
+              case "":
+              case "S":
+                continuar = true;
+                break;
+              default:
+                continuar = false;
+                break;
+            }
+          } else {
+            sc.close();
+            continuar = false;
+            ciudadesRango = this.arbolCiudades.listarPorRango(minNombre, maxNombre);
+            if (ciudadesRango.esVacia()) {
+              System.out.println("No hay ciudades en el rango especificado.");
+            } else {
+              while (!ciudadesRango.esVacia()) {
+                Ciudad unaCiudad = (Ciudad) ciudadesRango.recuperar(1);
+                double volumenCiudad = unaCiudad.getConsumoMensual(mes, anio);
+                if (volumenCiudad >= minVolumen && volumenCiudad <= maxVolumen) {
+                  System.out.println("\n" + unaCiudad.toString());
+                }
+                ciudadesRango.eliminar(1);
+              }
+            }
+          }
+        } while (continuar);
       }
-    }
-  }
+    } while (continuar);
+  }  
 
   public void listarCiudadesPorConsumoAnual() {
     Scanner sc = new Scanner(System.in);
