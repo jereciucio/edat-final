@@ -308,5 +308,47 @@ public class Grafo {
     }
     return caminoMinimo;
   }
-  
+  public Lista caminoMasCorto(Object elemVerticeSalida, Object elemVerticeEntrada) {
+    NodoVert nodoSalida = buscarVertice(elemVerticeSalida);
+    Lista camino = null;
+    if (nodoSalida != null) {
+        int[] minCantidadNodos = {Integer.MAX_VALUE};
+        camino = caminoMasCortoAux(nodoSalida, new Lista(), 1, 0, minCantidadNodos, elemVerticeEntrada);
+    }
+    return camino;
+}
+
+private Lista caminoMasCortoAux(NodoVert verticeActual, Lista visitados, int posVisitados, int cantidadActual, int[] minCantidadNodos, Object elemVerticeEntrada) {
+    Lista caminoMinimo = null;
+    Lista caminoActual;
+    // Caso base: llegamos al destino
+    if (verticeActual.getElem().equals(elemVerticeEntrada)) {
+        caminoMinimo = new Lista();
+        caminoMinimo.insertar(elemVerticeEntrada, 1);
+        minCantidadNodos[0] = cantidadActual;
+    } else {
+        // marcamos este vértice como visitado para evitar ciclos y luego recorremos los adyacntes del vertice actual
+        visitados.insertar(verticeActual.getElem(), posVisitados);
+        NodoAdy arcoActual = verticeActual.getPrimerAdy();
+        while (arcoActual != null) {
+            NodoVert verticeSiguiente = arcoActual.getVertice();
+            // verificamos si ya fue visitado
+            if (visitados.localizar(verticeSiguiente.getElem()) == -1) {
+                // verifica que el camino explorado tiene menos nodos y si es asi realiza la recursion 
+                if (cantidadActual + 1 < minCantidadNodos[0]) {
+                    caminoActual = caminoMasCortoAux(verticeSiguiente, visitados, posVisitados + 1, cantidadActual + 1, minCantidadNodos, elemVerticeEntrada);
+                    if (caminoActual != null) {
+                        caminoActual.insertar(verticeActual.getElem(), 1);
+                        caminoMinimo = caminoActual;
+                    }
+                }
+            }
+            //pasamos al siguiente arco
+            arcoActual = arcoActual.getSigAdy();
+        }
+        // desmarcamos este vértice antes de volver
+        visitados.eliminar(posVisitados);
+    }
+    return caminoMinimo;
+  }
 }
