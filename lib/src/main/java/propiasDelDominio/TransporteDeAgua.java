@@ -55,10 +55,10 @@ public class TransporteDeAgua {
       System.out.println("(5) Baja de tubería");
       System.out.println("(6) Modificar tubería");
       System.out.println("(7) Alta de habitantes");
-      System.out.println("(8) Cantidad de habitantes y volumen de agua consumido");
-      System.out.println("(9) Listar ciudades por rango de nombre de ciudades y volumen de agua consumido ");
-      System.out.println("(10) Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles");
-      System.out.println("(11) Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades");
+      System.out.println("(8) Mostrar la cantidad de habitantes y volumen de agua consumido que se habría distribuido en dicha ciudad en dicho mes y año ");
+      System.out.println("(9) Devolver todas las ciudades cuyo nombre esté en el rango [minNomb, maxNomb] que en un mes y año determinado hayan consumido un volumen de agua en el rango [minVol, maxVol]");
+      System.out.println("(10) Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles. Decir en qué estado se encuentra el camino");
+      System.out.println("(11) Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades. Una vez obtenido el camino decir cuál es el estado");
       System.out.println("(12) Listar ciudades por consumo anual");
       System.out.println("(13) Mostrar sistema de Transporte de agua");
       System.out.println("(0) Salir del menu");
@@ -1042,8 +1042,9 @@ public class TransporteDeAgua {
     } catch (IOException e) {
         System.out.println("Error al leer el archivo de ciudades: " + e.getMessage());
     }
-}
-public void precargarTuberias(String pathArchivo) {
+  }
+
+  public void precargarTuberias(String pathArchivo) {
     try (BufferedReader lector = new BufferedReader(new FileReader(pathArchivo))) {
         String linea;
         while ((linea = lector.readLine()) != null) {
@@ -1073,5 +1074,6 @@ public void precargarTuberias(String pathArchivo) {
     } catch (IOException e) {
         System.out.println("Error al leer el archivo de tuberías: " + e.getMessage());
     }
-}
+  }
+
 }
