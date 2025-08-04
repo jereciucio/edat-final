@@ -117,6 +117,8 @@ public class TransporteDeAgua {
           mostrarSistema();
           break;
         case 0:
+        escribirLog("Salio del menu");
+        cerrarLog();
           continuar = false;
           break;
         default:
@@ -182,6 +184,7 @@ public class TransporteDeAgua {
       } else {
         System.out.println("Ciudad cargada correctamente.");
         continuar = false;
+        escribirLog("Se inserto la ciudad: " +nombreCiudad);
       }
     } while (continuar);
     return exito;
@@ -233,6 +236,7 @@ public class TransporteDeAgua {
       } else {
         continuar = false;
         bajaCiudadAux(nombreIngresado);
+        escribirLog("Se elimino la ciudad: "+nombreIngresado);
       }
     } while (continuar);
   }
@@ -315,6 +319,8 @@ public class TransporteDeAgua {
             System.out.println("La superficie ingresada es inválida, inténtelo nuevamente.");
           } else {
             modificarSuperficieCiudad(superficieNueva, nombreIngresado);
+            escribirLog("Se modifico la superficie de la ciudad");
+
           }
           break;
         case 2:
@@ -324,6 +330,7 @@ public class TransporteDeAgua {
             System.out.println("El consumo ingresado es inválido, inténtelo nuevamente.");
           } else {
             modificarConsumoCiudad(consumoNuevo, nombreIngresado);
+            escribirLog("Se modifico el consumo de la ciudad");
           }
           break;
       }
@@ -386,6 +393,7 @@ public class TransporteDeAgua {
                       caudalMaximo,
                       diametro,
                       estado);
+                      escribirLog("Se ha ingresado la tuberia: "+ciudadOrigen.getNomenclatura()+"-"+ciudadDestino.getNomenclatura());
                 } else {
                   System.out.println("El estado seleccionado es inválido. Inténtelo nuevamente.");
                 }
@@ -474,6 +482,7 @@ public class TransporteDeAgua {
       } else {
         continuar = false;
         bajaTuberiaAux(ciudadOrigen, ciudadDestino);
+        escribirLog("Se elimino la tuberia: "+ciudadOrigen+"-"+ciudadDestino);
         System.out.println("Tubería eliminada exitosamente.");
       }
     } while (continuar);
@@ -576,6 +585,7 @@ public class TransporteDeAgua {
         if (datosTuberia != null) {
           datosTuberia.setCaudalMinimo(nuevoCaudalMinimo);
           System.out.println("Caudal mínimo actualizado correctamente.");
+          escribirLog("Se modifico el caudal minimo");
         } else {
           System.out.println("No se encontró la tubería especificada.");
         }
@@ -614,6 +624,7 @@ public class TransporteDeAgua {
         if (datosTuberia != null) {
           datosTuberia.setCaudalMaximo(nuevoCaudalMaximo);
           System.out.println("Caudal máximo actualizado correctamente.");
+          escribirLog("Se modifico el caudal maximo");
         } else {
           System.out.println("No se encontró la tubería especificada.");
         }
@@ -650,6 +661,7 @@ public class TransporteDeAgua {
         if (datosTuberia != null) {
           datosTuberia.setDiametro(nuevoDiametro);
           System.out.println("Diámetro actualizado correctamente.");
+          escribirLog("Se modifico el diametro");
         } else {
           System.out.println("No se encontró la tubería especificada.");
         }
@@ -689,6 +701,7 @@ public class TransporteDeAgua {
         if (datosTuberia != null) {
           datosTuberia.setEstado(nuevoEstado);
           System.out.println("Estado actualizado correctamente.");
+          escribirLog("Se modifico el estado");
         } else {
           System.out.println("No se encontró la tubería especificada.");
         }
@@ -720,6 +733,7 @@ public class TransporteDeAgua {
         continuar = false;
         modificarHabitantes(nombreCiudad);
         System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);
+        escribirLog("Se modifico la cantidad de habitantes");
       }
     } while (continuar);
   }
@@ -746,7 +760,7 @@ public class TransporteDeAgua {
     }
   }
 
-  public static void cantHabitantesYVolAgua() {
+   public static void cantHabitantesYVolAgua() {
     Scanner sc = new Scanner(System.in);
     int mes, anio;
     String nombreCiudad;
@@ -821,6 +835,7 @@ public class TransporteDeAgua {
         
         continuar = false;
         listarCiudadesRango(minNombre, maxNombre);
+        escribirLog("Se listaron las ciudades a partir de un rango");
       }
     } while (continuar);
   }
@@ -917,6 +932,7 @@ public class TransporteDeAgua {
         Ciudad ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
         Ciudad ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
         listarCiudadesCaudalMinimo(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura());
+        escribirLog("Se obtuvo el camino con menor caudal");
       }
     } while (continuar);
   }
@@ -993,6 +1009,7 @@ public class TransporteDeAgua {
         Ciudad ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
         Ciudad ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
         listarCiudadesEIndicarEstado(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura());
+        escribirLog("Se obtuvo el camino con menor ciudades");
       }
     } while (continuar);
   }
@@ -1090,6 +1107,7 @@ public class TransporteDeAgua {
         System.out.println(nodo.toString());
         heap.eliminarCima();
       }
+      escribirLog("Se listó las ciudades por consumo anual");
     }
   }
 
@@ -1098,6 +1116,7 @@ public class TransporteDeAgua {
   }
 
   private static String mostrarSistemaString() {
+    escribirLog("Se mostro el sistema");
     String str = "";
     str += "=== Estado del Sistema de Transporte de Agua ===\n";
     str += "Árbol AVL de Ciudades:";
@@ -1139,6 +1158,7 @@ public class TransporteDeAgua {
             }
         }
         System.out.println("Ciudades precargadas correctamente.");
+        escribirLog("Se realizo la precarga de las ciudades");
     } catch (IOException e) {
         System.out.println("Error al leer el archivo de ciudades: " + e.getMessage());
     }
@@ -1171,6 +1191,7 @@ public static void precargarTuberias(String pathArchivo) {
             }
         }
         System.out.println("Tuberías precargadas correctamente.");
+        escribirLog("Se realizo la precarga de las tuberias");
     } catch (IOException e) {
         System.out.println("Error al leer el archivo de tuberías: " + e.getMessage());
     }
