@@ -115,10 +115,10 @@ public class ArbolAVLDicc {
 
       if (balanceHijo <= 0) {
         // El hijo tiene el mismo o nulo desbalance
-        nodo = rotacionSimpleDerecha(nodo);
+        nodo = rotacionSimpleIzquierda(nodo);
       } else {
         // El hijo tiene el desbalance contrario
-        nodo = rotacionDobleIzquierdaDerecha(nodo);
+        nodo = rotacionDobleDerechaIzquierda(nodo);
       }
     }
 
