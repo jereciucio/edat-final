@@ -873,7 +873,7 @@ public class TransporteDeAgua {
     } while (continuar);
   }
 
-  public void obtenerCaminoCaudalMinimo(){
+  public static void obtenerCaminoCaudalMinimo(){
     Scanner sc = new Scanner(System.in);
     String nombreCiudadOrigen, nombreCiudadDestino;
     boolean existe, continuar;
@@ -883,7 +883,7 @@ public class TransporteDeAgua {
       System.out.println("Ingrese el nombre de la ciudad destino:");
       nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
       existe =
-          this.arbolCiudades.existeClave(nombreCiudadOrigen) && this.arbolCiudades.existeClave(nombreCiudadDestino);
+          arbolCiudades.existeClave(nombreCiudadOrigen) && arbolCiudades.existeClave(nombreCiudadDestino);
       if (!existe) {
         System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
@@ -905,9 +905,9 @@ public class TransporteDeAgua {
     } while (continuar);
   }
 
-  private void listarCiudadesCaudalMinimo(String nomenclaturaCiudadOrigen, String nomenclaturaCiudadDestino) {
-    Lista caminoMinimoCiudades = this.grafoTuberias.encontrarCaminoEtiquetaMinima(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino);
-    if (caminoMinimoCiudades.esVacia()) {
+  private static void listarCiudadesCaudalMinimo(String nomenclaturaCiudadOrigen, String nomenclaturaCiudadDestino) {
+    Lista caminoMinimoCiudades = grafoTuberias.encontrarCaminoEtiquetaMinima(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino);
+    if (caminoMinimoCiudades == null) {
       System.out.println("El camino entre las ciudades ingresadas no existe.");
     } else {
       String estadoFinal;
@@ -920,7 +920,7 @@ public class TransporteDeAgua {
           DominioTuberia clave = new DominioTuberia(
               (String) caminoMinimoCiudades.recuperar(1),
               (String) caminoMinimoCiudades.recuperar(2));
-          DatosTuberia datosTuberia = (DatosTuberia) this.mapeoTuberias.get(clave);
+          DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
           int estadoActual = precedenciaEstado(datosTuberia.getEstado());
           if (estadoActual < estadoDelCamino) {
             estadoDelCamino = estadoActual;
@@ -983,7 +983,7 @@ public class TransporteDeAgua {
 
   private static void listarCiudadesEIndicarEstado(String nomenclaturaCiudadOrigen, String nomenclaturaCiudadDestino) {
     Lista caminoMinimoCiudades = grafoTuberias.caminoMasCorto(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino);
-    if (caminoMinimoCiudades.esVacia()) {
+    if (caminoMinimoCiudades == null) {
       System.out.println("El camino entre las ciudades ingresadas no existe.");
     } else {
       String estadoFinal;
