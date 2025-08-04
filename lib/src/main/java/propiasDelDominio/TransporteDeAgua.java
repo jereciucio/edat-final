@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -19,7 +20,7 @@ public class TransporteDeAgua {
   private static ArbolAVLDicc arbolCiudades;
   private static Grafo grafoTuberias;
   private static HashMap mapeoTuberias;
-
+  private static FileWriter escrituraLog;
   public static void main(String[] args) {
     arbolCiudades = new ArbolAVLDicc();
     grafoTuberias = new Grafo();
@@ -1152,4 +1153,29 @@ public static void precargarTuberias(String pathArchivo) {
         System.out.println("Error al leer el archivo de tuberías: " + e.getMessage());
     }
   }
+  public static void iniciarLog(){
+  try{
+    escrituraLog = new FileWriter("sistema.log", false);
+  }catch(IOException e){
+    System.out.println("No se pudo encontrar el archivo");
+  }
+}
+public static void escribirLog(String mensaje){
+  try {
+        String timestamp = java.time.LocalDateTime.now().toString();
+        escrituraLog.write("[" + timestamp + "] " + mensaje + "\n");
+        escrituraLog.flush();
+    } catch (IOException e) {
+        System.out.println("Error al escribir en el log: " + e.getMessage());
+    }
+}
+public static void cerrarLog() {
+    try {
+        if (escrituraLog != null) {
+            escrituraLog.close();
+        }
+    } catch (IOException e) {
+        System.out.println("Error al cerrar el archivo de log: " + e.getMessage());
+    }
+}
 }
