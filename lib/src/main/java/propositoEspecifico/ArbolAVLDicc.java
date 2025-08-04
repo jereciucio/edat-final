@@ -110,7 +110,7 @@ public class ArbolAVLDicc {
         // El hijo tiene el desbalance contrario
         nodo = rotacionDobleIzquierdaDerecha(nodo);
       }
-    } else { // Desbalance hacia la derecha
+    } else if (balance <= -2) { // Desbalance hacia la derecha
       balanceHijo = balance(nodo.getDerecho());
 
       if (balanceHijo <= 0) {
@@ -126,8 +126,12 @@ public class ArbolAVLDicc {
   }
 
   private int balance(NodoAVLDicc nodo) {
-    NodoAVLDicc izquierdo = nodo.getIzquierdo();
-    NodoAVLDicc derecho = nodo.getDerecho();
+    NodoAVLDicc izquierdo = null; 
+    NodoAVLDicc derecho = null;
+    if (nodo != null) {
+      izquierdo = nodo.getIzquierdo();
+      derecho = nodo.getDerecho();
+    }
     int alturaIzquierdo = -1;
     int alturaDerecho = -1;
     if (izquierdo != null) {
