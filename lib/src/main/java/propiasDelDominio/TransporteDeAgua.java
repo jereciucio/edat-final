@@ -1145,7 +1145,7 @@ public class TransporteDeAgua {
         while ((linea = br.readLine()) != null) {
             linea = linea.trim();
             if (!linea.isEmpty()) {
-                StringTokenizer stk = new StringTokenizer(linea, ";");
+                StringTokenizer stk = new StringTokenizer(linea, separador);
                 if (stk.countTokens() >= 4) {
                     String nombre = stk.nextToken().trim().toUpperCase();
                     String nomenclatura = stk.nextToken().trim().toUpperCase();
