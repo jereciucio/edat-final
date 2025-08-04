@@ -28,8 +28,8 @@ public class TransporteDeAgua {
     grafoTuberias = new Grafo();
     mapeoTuberias = new HashMap();
 
-    precargarCiudades("Ciudades.csv");
-    precargarTuberias("Tuberias.csv");
+    precargarCiudades("Ciudades.csv", ",");
+    precargarTuberias("Tuberias.csv", ",");
     
     escribirLog(mostrarSistemaString());
     menuTransporteDeAgua();
@@ -1140,18 +1140,18 @@ public class TransporteDeAgua {
     return str = "";
   }
 
-  public static void precargarCiudades(String pathArchivo) {
+  public static void precargarCiudades(String pathArchivo, String separador) {
     try (BufferedReader br = new BufferedReader(new FileReader(pathArchivo))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             linea = linea.trim();
             if (!linea.isEmpty()) {
-                StringTokenizer separadorTokens = new StringTokenizer(linea, ";");
-                if (separadorTokens.countTokens() >= 4) {
-                    String nombre = separadorTokens.nextToken().trim().toUpperCase();
-                    String nomenclatura = separadorTokens.nextToken().trim().toUpperCase();
-                    double superficie = Double.parseDouble(separadorTokens.nextToken().trim());
-                    double consumo = Double.parseDouble(separadorTokens.nextToken().trim());
+                StringTokenizer stk = new StringTokenizer(linea, ";");
+                if (stk.countTokens() >= 4) {
+                    String nombre = stk.nextToken().trim().toUpperCase();
+                    String nomenclatura = stk.nextToken().trim().toUpperCase();
+                    double superficie = Double.parseDouble(stk.nextToken().trim());
+                    double consumo = Double.parseDouble(stk.nextToken().trim());
                     ArbolAVLDicc calendario = new ArbolAVLDicc(); // Árbol vacío
                     registrarCiudad(nombre, nomenclatura, superficie, consumo, calendario);
                 }
@@ -1164,23 +1164,23 @@ public class TransporteDeAgua {
     }
   }
 
-public static void precargarTuberias(String pathArchivo) {
+public static void precargarTuberias(String pathArchivo, String separador) {
     try (BufferedReader lector = new BufferedReader(new FileReader(pathArchivo))) {
         String linea;
         while ((linea = lector.readLine()) != null) {
             linea = linea.trim();
             if (!linea.isEmpty()) {
-                StringTokenizer separador = new StringTokenizer(linea, ";");
-                if (separador.countTokens() >= 5) {
-                    String campoCiudades = separador.nextToken().trim().toUpperCase();
-                    StringTokenizer separadorCiudades = new StringTokenizer(campoCiudades, "-");
-                    if (separadorCiudades.countTokens() == 2) {
-                        String origen = separadorCiudades.nextToken();
-                        String destino = separadorCiudades.nextToken();
-                        double caudalMin = Double.parseDouble(separador.nextToken().trim());
-                        double caudalMax = Double.parseDouble(separador.nextToken().trim());
-                        double diametro = Double.parseDouble(separador.nextToken().trim());
-                        String estado = separador.nextToken().trim().toUpperCase();
+                StringTokenizer stk = new StringTokenizer(linea, separador);
+                if (stk.countTokens() >= 5) {
+                    String campoCiudades = stk.nextToken().trim().toUpperCase();
+                    StringTokenizer stkCiudades = new StringTokenizer(campoCiudades, "-");
+                    if (stkCiudades.countTokens() == 2) {
+                        String origen = stkCiudades.nextToken();
+                        String destino = stkCiudades.nextToken();
+                        double caudalMin = Double.parseDouble(stk.nextToken().trim());
+                        double caudalMax = Double.parseDouble(stk.nextToken().trim());
+                        double diametro = Double.parseDouble(stk.nextToken().trim());
+                        String estado = stk.nextToken().trim().toUpperCase();
 
                         DominioTuberia dominio = new DominioTuberia(origen, destino);
                         DatosTuberia datos = new DatosTuberia(origen, destino, caudalMin, caudalMax, diametro, estado);
