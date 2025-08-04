@@ -1112,11 +1112,11 @@ public class TransporteDeAgua {
   }
 
   public static void mostrarSistema() {
+    escribirLog("Se mostro el sistema");
     System.out.println(mostrarSistemaString());
   }
 
   private static String mostrarSistemaString() {
-    escribirLog("Se mostro el sistema");
     String str = "";
     str += "=== Estado del Sistema de Transporte de Agua ===\n";
     str += "Árbol AVL de Ciudades:";
@@ -1137,7 +1137,7 @@ public class TransporteDeAgua {
         }
     }
     str += "===============================================";
-    return str = "";
+    return str;
   }
 
   public static void precargarCiudades(String pathArchivo, String separador) {
