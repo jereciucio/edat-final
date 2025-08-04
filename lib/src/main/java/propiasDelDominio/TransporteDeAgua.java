@@ -22,10 +22,18 @@ public class TransporteDeAgua {
   private static HashMap mapeoTuberias;
   private static FileWriter escrituraLog;
   public static void main(String[] args) {
+    iniciarLog();
+
     arbolCiudades = new ArbolAVLDicc();
     grafoTuberias = new Grafo();
     mapeoTuberias = new HashMap();
+
+    precargarCiudades("Ciudades.csv");
+    precargarTuberias("Tuberias.csv");
+    
+    escribirLog(mostrarSistemaString());
     menuTransporteDeAgua();
+    escribirLog(mostrarSistemaString());
   }
 
   public static ArbolAVLDicc getArbolCiudades() {
