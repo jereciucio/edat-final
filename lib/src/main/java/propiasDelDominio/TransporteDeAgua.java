@@ -20,11 +20,12 @@ public class TransporteDeAgua {
   private static Grafo grafoTuberias;
   private static HashMap mapeoTuberias;
 
-  // public static TransporteDeAgua() {
-  //   arbolCiudades = new ArbolAVLDicc();
-  //   grafoTuberias = new Grafo();
-  //   mapeoTuberias = new HashMap();
-  // }
+  public static void main(String[] args) {
+    arbolCiudades = new ArbolAVLDicc();
+    grafoTuberias = new Grafo();
+    mapeoTuberias = new HashMap();
+    menuTransporteDeAgua();
+  }
 
   public static ArbolAVLDicc getArbolCiudades() {
     return arbolCiudades;
