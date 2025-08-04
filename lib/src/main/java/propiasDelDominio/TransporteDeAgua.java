@@ -56,7 +56,7 @@ public class TransporteDeAgua {
       System.out.println("(6) Modificar tubería");
       System.out.println("(7) Alta de habitantes");
       System.out.println("(8) Cantidad de habitantes y volumen de agua consumido");
-      System.out.println("(9) Listar ciudades por rango de nombre de ciudades y volumen de agua consumido");
+      System.out.println("(9) Listar ciudades por rango de nombre de ciudades y volumen de agua consumido ");
       System.out.println("(10) Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles");
       System.out.println("(11) Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades");
       System.out.println("(12) Listar ciudades por consumo anual");
@@ -92,13 +92,13 @@ public class TransporteDeAgua {
           cantHabitantesYVolAgua(0, 0);
           break;
         case 9:
-          listarCiudadesPorConsumoAnual();
+          obtenerCiudadRango();
           break;
         case 10:
           /// Obtener el camino que llegue de A a B tal que el caudal pleno del camino completo sea el mínimo entre los caminos posibles
           break;
         case 11:
-          /// Obtener el camino que llegue de A a B pasando por la mínima cantidad de ciudades
+          obtenerCaminoMinimaCantCiudades();
           break;
         case 12:
           listarCiudadesPorConsumoAnual();
@@ -870,7 +870,105 @@ public class TransporteDeAgua {
         } while (continuar);
       }
     } while (continuar);
-  }  
+  }
+  
+  public void obtenerCaminoMinimaCantCiudades(){
+    Scanner sc = new Scanner(System.in);
+    String nombreCiudadOrigen, nombreCiudadDestino;
+    boolean existe, continuar;
+    do {
+      System.out.println("Ingrese el nombre de la ciudad origen:");
+      nombreCiudadOrigen = sc.nextLine().trim().toUpperCase();
+      System.out.println("Ingrese el nombre de la ciudad destino:");
+      nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
+      existe =
+          this.arbolCiudades.existeClave(nombreCiudadOrigen) && this.arbolCiudades.existeClave(nombreCiudadDestino);
+      if (!existe) {
+        System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
+        sc.close();
+        continuar = false;
+        Ciudad ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
+        Ciudad ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
+        listarCiudadesEIndicarEstado(ciudadOrigen.getNomenclatura(), ciudadDestino.getNomenclatura());
+      }
+    } while (continuar);
+  }
+
+  private void listarCiudadesEIndicarEstado(String nomenclaturaCiudadOrigen, String nomenclaturaCiudadDestino) {
+    Lista caminoMinimoCiudades = this.grafoTuberias.caminoMasCorto(nomenclaturaCiudadOrigen, nomenclaturaCiudadDestino);
+    if (caminoMinimoCiudades.esVacia()) {
+      System.out.println("El camino entre las ciudades ingresadas no existe.");
+    } else {
+      String estadoFinal;
+      int estadoDelCamino = 40;
+      System.out.println("Nomenclaturas de las ciudades que se encuentran en el camino:");
+      while (!caminoMinimoCiudades.esVacia()) {
+        System.out.println(caminoMinimoCiudades.recuperar(1).toString());
+        if (estadoDelCamino != 1 && caminoMinimoCiudades.longitud() > 1) {
+          // Si el camino tiene más de una ciudad, verificamos el estado de las tuberías
+          DominioTuberia clave = new DominioTuberia(
+              (String) caminoMinimoCiudades.recuperar(1),
+              (String) caminoMinimoCiudades.recuperar(2));
+          DatosTuberia datosTuberia = (DatosTuberia) this.mapeoTuberias.get(clave);
+          int estadoActual = precedenciaEstado(datosTuberia.getEstado());
+          if (estadoActual < estadoDelCamino) {
+            estadoDelCamino = estadoActual;
+          }
+        }
+        caminoMinimoCiudades.eliminar(1);
+      }
+      switch (estadoDelCamino) {
+        case 1:
+            estadoFinal = "EN DISEÑO";
+            break;
+        case 2:
+            estadoFinal = "INACTIVO";
+            break;
+        case 3:
+            estadoFinal = "EN REPARACION";
+            break;
+        case 4:
+            estadoFinal = "ACTIVO";
+            break;
+        default:
+            estadoFinal = "DESCONOCIDO"; // Para estados desconocidos
+            break;
+      }
+      System.out.println("Estado del camino: " + estadoFinal);
+    }
+  }
+
+  private int precedenciaEstado(String estado) {
+    int estadoInt = 0;
+    switch (estado) {
+        case "EN DISEÑO":
+            estadoInt = 1;
+            break;
+        case "INACTIVO":
+            estadoInt = 2;
+            break;
+        case "EN REPARACION":
+            estadoInt = 3;
+            break;
+        case "ACTIVO":
+            estadoInt = 4;
+            break;
+        default:
+            estadoInt = 40; // Para estados desconocidos
+            break;
+    }
+    return estadoInt;
+  }
 
   public void listarCiudadesPorConsumoAnual() {
     Scanner sc = new Scanner(System.in);
