@@ -207,7 +207,6 @@ public class TransporteDeAgua {
     } else {
       arbolCiudades.insertar(nombre, nuevaCiudad);
       grafoTuberias.insertarVertice(nomenclatura);
-      mapeoTuberias.put(nomenclatura, nuevaCiudad);
     }
     return registrado;
   }
