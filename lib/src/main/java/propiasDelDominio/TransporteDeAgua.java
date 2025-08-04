@@ -99,7 +99,7 @@ public class TransporteDeAgua {
           altaHabitantes();
           break;
         case 8:
-          cantHabitantesYVolAgua(0, 0);
+          cantHabitantesYVolAgua();
           break;
         case 9:
           obtenerCiudadRango();
@@ -746,13 +746,20 @@ public class TransporteDeAgua {
     }
   }
 
-  public static void cantHabitantesYVolAgua(int mes, int anio) {
+  public static void cantHabitantesYVolAgua() {
     Scanner sc = new Scanner(System.in);
+    int mes, anio;
+    String nombreCiudad;
     boolean continuar = true;
     do {
       boolean exito = true;
+      System.out.println("Ingrese el número del año:");
+      anio = sc.nextInt();
+      System.out.println("Ingrese el número del mes:");
+      mes = sc.nextInt();
+      sc.nextLine(); // Consumir el salto de línea pendiente
       System.out.println("Ingrese el nombre de la ciudad");
-      String nombreCiudad = sc.nextLine().toUpperCase();
+      nombreCiudad = sc.nextLine().toUpperCase();
       if (!arbolCiudades.existeClave(nombreCiudad)) {
         System.out.println("La ciudad ingresada no existe");
         exito = false;
