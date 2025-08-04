@@ -3,3 +3,8 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ignorar archivos de precarga y log
+*.csv
+*.txt
+*.log
