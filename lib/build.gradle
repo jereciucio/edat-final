@@ -8,7 +8,16 @@
 
 plugins {
     // Apply the java-library plugin for API and implementation separation.
-    id 'java-library'
+    id 'application'
+}
+application {
+    mainClass = 'propiasDelDominio.TransporteDeAgua'
+}
+
+task runApp(type: JavaExec){
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'propiasDelDominio.TransporteDeAgua'
+    standardInput = System.in
 }
 
 repositories {
@@ -16,13 +25,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api libs.commons.math3
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation libs.guava
-}
 
 testing {
     suites {
