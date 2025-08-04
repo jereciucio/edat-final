@@ -296,14 +296,14 @@ public class ArbolAVLDicc {
     final String VACIO = "-";
     representacion += nodo.getDato() +" (alt: " + nodo.getAltura() + ") ";
     if (nodo.getIzquierdo() != null) {
-      representacion += "HI: " + nodo.getIzquierdo().getDato().toString() + " ";
+      representacion += "\n    HI: " + nodo.getIzquierdo().getDato().toString() + " ";
     } else {
-      representacion += "HI " + VACIO + " ";
+      representacion += "\n    HI " + VACIO + " ";
     }
     if (nodo.getDerecho() != null) {
-      representacion += "HD: " + nodo.getDerecho().getDato().toString();
+      representacion += "\n    HD: " + nodo.getDerecho().getDato().toString();
     } else {
-      representacion += "HD " + VACIO;
+      representacion += "\n    HD " + VACIO;
     }
     // Recorrido en preorden
     if (nodo.getIzquierdo() != null) {

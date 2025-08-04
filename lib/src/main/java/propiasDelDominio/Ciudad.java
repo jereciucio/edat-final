@@ -132,12 +132,11 @@ public class Ciudad {
   }
 
   public String toString() {
-    String cad = "";
-    cad += "nombre: " + this.nombre;
-    cad += "\n" + "nomenclatura: " + this.nomenclatura;
-    cad += "\n" + "superficie: " + this.superficie;
-    cad += "\n" + "consumo perCapita: " + this.consumoPerCapita;
-    cad += "\n" + "Calendario de habitantes: " + this.calendarioHabitantes.toString();
+    String cad = "[";
+    cad += this.nombre + ",";
+    cad += this.nomenclatura + ",";
+    cad += this.superficie + ",";
+    cad += this.consumoPerCapita + "]";
     return cad;
   }
 }

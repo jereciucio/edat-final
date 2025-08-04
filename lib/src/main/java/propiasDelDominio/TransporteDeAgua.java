@@ -1117,17 +1117,18 @@ public class TransporteDeAgua {
 
   private static String mostrarSistemaString() {
     String str = "";
+    str += "\n===============================================";
     str += "=== Estado del Sistema de Transporte de Agua ===\n";
-    str += "Árbol AVL de Ciudades:";
+    str += "Árbol AVL de Ciudades:\n";
     str += arbolCiudades.toString();
-    str += "\n";
-    str += "Grafo de Tuberías:";
+    str += "\n\n";
+    str += "Grafo de Tuberías:\n";
     str += grafoTuberias.toString();
-    str += "\n";
+    str += "\n\n";
 
-    str += "Mapeo de Tuberías (HashMap):";
+    str += "Mapeo de Tuberías (HashMap):\n";
     if (mapeoTuberias.isEmpty()) {
-        str += "El mapeo está vacío.";
+        str += "    El mapeo está vacío.";
     } else {
         for (Object clave : mapeoTuberias.keySet()) {
             str += "Clave: " + clave.toString();
@@ -1135,7 +1136,7 @@ public class TransporteDeAgua {
             str += "---";
         }
     }
-    str += "===============================================";
+    str += "\n===============================================";
     return str;
   }
 
