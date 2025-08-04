@@ -1079,26 +1079,33 @@ public class TransporteDeAgua {
   }
 
   public static void mostrarSistema() {
-    System.out.println("=== Estado del Sistema de Transporte de Agua ===\n");
-    System.out.println("Árbol AVL de Ciudades:");
-    System.out.println(arbolCiudades.toString());
-    System.out.println();
-    System.out.println("Grafo de Tuberías:");
-    System.out.println(grafoTuberias.toString());
-    System.out.println();
+    System.out.println(mostrarSistemaString());
+  }
 
-    System.out.println("Mapeo de Tuberías (HashMap):");
+  private static String mostrarSistemaString() {
+    String str = "";
+    str += "=== Estado del Sistema de Transporte de Agua ===\n";
+    str += "Árbol AVL de Ciudades:";
+    str += arbolCiudades.toString();
+    str += "\n";
+    str += "Grafo de Tuberías:";
+    str += grafoTuberias.toString();
+    str += "\n";
+
+    str += "Mapeo de Tuberías (HashMap):";
     if (mapeoTuberias.isEmpty()) {
-        System.out.println("El mapeo está vacío.");
+        str += "El mapeo está vacío.";
     } else {
         for (Object clave : mapeoTuberias.keySet()) {
-            System.out.println("Clave: " + clave.toString());
-            System.out.println("Valor: " + mapeoTuberias.get(clave).toString());
-            System.out.println("---");
+            str += "Clave: " + clave.toString();
+            str += "Valor: " + mapeoTuberias.get(clave).toString();
+            str += "---";
         }
     }
-    System.out.println("===============================================");
+    str += "===============================================";
+    return str = "";
   }
+
   public static void precargarCiudades(String pathArchivo) {
     try (BufferedReader br = new BufferedReader(new FileReader(pathArchivo))) {
         String linea;
