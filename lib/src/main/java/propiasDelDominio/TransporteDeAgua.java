@@ -114,7 +114,7 @@ public class TransporteDeAgua {
           System.out.println("Opción no válida. Inténtelo nuevamente.");
       }
     }
-    sc.close();
+    
   }
 
   public static boolean altaCiudad() {
@@ -319,7 +319,7 @@ public class TransporteDeAgua {
           break;
       }
     }
-    sc.close();
+    
   }
 
   private static void modificarSuperficieCiudad(double superficie, String nombreCiudad) {
@@ -535,7 +535,7 @@ public class TransporteDeAgua {
           System.out.println("Opción inválida. Inténtelo nuevamente.");
       }
     } while (continuar);
-    sc.close();
+    
   }
 
   private static void modificarCaudalMinimo(String ciudadOrigen, String ciudadDestino) {
@@ -558,7 +558,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
         Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
@@ -594,7 +594,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
         Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
@@ -632,7 +632,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
         Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
@@ -671,7 +671,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
         Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
@@ -707,7 +707,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         modificarHabitantes(nombreCiudad);
         System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);
@@ -725,7 +725,7 @@ public class TransporteDeAgua {
     sc.nextLine(); // Consumir el salto de línea pendiente
     System.out.println("Ingrese el numero del mes:");
     mes = sc.nextInt();
-    sc.close();
+    
     Ciudad unaCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
     Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
     if (unAnio == null) {
@@ -802,7 +802,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         listarCiudadesRango(minNombre, maxNombre);
       }
@@ -852,7 +852,7 @@ public class TransporteDeAgua {
                 break;
             }
           } else {
-            sc.close();
+            
             continuar = false;
             ciudadesRango = arbolCiudades.listarPorRango(minNombre, maxNombre);
             if (ciudadesRango.esVacia()) {
@@ -896,7 +896,7 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
+        
         continuar = false;
         Ciudad ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
         Ciudad ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
