@@ -34,6 +34,7 @@ public class TransporteDeAgua {
     escribirLog(mostrarSistemaString());
     menuTransporteDeAgua();
     escribirLog(mostrarSistemaString());
+    cerrarLog();
   }
 
   public static ArbolAVLDicc getArbolCiudades() {
@@ -118,7 +119,6 @@ public class TransporteDeAgua {
           break;
         case 0:
         escribirLog("Salio del menu");
-        cerrarLog();
           continuar = false;
           break;
         default:
