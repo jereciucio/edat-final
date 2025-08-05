@@ -321,6 +321,7 @@ public class TransporteDeAgua {
             System.out.println("La superficie ingresada es inválida, inténtelo nuevamente.");
           } else {
             modificarSuperficieCiudad(superficieNueva, nombreIngresado);
+            System.out.println("Se modifico la superficie exitosamente");
             escribirLog("Se modifico la superficie de la ciudad");
 
           }
@@ -332,6 +333,7 @@ public class TransporteDeAgua {
             System.out.println("El consumo ingresado es inválido, inténtelo nuevamente.");
           } else {
             modificarConsumoCiudad(consumoNuevo, nombreIngresado);
+            System.out.println("Se modifico el consumo exitosamente");
             escribirLog("Se modifico el consumo de la ciudad");
           }
           break;
