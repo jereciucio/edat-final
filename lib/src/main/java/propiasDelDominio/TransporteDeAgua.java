@@ -237,6 +237,7 @@ public class TransporteDeAgua {
       } else {
         continuar = false;
         bajaCiudadAux(nombreIngresado);
+        System.out.println("La ciudad se elimino correctamente");
         escribirLog("Se elimino la ciudad: "+nombreIngresado);
       }
     } while (continuar);
