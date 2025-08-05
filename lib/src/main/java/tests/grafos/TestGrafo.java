@@ -1,5 +1,6 @@
-package grafos;
+package tests.grafos;
 
+import grafos.dinamicas.Grafo;
 import lineales.dinamicas.Lista;
 
 public class TestGrafo {
