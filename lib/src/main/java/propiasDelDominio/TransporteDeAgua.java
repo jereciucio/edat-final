@@ -555,7 +555,7 @@ public class TransporteDeAgua {
             continuar = false;
             break;
           default:
-            System.out.println("Opción inválida. Inténtelo nuevamente.");
+            System.out.println("¿Desea volver a intentar? (S/n):");
             switch (sc.nextLine().toUpperCase()) {
                 case "":
                 case "S":
