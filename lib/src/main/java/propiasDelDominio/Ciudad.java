@@ -39,16 +39,14 @@ public class Ciudad {
   }
 
   public int getHabitantes(int mes, int anio) {
-    // int cantidad=0;
-    // if(mes>0 && mes<13 && anio>1900){
-    //   Anio unAnio = this.calendarioHabitantes.buscar(anio);
-    //   if(unAnio!=null){
-    //     cantidad=unAnio.getValor(mes);
-    //   }
-    // }
-    // return cantidad;
-    // FIXME: Implementar recuperar en ArbolAVL y compareTo(int) en Anio
-    return 0;
+     int cantidad=0;
+     if(mes>0 && mes<13 && anio>1900){
+       Anio unAnio = (Anio)this.calendarioHabitantes.obtenerInformacion(anio);
+       if(unAnio!=null){
+         cantidad=unAnio.getValor(mes);
+       }
+     }
+     return cantidad;
   }
 
   public double getConsumoMensual(int mes, int anio) {
