@@ -337,6 +337,9 @@ public class TransporteDeAgua {
             escribirLog("Se modifico el consumo de la ciudad");
           }
           break;
+       default:
+          System.out.println("Opción no válida. Intente nuevamente.");
+          break;
       }
     }
     
