@@ -506,16 +506,17 @@ public class TransporteDeAgua {
   public static void modificarTuberias(){
     Scanner sc = new Scanner(System.in);
     String ciudadOrigen, ciudadDestino;
-    boolean existe, continuar;
+    boolean existe, continuar=true;
     do {
-      System.out.println("Ingrese el nombre de la ciudad de origen:");
+      System.out.println("Ingrese la nomenclatura de la ciudad de origen:");
       ciudadOrigen = sc.nextLine().trim().toUpperCase();
-      System.out.println("Ingrese el nombre de la ciudad de destino:");
+      System.out.println("Ingrese la nomenclatura de la ciudad de destino:");
       ciudadDestino = sc.nextLine().trim().toUpperCase();
-      existe =arbolCiudades.existeClave(ciudadOrigen)
-              && arbolCiudades.existeClave(ciudadDestino);
+      existe =grafoTuberias.existeVertice(ciudadOrigen)
+          && grafoTuberias.existeVertice(ciudadDestino)
+          && grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
       if (!existe) {
-        System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
+        System.out.println("Alguna nomenclatura ingresada o la tubería no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
           case "":
           case "S":
@@ -526,41 +527,47 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        continuar = false;
+        do{
+        System.out.println("Seleccione el dato a modificar:");
+        System.out.println("(1) Caudal mínimo");
+        System.out.println("(2) Caudal máximo");
+        System.out.println("(3) Diámetro");
+        System.out.println("(4) Estado");
+        System.out.print("Su respuesta: ");
+        int opcion = sc.nextInt();
+        sc.nextLine(); 
+        switch (opcion) {
+          case 1:
+            modificarCaudalMinimo(ciudadOrigen, ciudadDestino);
+            continuar = false;
+            break;
+          case 2:
+            modificarCaudalMaximo(ciudadOrigen, ciudadDestino);
+            continuar = false;
+            break;
+          case 3:
+            modificarDiametro(ciudadOrigen, ciudadDestino);
+            continuar = false;
+            break;
+          case 4:
+            modificarEstado(ciudadOrigen, ciudadDestino);
+            continuar = false;
+            break;
+          default:
+            System.out.println("Opción inválida. Inténtelo nuevamente.");
+            switch (sc.nextLine().toUpperCase()) {
+                case "":
+                case "S":
+                  continuar = true;
+                  break;
+                default:
+                  continuar = false;
+                  break;
+            }
+        }
+        } while (continuar);
       }
     } while (continuar);
-    continuar = true;
-    do{
-      System.out.println("Seleccione el dato a modificar:");
-      System.out.println("(1) Caudal mínimo");
-      System.out.println("(2) Caudal máximo");
-      System.out.println("(3) Diámetro");
-      System.out.println("(4) Estado");
-      System.out.print("Su respuesta: ");
-      int opcion = sc.nextInt();
-      sc.nextLine(); 
-      switch (opcion) {
-        case 1:
-          modificarCaudalMinimo(ciudadOrigen, ciudadDestino);
-          continuar = false;
-          break;
-        case 2:
-          modificarCaudalMaximo(ciudadOrigen, ciudadDestino);
-          continuar = false;
-          break;
-        case 3:
-          modificarDiametro(ciudadOrigen, ciudadDestino);
-          continuar = false;
-          break;
-        case 4:
-          modificarEstado(ciudadOrigen, ciudadDestino);
-          continuar = false;
-          break;
-        default:
-          System.out.println("Opción inválida. Inténtelo nuevamente.");
-      }
-    } while (continuar);
-    
   }
 
   private static void modificarCaudalMinimo(String ciudadOrigen, String ciudadDestino) {
@@ -585,9 +592,7 @@ public class TransporteDeAgua {
       } else {
         
         continuar = false;
-        Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
-        Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
-        DominioTuberia clave = new DominioTuberia(ciudadO.getNomenclatura(), ciudadD.getNomenclatura());
+        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
         DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setCaudalMinimo(nuevoCaudalMinimo);
@@ -622,11 +627,9 @@ public class TransporteDeAgua {
       } else {
         
         continuar = false;
-        Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
-        Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
-        NodoAdy caudalEnGrafo=grafoTuberias.obtenerArco(ciudadO.getNomenclatura(), ciudadD.getNomenclatura());
+        NodoAdy caudalEnGrafo=grafoTuberias.obtenerArco(ciudadOrigen, ciudadDestino);
         caudalEnGrafo.setEtiqueta(nuevoCaudalMaximo);
-        DominioTuberia clave = new DominioTuberia(ciudadO.getNomenclatura(), ciudadD.getNomenclatura());
+        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
         DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setCaudalMaximo(nuevoCaudalMaximo);
@@ -661,9 +664,7 @@ public class TransporteDeAgua {
       } else {
         
         continuar = false;
-        Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
-        Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
-        DominioTuberia clave = new DominioTuberia(ciudadO.getNomenclatura(), ciudadD.getNomenclatura());
+        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
         DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setDiametro(nuevoDiametro);
@@ -679,14 +680,13 @@ public class TransporteDeAgua {
   private static void modificarEstado(String ciudadOrigen, String ciudadDestino){
     Scanner sc = new Scanner(System.in);
     String nuevoEstado;
+    int estado;
     boolean valido, continuar;
     do {
-      System.out.println("Ingrese el nuevo estado:");
-      nuevoEstado = sc.nextLine().toUpperCase();
-      valido=nuevoEstado.equals("ACTIVO")
-          || nuevoEstado.equals("EN REPARACION")
-          || nuevoEstado.equals("EN DISEÑO")
-          || nuevoEstado.equals("INACTIVO");
+      System.out.println("[1] Activo [2] En reparacion [3] En diseño [4] Inactivo");
+      System.out.print("Seleccione de la lista anterior el nuevo estado de la tubería: ");
+      estado = sc.nextInt();
+      valido=estado>=1 && estado<=4;
       if (!valido) {
         System.out.println("El estado ingresado no es válido. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
@@ -701,9 +701,23 @@ public class TransporteDeAgua {
       } else {
         
         continuar = false;
-        Ciudad ciudadO = (Ciudad) arbolCiudades.obtenerInformacion(ciudadOrigen);
-        Ciudad ciudadD = (Ciudad) arbolCiudades.obtenerInformacion(ciudadDestino);
-        DominioTuberia clave = new DominioTuberia(ciudadO.getNomenclatura(), ciudadD.getNomenclatura());
+        switch(estado) {
+          case 1:
+            nuevoEstado = "ACTIVO";
+            break;
+          case 2:
+            nuevoEstado = "EN REPARACION";
+            break;
+          case 3:
+            nuevoEstado = "EN DISEÑO";
+            break;
+          case 4:
+            nuevoEstado = "INACTIVO";
+            break;
+          default:
+            nuevoEstado = "";
+        }
+        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
         DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setEstado(nuevoEstado);
