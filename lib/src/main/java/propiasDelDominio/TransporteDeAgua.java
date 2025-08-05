@@ -555,7 +555,7 @@ public class TransporteDeAgua {
             continuar = false;
             break;
           default:
-            System.out.println("¿Desea volver a intentar? (S/n):");
+            System.out.println("Valor no valido ¿Desea volver a intentar? (S/n):");
             switch (sc.nextLine().toUpperCase()) {
                 case "":
                 case "S":
@@ -578,6 +578,7 @@ public class TransporteDeAgua {
     do {
       System.out.println("Ingrese el nuevo caudal minimo:");
       nuevoCaudalMinimo = sc.nextDouble();
+      sc.nextLine();
       valido=nuevoCaudalMinimo>0;
       if (!valido) {
         System.out.println("El caudal mínimo debe ser mayor que 0. ¿Desea volver a intentar? (S/n)");
