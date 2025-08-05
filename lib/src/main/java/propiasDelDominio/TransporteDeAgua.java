@@ -1131,9 +1131,9 @@ public class TransporteDeAgua {
         str += "    El mapeo está vacío.";
     } else {
         for (Object clave : mapeoTuberias.keySet()) {
-            str += "Clave: " + clave.toString();
+            str += "Clave: " + clave.toString()+" ";
             str += "Valor: " + mapeoTuberias.get(clave).toString();
-            str += "---";
+            str += "\n";
         }
     }
     str += "\n===============================================";

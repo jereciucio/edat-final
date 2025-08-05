@@ -23,4 +23,8 @@ public class DominioTuberia {
     // Verifica si la tuberia va o viene de la ciudad ingresada como paramentro
     return (nomenclatura == this.ciudadOrigen || nomenclatura == this.ciudadDestino);
   }
+
+  public String toString() {
+    return "["+this.ciudadOrigen+","+this.ciudadDestino+"]";
+  }
 }

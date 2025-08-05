@@ -8,7 +8,7 @@ public class DatosTuberia {
   private String estado;
 
   public DatosTuberia(String nomCiudadOrigen, String nomCiudadDestino) {
-    this.nomenclatura = "(" + nomCiudadOrigen + ", " + nomCiudadDestino + ")";
+    this.nomenclatura = nomCiudadOrigen + "-" + nomCiudadDestino;
     this.caudalMinimoM3 = 0.0;
     this.caudalMaximoM3 = 0.0;
     this.diametroMM = 0.0;
@@ -22,7 +22,7 @@ public class DatosTuberia {
       double elCaudalMaximo,
       double elDiametro,
       String elEstado) {
-    this.nomenclatura = "(" + nomCiudadOrigen + ", " + nomCiudadDestino + ")";
+    this.nomenclatura = nomCiudadOrigen + "-" + nomCiudadDestino;
     this.caudalMinimoM3 = elCaudalMinimo;
     this.caudalMaximoM3 = elCaudalMaximo;
     this.diametroMM = elDiametro;
@@ -69,5 +69,10 @@ public class DatosTuberia {
     // No verifica si el estado es válido. Debería hacerse en cualquier utilizacion desde
     // TransporteDeAgua
     this.estado = elEstado;
+  }
+
+  public String toString() {
+    String str = "["+this.nomenclatura+","+this.caudalMinimoM3+","+this.caudalMaximoM3+","+this.diametroMM+","+this.estado+"]";
+    return str;
   }
 }
