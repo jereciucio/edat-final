@@ -1172,22 +1172,19 @@ public static void precargarTuberias(String pathArchivo, String separador) {
             if (!linea.isEmpty()) {
                 StringTokenizer stk = new StringTokenizer(linea, separador);
                 if (stk.countTokens() >= 5) {
-                    String campoCiudades = stk.nextToken().trim().toUpperCase();
-                    StringTokenizer stkCiudades = new StringTokenizer(campoCiudades, "-");
-                    if (stkCiudades.countTokens() == 2) {
-                        String origen = stkCiudades.nextToken();
-                        String destino = stkCiudades.nextToken();
-                        double caudalMin = Double.parseDouble(stk.nextToken().trim());
-                        double caudalMax = Double.parseDouble(stk.nextToken().trim());
-                        double diametro = Double.parseDouble(stk.nextToken().trim());
-                        String estado = stk.nextToken().trim().toUpperCase();
+                    String origen = stk.nextToken().trim().toUpperCase();
+                    String destino = stk.nextToken().trim().toUpperCase();
+                    double caudalMin = Double.parseDouble(stk.nextToken().trim());
+                    double caudalMax = Double.parseDouble(stk.nextToken().trim());
+                    double diametro = Double.parseDouble(stk.nextToken().trim());
+                    String estado = stk.nextToken().trim().toUpperCase();
 
-                        DominioTuberia dominio = new DominioTuberia(origen, destino);
-                        DatosTuberia datos = new DatosTuberia(origen, destino, caudalMin, caudalMax, diametro, estado);
-                        mapeoTuberias.put(dominio, datos);
-                        grafoTuberias.insertarArco(origen, destino, caudalMax);
-                    }
+                    DominioTuberia dominio = new DominioTuberia(origen, destino);
+                    DatosTuberia datos = new DatosTuberia(origen, destino, caudalMin, caudalMax, diametro, estado);
+                    mapeoTuberias.put(dominio, datos);
+                    grafoTuberias.insertarArco(origen, destino, caudalMax);
                 }
+                
             }
         }
         System.out.println("Tuberías precargadas correctamente.");
