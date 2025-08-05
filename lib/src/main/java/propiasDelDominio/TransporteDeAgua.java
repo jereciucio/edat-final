@@ -400,6 +400,7 @@ public class TransporteDeAgua {
                       caudalMaximo,
                       diametro,
                       estado);
+                      System.out.println("Se agrego la tuberia exitosamente");
                       escribirLog("Se ha ingresado la tuberia: "+ciudadOrigen.getNomenclatura()+"-"+ciudadDestino.getNomenclatura());
                 } else {
                   System.out.println("El estado seleccionado es inválido. Inténtelo nuevamente.");
