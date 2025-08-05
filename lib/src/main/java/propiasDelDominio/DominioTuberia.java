@@ -21,7 +21,7 @@ public class DominioTuberia {
 
   public boolean tieneCiudad(String nomenclatura) {
     // Verifica si la tuberia va o viene de la ciudad ingresada como paramentro
-    return (nomenclatura == this.ciudadOrigen || nomenclatura == this.ciudadDestino);
+    return (nomenclatura.equals(this.ciudadOrigen) || nomenclatura.equals(this.ciudadDestino));
   }
 
   public String toString() {
