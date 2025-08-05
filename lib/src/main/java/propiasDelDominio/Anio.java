@@ -13,7 +13,7 @@ public class Anio {
     if (unMes >= 1 && unMes <= 12) {
       valor = this.meses[unMes - 1];
     } else {
-      valor = 0;
+      valor = -1;
     }
     return valor;
   }
@@ -23,8 +23,14 @@ public class Anio {
     }
   }
   public String toString(){
-    int i;
-    String cad = "(" + this.numeroAnio + " " + this.meses.toString() + ")";
+    String cad = "(" + this.numeroAnio + " [";
+    for (int i = 0; i < this.meses.length; i++) {
+      cad += this.meses[i];
+      if (i < this.meses.length - 1) {
+        cad += ", ";
+      }
+    }
+    cad += "])";
     return cad;
   }
 }
