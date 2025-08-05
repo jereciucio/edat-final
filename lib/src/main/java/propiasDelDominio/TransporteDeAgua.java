@@ -830,17 +830,17 @@ public class TransporteDeAgua {
       System.out.println("Ingrese el nombre de la ciudad");
       nombreCiudad = sc.nextLine().toUpperCase();
       if (!arbolCiudades.existeClave(nombreCiudad)) {
-        System.out.println("La ciudad ingresada no existe");
+        System.out.println("La ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         exito = false;
       } else if (mes < 1 || mes > 12) {
-        System.out.println("Mes invalido");
+        System.out.println("Mes invalido. ¿Desea volver a intentar? (S/n)");
         exito = false;
       } else {
         Ciudad ciudadBuscada = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
         double volumenAgua = ciudadBuscada.getConsumoMensual(mes, anio);
         if (volumenAgua == -1) {
           exito = false;
-          System.out.println("El año no esta registrado");
+          System.out.println("El año no esta registrado. ¿Desea volver a intentar? (S/n)");
         } else {
           int habitantes = ciudadBuscada.getHabitantes(mes, anio);
           System.out.println("Ciudad: " + nombreCiudad);
