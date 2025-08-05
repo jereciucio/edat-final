@@ -753,7 +753,7 @@ public class TransporteDeAgua {
         
         continuar = false;
         modificarHabitantes(nombreCiudad);
-        System.out.println("Habitantes actualizados correctamente en la ciudad: " + nombreCiudad);
+        System.out.println("Se modifico la cantidad de habitantes exitosamente");
         escribirLog("Se modifico la cantidad de habitantes");
       }
     } while (continuar);
@@ -762,23 +762,57 @@ public class TransporteDeAgua {
   private static void modificarHabitantes(String nombreCiudad) {
     Scanner sc = new Scanner(System.in); 
     int habitantes, anio, mes;
-    System.out.println("Ingrese la cantidad de habitantes:");
-    habitantes = sc.nextInt();
-    System.out.println("Ingrese el numero del anio:");
-    anio = sc.nextInt();
-    sc.nextLine(); // Consumir el salto de línea pendiente
-    System.out.println("Ingrese el numero del mes:");
-    mes = sc.nextInt();
-    
-    Ciudad unaCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
-    Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
-    if (unAnio == null) {
-      unAnio = new Anio(anio);
-      unAnio.setValor(mes, habitantes);
-      unaCiudad.getCalendarioHabitantes().insertar(anio, unAnio);
-    } else {
-      unaCiudad.setHabitantes(habitantes, mes, anio);
-    }
+    boolean valido, continuar=true;
+    do {
+      System.out.println("Ingrese la cantidad de habitantes:");
+      habitantes = sc.nextInt();
+      valido = habitantes >= 0;
+      sc.nextLine(); // Consumir el salto de línea pendiente
+      if (!valido) {
+        System.out.println("El numero de habitantes ingresado no es valido. ¿Desea volver a intentar? (S/n)");
+        switch (sc.nextLine().toUpperCase()) {
+          case "":
+          case "S":
+            continuar = true;
+            break;
+          default:
+            continuar = false;
+            break;
+        }
+      } else {
+        do {
+          System.out.println("Ingrese el numero del anio:");
+          anio = sc.nextInt();
+          System.out.println("Ingrese el numero del mes:");
+          mes = sc.nextInt();
+          sc.nextLine(); // Consumir el salto de línea pendiente
+          valido = mes >= 1 && mes <= 12 && anio > 0;
+          if (!valido) {
+            System.out.println("El mes o año ingresado no es valido. ¿Desea volver a intentar? (S/n)");
+            switch (sc.nextLine().toUpperCase()) {
+              case "":
+              case "S":
+                continuar = true;
+                break;
+              default:
+                continuar = false;
+                break;
+            }
+          } else {
+            continuar = false;
+            Ciudad unaCiudad = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudad);
+            Anio unAnio = (Anio) unaCiudad.getCalendarioHabitantes().obtenerInformacion(anio);
+            if (unAnio == null) {
+              unAnio = new Anio(anio);
+              unAnio.setValor(mes, habitantes);
+              unaCiudad.getCalendarioHabitantes().insertar(anio, unAnio);
+            } else {
+              unaCiudad.setHabitantes(habitantes, mes, anio);
+            }
+          }
+        } while(continuar);
+      }
+    } while (continuar);
   }
 
    public static void cantHabitantesYVolAgua() {
