@@ -149,11 +149,13 @@ public class TransporteDeAgua {
           double superficieCiudad = sc.nextDouble();
           if (superficieCiudad < 0) {
             System.out.println("Valor no válido. Debe ser un número positivo.");
+            sc.nextLine();
           } else {
             System.out.print("Ingrese el consumo per cápita: ");
             double consumoCiudad = sc.nextDouble();
             if (consumoCiudad < 0) {
               System.out.println("Valor no válido. Debe ser un número positivo.");
+              sc.nextLine();
             } else {
               sc.nextLine();
               ArbolAVLDicc calendario = new ArbolAVLDicc();
