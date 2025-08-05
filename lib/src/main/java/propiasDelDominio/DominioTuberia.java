@@ -10,7 +10,7 @@ public class DominioTuberia {
 
   public boolean equals(DominioTuberia otroPar) {
     boolean valorIgualdad;
-    valorIgualdad = this.ciudadOrigen == otroPar.ciudadOrigen && this.ciudadDestino == otroPar.ciudadDestino;
+    valorIgualdad = this.ciudadOrigen.equals(otroPar.ciudadOrigen) && this.ciudadDestino.equals(otroPar.ciudadDestino);
     return valorIgualdad;
   }
 
