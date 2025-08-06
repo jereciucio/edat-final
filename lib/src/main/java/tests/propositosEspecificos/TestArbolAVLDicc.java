@@ -1,5 +1,90 @@
 package tests.propositosEspecificos;
 
-public class TestArbolAVLDicc {
+import propiasDelDominio.Anio;
+import propositoEspecifico.ArbolAVLDicc;
 
+public class TestArbolAVLDicc {
+  public static void main(String[] args) {
+    ArbolAVLDicc a1 = new ArbolAVLDicc();
+    Anio unAnio=new Anio(2017);
+        unAnio.setValor(1, 23550);
+        unAnio.setValor(2, 46670);
+        unAnio.setValor(3, 7660);
+        unAnio.setValor(4, 27330);
+        unAnio.setValor(5, 11120);
+        unAnio.setValor(6, 4860);
+        unAnio.setValor(7, 4900);
+        unAnio.setValor(8, 50000);
+        unAnio.setValor(9, 23480);
+        unAnio.setValor(10, 9770);
+        unAnio.setValor(11, 4320);
+        unAnio.setValor(12, 20000);
+    Anio unAnio2=new Anio(2018);
+        unAnio2.setValor(1, 23550);
+        unAnio2.setValor(2, 46670);
+        unAnio2.setValor(3, 7660);
+        unAnio2.setValor(4, 27330);
+        unAnio2.setValor(5, 11120);
+        unAnio2.setValor(6, 4860);
+        unAnio2.setValor(7, 4900);
+        unAnio2.setValor(8, 50000);
+        unAnio2.setValor(9, 23480);
+        unAnio2.setValor(10, 9770);
+        unAnio2.setValor(11, 4320);
+        unAnio2.setValor(12, 20000);
+    Anio unAnio3=new Anio(2019);
+        unAnio3.setValor(1, 23550);
+        unAnio3.setValor(2, 46670);
+        unAnio3.setValor(3, 7660);
+        unAnio3.setValor(4, 27330);
+        unAnio3.setValor(5, 11120);
+        unAnio3.setValor(6, 4860);
+        unAnio3.setValor(7, 4900);
+        unAnio3.setValor(8, 50000);
+        unAnio3.setValor(9, 23480);
+        unAnio3.setValor(10, 9770);
+        unAnio3.setValor(11, 4320);
+        unAnio3.setValor(12, 20000);
+    Anio unAnio4=new Anio(2020);
+        unAnio4.setValor(1, 23550);
+        unAnio4.setValor(2, 46670);
+        unAnio4.setValor(3, 7660);
+        unAnio4.setValor(4, 27330);
+        unAnio4.setValor(5, 11120);
+        unAnio4.setValor(6, 4860);
+        unAnio4.setValor(7, 4900);
+        unAnio4.setValor(8, 50000);
+        unAnio4.setValor(9, 23480);
+        unAnio4.setValor(10, 9770);
+        unAnio4.setValor(11, 4320);
+        unAnio4.setValor(12, 20000);
+    Anio unAnio5=new Anio(2021);
+        unAnio5.setValor(1, 23550);
+        unAnio5.setValor(2, 46670);
+        unAnio5.setValor(3, 7660);
+        unAnio5.setValor(4, 27330);
+        unAnio5.setValor(5, 11120);
+        unAnio5.setValor(6, 4860);
+        unAnio5.setValor(7, 4900);
+        unAnio5.setValor(8, 50000);
+        unAnio5.setValor(9, 23480);
+        unAnio5.setValor(10, 9770);
+        unAnio5.setValor(11, 4320);
+        unAnio5.setValor(12, 20000);                    
+    a1.insertar(2017, unAnio);
+    a1.insertar(2018, unAnio2);
+    a1.insertar(2019, unAnio3);
+    a1.insertar(2020, unAnio4);
+    a1.insertar(2021, unAnio5);
+    System.out.println(a1.toString());
+    a1.eliminar(2018);
+    a1.eliminar(2021);
+    System.out.println(a1.toString());
+    System.out.println(a1.listarPorRango(2018, 2019).toString());
+    System.out.println(a1.existeClave(2020));
+    System.out.println(a1.listarClaves().toString());
+    System.out.println(a1.listarDatos());
+    System.out.println(a1.obtenerInformacion(2018));
+  } 
+  
 }
