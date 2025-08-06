@@ -614,6 +614,7 @@ public class TransporteDeAgua {
     do {
       System.out.println("Ingrese el nuevo caudal máximo:");
       nuevoCaudalMaximo = sc.nextDouble();
+      sc.nextLine();
       valido=nuevoCaudalMaximo>0;
       if (!valido) {
         System.out.println("El caudal máximo debe ser mayor que 0. ¿Desea volver a intentar? (S/n)");
@@ -651,6 +652,7 @@ public class TransporteDeAgua {
     do {
       System.out.println("Ingrese el nuevo diámetro:");
       nuevoDiametro = sc.nextDouble();
+      sc.nextLine();
       valido=nuevoDiametro>0;
       if (!valido) {
         System.out.println("El diámetro debe ser mayor que 0. ¿Desea volver a intentar? (S/n)");
@@ -688,6 +690,7 @@ public class TransporteDeAgua {
       System.out.println("[1] Activo [2] En reparacion [3] En diseño [4] Inactivo");
       System.out.print("Seleccione de la lista anterior el nuevo estado de la tubería: ");
       estado = sc.nextInt();
+      sc.nextLine();
       valido=estado>=1 && estado<=4;
       if (!valido) {
         System.out.println("El estado ingresado no es válido. ¿Desea volver a intentar? (S/n)");
