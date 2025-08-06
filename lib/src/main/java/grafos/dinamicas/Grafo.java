@@ -250,8 +250,11 @@ public class Grafo {
     Lista camino = null;
     if (nodoSalida != null) {
       // Inicializamos el valor de maximoActual para evitar nullPointerException
-      Comparable[] maximoActual = {nodoSalida.getPrimerAdy().getEtiqueta()}; 
-      camino = encontrarCaminoEtiquetaMinimaAux(nodoSalida, new Lista(), 1, maximoActual, elemVerticeEntrada);
+      NodoAdy primerArco = nodoSalida.getPrimerAdy(); 
+      if (primerArco != null) {
+        Comparable[] maximoActual = {primerArco.getEtiqueta()};
+        camino = encontrarCaminoEtiquetaMinimaAux(nodoSalida, new Lista(), 1, maximoActual, elemVerticeEntrada);
+      }
     }
     return camino;
   }
