@@ -1141,35 +1141,42 @@ public class TransporteDeAgua {
   }
 
   public static void listarCiudadesPorConsumoAnual() {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Ingrese el año: ");
-    int anio = sc.nextInt();
-    Lista listaCiudades = arbolCiudades.listarDatos();
-    ArbolHeap heap = new ArbolHeap();
-    boolean incompleto = false;
-    while (!listaCiudades.esVacia() && !incompleto) {
-      Ciudad ciudad = (Ciudad) listaCiudades.recuperar(1);
-      double consumoAnual = ciudad.getConsumoTotal(anio);
-      if (consumoAnual == -1) {
-        incompleto = true;
-      } else {
-        NodoConsumo nodo = new NodoConsumo(ciudad, consumoAnual);
-        heap.insertar(nodo);
-        listaCiudades.eliminar(1);
-      }
-    }
-    if (incompleto) {
-      System.out.println("No todas las ciudades tienen datos cargados para el año ingresado.");
+  Scanner sc = new Scanner(System.in);
+  System.out.println("Ingrese el año: ");
+  int anio = sc.nextInt();
+  Lista listaCiudades = arbolCiudades.listarDatos();
+  ArbolHeap heap = new ArbolHeap();
+  boolean incompleto = false;
+
+  while (!listaCiudades.esVacia()) {
+    Ciudad ciudad = (Ciudad) listaCiudades.recuperar(1);
+    double consumoAnual = ciudad.getConsumoTotal(anio);
+
+    if (consumoAnual != -1) {
+      NodoConsumo nodo = new NodoConsumo(ciudad, consumoAnual);
+      heap.insertar(nodo);
     } else {
-      System.out.println("Listado de ciudades por consumo anual:");
-      while (!heap.esVacio()) {
-        NodoConsumo nodo = (NodoConsumo) heap.recuperarCima();
-        System.out.println(nodo.toString());
-        heap.eliminarCima();
-      }
-      escribirLog("Se listó las ciudades por consumo anual");
+      incompleto = true;
+    }
+
+    listaCiudades.eliminar(1);
+  }
+
+  if (heap.esVacio()) {
+    System.out.println("Ninguna ciudad tiene datos cargados para el año ingresado.");
+  } else {
+    System.out.println("Listado de ciudades por consumo anual:");
+    while (!heap.esVacio()) {
+      NodoConsumo nodo = (NodoConsumo) heap.recuperarCima();
+      System.out.println(nodo.toString());
+      heap.eliminarCima();
+    }
+    escribirLog("Se listó las ciudades por consumo anual");
+    if (incompleto) {
+      System.out.println("Algunas ciudades no tienen datos cargados para el año ingresado y no fueron listadas.");
     }
   }
+}
 
   public static void mostrarSistema() {
     escribirLog("Se mostro el sistema");
