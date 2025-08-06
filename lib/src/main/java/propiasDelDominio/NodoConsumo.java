@@ -22,7 +22,7 @@ public class NodoConsumo implements Comparable<NodoConsumo> {
         if (this.consumo > otroNodo.consumo) {
             numero = 1;
         } else if (this.consumo < otroNodo.consumo) {
-            numero = 0;
+            numero = -1;
         }
         return numero;
     }
