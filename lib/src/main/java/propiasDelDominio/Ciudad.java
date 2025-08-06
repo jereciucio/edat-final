@@ -40,7 +40,7 @@ public class Ciudad {
 
   public int getHabitantes(int mes, int anio) {
      int cantidad=0;
-     if(mes>0 && mes<13 && anio>1900){
+     if(mes > 0 && mes < 13 && anio > 0){
        Anio unAnio = (Anio)this.calendarioHabitantes.obtenerInformacion(anio);
        if(unAnio!=null){
          cantidad=unAnio.getValor(mes);
@@ -51,7 +51,7 @@ public class Ciudad {
 
   public double getConsumoMensual(int mes, int anio) {
     double consumo = -1;
-    if (mes > 0 && mes < 13 && anio > 1900) {
+    if (mes > 0 && mes < 13 && anio > 0) {
       Anio unAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);
       if (unAnio != null) {
         int diasMes = obtenerDiasMes(mes);
@@ -92,7 +92,7 @@ public class Ciudad {
 
   public boolean setHabitantes(int cantidad, int mes, int anio) {
     boolean exito = false;
-    if (cantidad > 0 && mes > 0 && mes < 13) {
+    if (cantidad > 0 && mes > 0 && mes < 13 && anio > 0) {
       Anio unAnio = (Anio) this.calendarioHabitantes.obtenerInformacion(anio);
       if (unAnio != null) {
         unAnio.setValor(mes, cantidad);
