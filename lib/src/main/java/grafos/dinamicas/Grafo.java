@@ -291,7 +291,7 @@ public class Grafo {
             // El camino existe y es el minmax de los hijos de ese nodo
             // Agregamos entonces el nodo actual al camino
             caminoActual.insertar(verticeActual.getElem(), 1);
-            if (maximoActual[0].compareTo(minimoMaximo) < 0) {
+            if (caminoMinimo == null || maximoActual[0].compareTo(minimoMaximo) < 0) {
               // El camino tiene una etiqueta maxima menor que la minima registrada.
               caminoMinimo = caminoActual;
               minimoMaximo = maximoActual[0];
