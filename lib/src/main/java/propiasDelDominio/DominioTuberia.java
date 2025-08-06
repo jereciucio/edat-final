@@ -8,11 +8,15 @@ public class DominioTuberia {
     this.ciudadDestino = nomCiudadDestino;
   }
 
-  public boolean equals(DominioTuberia otroPar) {
-    boolean valorIgualdad;
-    valorIgualdad = this.ciudadOrigen.equals(otroPar.ciudadOrigen) && this.ciudadDestino.equals(otroPar.ciudadDestino);
-    return valorIgualdad;
+  public boolean equals(Object unDominio) {
+  boolean esIgual = false;
+  if (unDominio instanceof DominioTuberia) {
+    DominioTuberia otro = (DominioTuberia) unDominio;
+    esIgual = this.ciudadOrigen.equals(otro.ciudadOrigen)
+        && this.ciudadDestino.equals(otro.ciudadDestino);
   }
+  return esIgual;
+}
 
   public int hashCode() {
     int valorHash = this.ciudadOrigen.hashCode() * this.ciudadDestino.hashCode();
