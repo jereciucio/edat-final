@@ -987,7 +987,6 @@ public class TransporteDeAgua {
             break;
         }
       } else {
-        sc.close();
         continuar = false;
         Ciudad ciudadOrigen = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadOrigen);
         Ciudad ciudadDestino = (Ciudad) arbolCiudades.obtenerInformacion(nombreCiudadDestino);
