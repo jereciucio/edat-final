@@ -383,7 +383,7 @@ public class TransporteDeAgua {
             System.out.print("Ingrese el caudal máximo en m² por hora: ");
             caudalMaximo = sc.nextDouble();
             sc.nextLine(); // Consumir \n
-            if (caudalMaximo >= 0) {
+            if (caudalMaximo>caudalMinimo) {
               System.out.print("Ingrese el diámetro en milímetros: ");
               diametro = sc.nextDouble();
               if (diametro >= 0) {
@@ -409,10 +409,10 @@ public class TransporteDeAgua {
                 System.out.println("El diámetro no puede ser negativo. Inténtelo nuevamente.");
               }
             } else {
-              System.out.println("El caudal no puede ser negativo. Inténtelo nuevamente.");
+              System.out.println("El caudal maximo ingresado debe ser mayor que el caudal minimo actual. Inténtelo nuevamente.");
             }
           } else {
-            System.out.println("El caudal no puede ser negativo. Inténtelo nuevamente.");
+            System.out.println("El caudal minimo no puede ser negativo. Inténtelo nuevamente.");
           }
         } else {
           System.out.println(
@@ -575,13 +575,15 @@ public class TransporteDeAgua {
     Scanner sc = new Scanner(System.in);
     double nuevoCaudalMinimo;
     boolean valido, continuar;
+    DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
+    DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
     do {
       System.out.println("Ingrese el nuevo caudal minimo:");
       nuevoCaudalMinimo = sc.nextDouble();
       sc.nextLine();
-      valido=nuevoCaudalMinimo>0;
+      valido=nuevoCaudalMinimo>0 && nuevoCaudalMinimo<datosTuberia.getCaudalMaximo();
       if (!valido) {
-        System.out.println("El caudal mínimo debe ser mayor que 0. ¿Desea volver a intentar? (S/n)");
+        System.out.println("El caudal mínimo ingresado no es valido debe ingresar un valor positivo y menor al caudal maximo actual. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
           case "":
           case "S":
@@ -594,8 +596,6 @@ public class TransporteDeAgua {
       } else {
         
         continuar = false;
-        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
-        DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setCaudalMinimo(nuevoCaudalMinimo);
           System.out.println("Caudal mínimo actualizado correctamente.");
@@ -611,13 +611,15 @@ public class TransporteDeAgua {
     Scanner sc = new Scanner(System.in);
     double nuevoCaudalMaximo;
     boolean valido, continuar;
+    DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
+    DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
     do {
       System.out.println("Ingrese el nuevo caudal máximo:");
       nuevoCaudalMaximo = sc.nextDouble();
       sc.nextLine();
-      valido=nuevoCaudalMaximo>0;
+      valido=nuevoCaudalMaximo>datosTuberia.getCaudalMinimo();
       if (!valido) {
-        System.out.println("El caudal máximo debe ser mayor que 0. ¿Desea volver a intentar? (S/n)");
+        System.out.println("El caudal máximo ingresado no es valido debe ser un valor mayor que el caudal minimo actual. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
           case "":
           case "S":
@@ -632,14 +634,10 @@ public class TransporteDeAgua {
         continuar = false;
         NodoAdy caudalEnGrafo=grafoTuberias.obtenerArco(ciudadOrigen, ciudadDestino);
         caudalEnGrafo.setEtiqueta(nuevoCaudalMaximo);
-        DominioTuberia clave = new DominioTuberia(ciudadOrigen, ciudadDestino);
-        DatosTuberia datosTuberia = (DatosTuberia) mapeoTuberias.get(clave);
         if (datosTuberia != null) {
           datosTuberia.setCaudalMaximo(nuevoCaudalMaximo);
           System.out.println("Caudal máximo actualizado correctamente.");
           escribirLog("Se modifico el caudal maximo");
-        } else {
-          System.out.println("No se encontró la tubería especificada.");
         }
       }
     } while (continuar);
