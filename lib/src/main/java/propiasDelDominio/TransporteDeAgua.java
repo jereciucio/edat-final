@@ -426,7 +426,7 @@ public class TransporteDeAgua {
     }
   }
 
-  public static void altaTuberiaAux(
+  private static void altaTuberiaAux(
       String nomenclaturaCiudadOrigen,
       String nomenclaturaCiudadDestino,
       double caudalMin,
@@ -472,10 +472,7 @@ public class TransporteDeAgua {
       ciudadOrigen = sc.nextLine().trim().toUpperCase();
       System.out.print("Ingrese la nomenclatura de la ciudad destino: ");
       ciudadDestino = sc.nextLine().trim().toUpperCase();
-      existe =
-          grafoTuberias.existeVertice(ciudadOrigen)
-              && grafoTuberias.existeVertice(ciudadDestino)
-              && grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
+      existe = grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
       if (!existe) {
         System.out.print("La tubería especificada no existe. ¿Desea volver a intentar? (S/n): ");
         switch (sc.nextLine().trim().toUpperCase()) {
@@ -513,9 +510,7 @@ public class TransporteDeAgua {
       ciudadOrigen = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese la nomenclatura de la ciudad de destino:");
       ciudadDestino = sc.nextLine().trim().toUpperCase();
-      existe =grafoTuberias.existeVertice(ciudadOrigen)
-          && grafoTuberias.existeVertice(ciudadDestino)
-          && grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
+      existe = grafoTuberias.existeArco(ciudadOrigen, ciudadDestino);
       if (!existe) {
         System.out.println("Alguna nomenclatura ingresada o la tubería no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
@@ -876,8 +871,7 @@ public class TransporteDeAgua {
       minNombre = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese el nombre de la ciudad maxima:");
       maxNombre = sc.nextLine().trim().toUpperCase();
-      existe =
-          arbolCiudades.existeClave(minNombre) && arbolCiudades.existeClave(maxNombre);
+      existe = arbolCiudades.existeClave(minNombre) && arbolCiudades.existeClave(maxNombre);
       if (!existe) {
         System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
@@ -971,8 +965,7 @@ public class TransporteDeAgua {
       nombreCiudadOrigen = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese el nombre de la ciudad destino:");
       nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
-      existe =
-          arbolCiudades.existeClave(nombreCiudadOrigen) && arbolCiudades.existeClave(nombreCiudadDestino);
+      existe = arbolCiudades.existeClave(nombreCiudadOrigen) && arbolCiudades.existeClave(nombreCiudadDestino);
       if (!existe) {
         System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
@@ -1047,8 +1040,7 @@ public class TransporteDeAgua {
       nombreCiudadOrigen = sc.nextLine().trim().toUpperCase();
       System.out.println("Ingrese el nombre de la ciudad destino:");
       nombreCiudadDestino = sc.nextLine().trim().toUpperCase();
-      existe =
-          arbolCiudades.existeClave(nombreCiudadOrigen) && arbolCiudades.existeClave(nombreCiudadDestino);
+      existe = arbolCiudades.existeClave(nombreCiudadOrigen) && arbolCiudades.existeClave(nombreCiudadDestino);
       if (!existe) {
         System.out.println("Alguna ciudad ingresada no existe. ¿Desea volver a intentar? (S/n)");
         switch (sc.nextLine().toUpperCase()) {
