@@ -101,6 +101,27 @@ public class TestArbolAVLDicc {
   }
 
   @Test
+  public void testInsertarRotacionDobleIzquierdaDerecha() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(30, 30);
+    tree.insertar(10, 10);
+    tree.insertar(20, 20); // Provoca rotacion doble izquierda-derecha
+    
+    String expectedTreeString = "Raiz: 20";
+    expectedTreeString += "\n20 (alt: 1)";
+    expectedTreeString += "\n    HI: 10";
+    expectedTreeString += "\n    HD: 30";
+    expectedTreeString += "\n10 (alt: 0)";
+    expectedTreeString += "\n    HI: -";
+    expectedTreeString += "\n    HD: -";
+    expectedTreeString += "\n30 (alt: 0)";
+    expectedTreeString += "\n    HI: -";
+    expectedTreeString += "\n    HD: -";
+
+    assertEquals(expectedTreeString, tree.toString());
+  }
+
+  @Test
   public void testObtenerInformacionExistente() {
     ArbolAVLDicc tree = new ArbolAVLDicc();
     tree.insertar(5, "A");
