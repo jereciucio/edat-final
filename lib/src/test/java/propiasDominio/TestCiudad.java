@@ -1,0 +1,63 @@
+package propiasDominio;
+import propositoEspecifico.ArbolAVLDicc;
+import propiasDelDominio.Anio;
+import propiasDelDominio.Ciudad;
+
+public class TestCiudad {
+  public static void main(String[] args) {
+    Anio unAnio=new Anio(2017);
+        unAnio.setValor(1, 23550);
+        unAnio.setValor(2, 46670);
+        unAnio.setValor(3, 7660);
+        unAnio.setValor(4, 27330);
+        unAnio.setValor(5, 11120);
+        unAnio.setValor(6, 4860);
+        unAnio.setValor(7, 4900);
+        unAnio.setValor(8, 50000);
+        unAnio.setValor(9, 23480);
+        unAnio.setValor(10, 9770);
+        unAnio.setValor(11, 4320);
+        unAnio.setValor(12, 20000);
+    Anio unAnio2=new Anio(2018);
+        unAnio2.setValor(1, 23550);
+        unAnio2.setValor(2, 46670);
+        unAnio2.setValor(3, 7660);
+        unAnio2.setValor(4, 27330);
+        unAnio2.setValor(5, 11120);
+        unAnio2.setValor(6, 4860);
+        unAnio2.setValor(7, 4900);
+        unAnio2.setValor(8, 50000);
+        unAnio2.setValor(9, 23480);
+        unAnio2.setValor(10, 9770);
+        unAnio2.setValor(11, 4320);
+        unAnio2.setValor(12, 20000);
+    Anio unAnio3=new Anio(2019);
+        unAnio3.setValor(1, 23550);
+        unAnio3.setValor(2, 46670);
+        unAnio3.setValor(3, 7660);
+        unAnio3.setValor(4, 27330);
+        unAnio3.setValor(5, 11120);
+        unAnio3.setValor(6, 4860);
+        unAnio3.setValor(7, 4900);
+        unAnio3.setValor(8, 50000);
+        unAnio3.setValor(9, 23480);
+        unAnio3.setValor(10, 9770);
+        unAnio3.setValor(11, 4320);
+        unAnio3.setValor(12, 20000);
+    ArbolAVLDicc a=new ArbolAVLDicc();            
+    a.insertar(2017, unAnio);
+    a.insertar(2018, unAnio2);
+    a.insertar(2019, unAnio3);
+    Ciudad unaCiudad = new Ciudad("Neuquen", "NE3001", a, 700000, 0.25);
+    System.out.println(unaCiudad.toString());
+    System.out.println(a.toString()); 
+    System.out.println(unaCiudad.getConsumoMensual(12, 2018));
+    System.out.println(unaCiudad.getConsumoTotal(2019));
+    System.out.println(unaCiudad.getHabitantes(5, 2017));
+    System.out.println(unaCiudad.getNombre());
+    System.out.println(unaCiudad.getNomenclatura());
+    System.out.println(unaCiudad.getSuperficie());
+    System.out.println(unaCiudad.setHabitantes(9, 12, 2018));  
+    System.out.println(a.toString()); 
+  }
+}
