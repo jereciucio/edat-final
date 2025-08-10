@@ -188,4 +188,12 @@ public class TestArbolAVLDicc {
 
     assertEquals(expectedTreeString, tree.toString());
   }
+
+  @Test
+  public void testArbolVacio() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    assertEquals("", tree.toString());
+    assertNull(tree.obtenerInformacion(1));
+    assertFalse(tree.eliminar(1));
+  }
 }
