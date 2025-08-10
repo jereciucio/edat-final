@@ -294,16 +294,16 @@ public class ArbolAVLDicc {
   private String toStringAux(NodoAVLDicc nodo) {
     String representacion = "";
     final String VACIO = "-";
-    representacion += nodo.getDato() +" (alt: " + nodo.getAltura() + ") ";
+    representacion += nodo.getDato() +" (alt: " + nodo.getAltura() + ")";
     if (nodo.getIzquierdo() != null) {
-      representacion += "\n    HI: " + nodo.getIzquierdo().getDato().toString() + " ";
+      representacion += "\n    HI: " + nodo.getIzquierdo().getDato().toString();
     } else {
-      representacion += "\n    HI " + VACIO + " ";
+      representacion += "\n    HI: " + VACIO;
     }
     if (nodo.getDerecho() != null) {
       representacion += "\n    HD: " + nodo.getDerecho().getDato().toString();
     } else {
-      representacion += "\n    HD " + VACIO;
+      representacion += "\n    HD: " + VACIO;
     }
     // Recorrido en preorden
     if (nodo.getIzquierdo() != null) {
