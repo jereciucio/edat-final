@@ -111,4 +111,11 @@ public class TestArbolAVLDicc {
     assertEquals("B", tree.obtenerInformacion(3));
     assertEquals("C", tree.obtenerInformacion(7));
   }
+
+  @Test
+  public void testObtenerInformacionClaveInexistente() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(1, "X");
+    assertNull(tree.obtenerInformacion(999));
+  }
 }
