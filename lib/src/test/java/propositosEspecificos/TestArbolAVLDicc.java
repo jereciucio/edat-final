@@ -99,4 +99,16 @@ public class TestArbolAVLDicc {
 
     assertEquals(expectedTreeString, tree.toString());
   }
+
+  @Test
+  public void testObtenerInformacionExistente() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(5, "A");
+    tree.insertar(3, "B");
+    tree.insertar(7, "C");
+
+    assertEquals("A", tree.obtenerInformacion(5));
+    assertEquals("B", tree.obtenerInformacion(3));
+    assertEquals("C", tree.obtenerInformacion(7));
+  }
 }
