@@ -80,7 +80,7 @@ public class TestArbolAVLDicc {
   }
 
   @Test
-  public void testInsercionRotacionIzquierda() {
+  public void testInsertarRotacionIzquierda() {
     ArbolAVLDicc tree = new ArbolAVLDicc();
     tree.insertar(10, 10);
     tree.insertar(20, 20);
