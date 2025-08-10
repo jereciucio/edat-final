@@ -1,9 +1,9 @@
 package propositosEspecificos;
 
-import propiasDelDominio.Anio;
-import propositoEspecifico.ArbolAVLDicc;
 import static org.junit.Assert.*;
+
 import org.junit.Test;
+import propositoEspecifico.ArbolAVLDicc;
 
 public class TestArbolAVLDicc {
   @Test
@@ -106,7 +106,7 @@ public class TestArbolAVLDicc {
     tree.insertar(30, 30);
     tree.insertar(10, 10);
     tree.insertar(20, 20); // Provoca rotacion doble izquierda-derecha
-    
+
     String expectedTreeString = "Raiz: 20";
     expectedTreeString += "\n20 (alt: 1)";
     expectedTreeString += "\n    HI: 10";
@@ -127,7 +127,7 @@ public class TestArbolAVLDicc {
     tree.insertar(10, 10);
     tree.insertar(30, 30);
     tree.insertar(20, 20); // Provoca rotacion doble derecha-izquierda
-    
+
     String expectedTreeString = "Raiz: 20";
     expectedTreeString += "\n20 (alt: 1)";
     expectedTreeString += "\n    HI: 10";
@@ -140,7 +140,6 @@ public class TestArbolAVLDicc {
     expectedTreeString += "\n    HD: -";
 
     assertEquals(expectedTreeString, tree.toString());
-    
   }
 
   @Test
