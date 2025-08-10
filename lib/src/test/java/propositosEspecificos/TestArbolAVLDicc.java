@@ -138,4 +138,25 @@ public class TestArbolAVLDicc {
     assertNull(tree.obtenerInformacion(5));
     assertEquals(expectedTreeString, tree.toString());
   }
+
+  @Test
+  public void testEliminarNodoConUnHijo() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(10, 10);
+    tree.insertar(5, 5);
+    tree.insertar(2, 2);
+
+    assertTrue(tree.eliminar(5));
+    assertNull(tree.obtenerInformacion(5));
+
+    String expectedTreeString = "Raiz: 10";
+    expectedTreeString += "\n10 (alt: 1)";
+    expectedTreeString += "\n    HI: 2";
+    expectedTreeString += "\n    HD: -";
+    expectedTreeString += "\n2 (alt: 0)";
+    expectedTreeString += "\n    HI: -";
+    expectedTreeString += "\n    HD: -";
+
+    assertEquals(expectedTreeString, tree.toString());
+  }
 }
