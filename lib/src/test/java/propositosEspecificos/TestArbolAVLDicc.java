@@ -190,6 +190,13 @@ public class TestArbolAVLDicc {
   }
 
   @Test
+  public void testEliminarClaveInexistente() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(1, 1);
+    assertFalse(tree.eliminar(99));
+  }
+
+  @Test
   public void testArbolVacio() {
     ArbolAVLDicc tree = new ArbolAVLDicc();
     assertEquals("", tree.toString());
