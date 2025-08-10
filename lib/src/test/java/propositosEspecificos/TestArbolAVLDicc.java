@@ -118,4 +118,24 @@ public class TestArbolAVLDicc {
     tree.insertar(1, "X");
     assertNull(tree.obtenerInformacion(999));
   }
+
+  @Test
+  public void testEliminarHoja() {
+    ArbolAVLDicc tree = new ArbolAVLDicc();
+    tree.insertar(10, 10);
+    tree.insertar(5, 5);
+    tree.insertar(15, 15);
+
+    String expectedTreeString = "Raiz: 10";
+    expectedTreeString += "\n10 (alt: 1)";
+    expectedTreeString += "\n    HI: -";
+    expectedTreeString += "\n    HD: 15";
+    expectedTreeString += "\n15 (alt: 0)";
+    expectedTreeString += "\n    HI: -";
+    expectedTreeString += "\n    HD: -";
+
+    assertTrue(tree.eliminar(5));
+    assertNull(tree.obtenerInformacion(5));
+    assertEquals(expectedTreeString, tree.toString());
+  }
 }
