@@ -244,73 +244,47 @@ public class Grafo {
   }
 
   public Lista encontrarCaminoEtiquetaMinima(Object elemVerticeSalida, Object elemVerticeEntrada) {
-    // Si el nodo de salida no existe, o el camino entre los dos nodos no existe, el método retorna
-    // null
     NodoVert nodoSalida = buscarVertice(elemVerticeSalida);
     Lista camino = null;
-    if (nodoSalida != null) {
-      // Inicializamos el valor de maximoActual para evitar nullPointerException
-      NodoAdy primerArco = nodoSalida.getPrimerAdy(); 
-      if (primerArco != null) {
-        Comparable[] maximoActual = {primerArco.getEtiqueta()};
-        camino = encontrarCaminoEtiquetaMinimaAux(nodoSalida, new Lista(), 1, maximoActual, elemVerticeEntrada);
-      }
+    if (nodoSalida != null) { 
+      camino = encontrarCaminoEtiquetaMinimaAux(nodoSalida, new Lista(), 1, null, elemVerticeEntrada);
     }
     return camino;
   }
 
-  private Lista encontrarCaminoEtiquetaMinimaAux(NodoVert verticeActual, Lista visitados, int posVisitados, Comparable[] maximoActual, Object elemVerticeEntrada) {
-    NodoAdy arcoActual;
-    NodoVert verticeSiguiente;
-    Lista caminoMinimo = null;
-    Lista caminoActual = null;
-    Comparable maximoInicial = maximoActual[0];
-    Comparable minimoMaximo = maximoActual[0];
-    // Caso base, llegamos al vertice que buscabamos
+  private Lista encontrarCaminoEtiquetaMinimaAux(NodoVert verticeActual, Lista visitados, int posVisitados, Comparable maxActual, Object elemVerticeEntrada) {
+    Lista mejorCamino = null;
+    Comparable mejorMax = null;
     if (verticeActual.getElem().equals(elemVerticeEntrada)) {
-      caminoMinimo = new Lista();
-      caminoMinimo.insertar(elemVerticeEntrada, 1);
+      mejorCamino = new Lista();
+      mejorCamino.insertar(elemVerticeEntrada, 1);
+      mejorMax = maxActual;
     } else {
-      // Añadimos el vertice actual a la lista de visitados para evitar bucles
       visitados.insertar(verticeActual.getElem(), posVisitados);
-      arcoActual = verticeActual.getPrimerAdy();
-      // Recorremos todos los arcos que salen de este vertice
+      NodoAdy arcoActual = verticeActual.getPrimerAdy();
       while (arcoActual != null) {
-        // Verificamos si el arco lleva a un nodo ya visitado;
-        verticeSiguiente = arcoActual.getVertice();
-        if (visitados.localizar(verticeSiguiente.getElem()) > 0 ) {
-          // El nodo ya fue visitado, pasamos al siguiente arco
-          arcoActual = arcoActual.getSigAdy();
-        } else {
-          // El nodo no fue visitado, asi que comparamos la etiqueta del arco con nuestro maximo
-          // actual
-          if (arcoActual.getEtiqueta().compareTo(maximoActual[0]) > 0) {
-            // El arco tiene una etiqueta mayor, asi que cambiamos el maximo actual
-            maximoActual[0] = arcoActual.getEtiqueta();
+        NodoVert siguiente = arcoActual.getVertice();
+        if (visitados.localizar(siguiente.getElem()) == -1) {
+          Comparable nuevoMax = maxActual;
+          if (nuevoMax == null || arcoActual.getEtiqueta().compareTo(nuevoMax) > 0) {
+            nuevoMax = arcoActual.getEtiqueta();
           }
-          // Visitamos el nodo y obtenemos el camino que forma;
-          caminoActual = encontrarCaminoEtiquetaMinimaAux(verticeSiguiente, visitados, posVisitados + 1, maximoActual, elemVerticeEntrada);
-          if (caminoActual != null) {
-            // El camino existe y es el minmax de los hijos de ese nodo
-            // Agregamos entonces el nodo actual al camino
-            caminoActual.insertar(verticeActual.getElem(), 1);
-            if (caminoMinimo == null || maximoActual[0].compareTo(minimoMaximo) < 0) {
-              // El camino tiene una etiqueta maxima menor que la minima registrada.
-              caminoMinimo = caminoActual;
-              minimoMaximo = maximoActual[0];
+          Lista caminoRama = encontrarCaminoEtiquetaMinimaAux(siguiente, visitados, posVisitados + 1, nuevoMax, elemVerticeEntrada);
+          if (caminoRama != null) {
+            caminoRama.insertar(verticeActual.getElem(), 1);
+            if (mejorCamino == null || nuevoMax.compareTo(mejorMax) < 0) {
+              mejorCamino = caminoRama;
+              mejorMax = nuevoMax;
             }
           }
-          // Reiniciamos el maximoActual al que corresponde a este vertice
-          maximoActual[0] = maximoInicial;
-          // Finalmente, pasamos al siguiente arco
-          arcoActual = arcoActual.getSigAdy();
         }
+        arcoActual = arcoActual.getSigAdy();
       }
-      // Antes de volver en la recursion, eliminamos el nodo actual de la lista de visitados
       visitados.eliminar(posVisitados);
     }
-    return caminoMinimo;
+    return mejorCamino;
   }
+
   public Lista caminoMasCorto(Object elemVerticeSalida, Object elemVerticeEntrada) {
     NodoVert nodoSalida = buscarVertice(elemVerticeSalida);
     Lista camino = null;
@@ -319,9 +293,9 @@ public class Grafo {
         camino = caminoMasCortoAux(nodoSalida, new Lista(), 1, 0, minCantidadNodos, elemVerticeEntrada);
     }
     return camino;
-}
+  }
 
-private Lista caminoMasCortoAux(NodoVert verticeActual, Lista visitados, int posVisitados, int cantidadActual, int[] minCantidadNodos, Object elemVerticeEntrada) {
+  private Lista caminoMasCortoAux(NodoVert verticeActual, Lista visitados, int posVisitados, int cantidadActual, int[] minCantidadNodos, Object elemVerticeEntrada) {
     Lista caminoMinimo = null;
     Lista caminoActual;
     // Caso base: llegamos al destino
